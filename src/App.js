@@ -1,20 +1,22 @@
-import './App.css';
-import {BrowserRouter} from 'react-router-dom';
-import Routes from './Routes';
-
-import {Template} from './components/MainComponentes';
-import Header from './components/partials/Header';
-import Footer from './components/partials/Footer';
+import ListaDeNotas from "./components/ListaDeNotas"
+import FormularioCadastro from "./components/FormularioCadastro"
+import {useState} from "react";
 
 function App() {
+    const [notas, setNotas] = useState([]);
+
+    async function handleSubmit(titulo,nota){
+        const novaNota = {titulo:titulo, nota:nota};
+        const array = [...notas,novaNota];
+        setNotas(array);
+    }
+
   return (
-      <BrowserRouter>
-        <Template>
-          <Header/>
-          <Routes/>
-          <Footer/>
-        </Template>
-      </BrowserRouter>
+      <section>
+          <FormularioCadastro handleSubmit={handleSubmit}/>
+          <ListaDeNotas notas={notas}/>
+      </section>
   );
 }
+
 export default App;
