@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {HeaderArea} from './styles';
 
 import './_css/header.b07c3d9f.css';
