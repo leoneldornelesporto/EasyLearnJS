@@ -1,5 +1,6 @@
 import React from 'react';
 import {HeaderArea} from './styles';
+import {Link} from 'react-router-dom';
 
 import './_css/header.b07c3d9f.css';
 import './_css/headerAluraDark.cce4a88f.css';
@@ -14,14 +15,14 @@ function Header() {
             <section className="headerBusca headerBusca-desktop">
                 <div className="container">
 
-                    <a href="https://cursos.alura.com.br/search" aria-label="busca" className="headerBusca-icon"
+                    <Link to="https://cursos.alura.com.br/search" aria-label="busca" className="headerBusca-icon"
                        role="button" aria-expanded="false" aria-controls="headerBusca-form">
                         <svg className="headerBusca-icon-svg">
                             <svg width="17" height="17" viewBox="0 0 17 17" id="busca">
                                 <path d="M16.533 16.533a1.597 1.597 0 0 1-2.26 0l-2.816-2.818A7.392 7.392 0 0 1 7.45 14.9a7.45 7.45 0 1 1 7.45-7.45 7.4 7.4 0 0 1-1.186 4.007l2.818 2.818a1.596 1.596 0 0 1 0 2.257zM7.45 2.13a5.322 5.322 0 1 0 0 10.642 5.322 5.322 0 0 0 0-10.643z"></path>
                             </svg>
                         </svg>
-                    </a>
+                    </Link>
                     <form action="https://cursos.alura.com.br/search" id="headerBusca-form"
                           className="headerBusca-form headerBusca-form--retratil" aria-hidden="true">
                         <label htmlFor="headerBusca-campoBusca">Qual curso procura?</label>
