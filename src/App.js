@@ -1,25 +1,13 @@
-import ListaDeNotas from "./components/ListaDeNotas"
-import FormularioCadastro from "./components/FormularioCadastro"
-import {useState} from "react";
-import useApi from './helpers/EasyLearnApi';
+import Header from './components/partials/header';
+import Footer from './components/partials/footer';
+import {BrowserRouter} from 'react-router-dom';
 
 function App() {
-    const [notas, setNotas] = useState([]);
-    const api = useApi();
-
-    async function handleSubmit(titulo,nota){
-        const novaNota = {titulo:titulo, nota:nota};
-        const array = [...notas,novaNota];
-        setNotas(array);
-        console.log("aqui");
-        console.log(api.getCursos());
-    }
-
   return (
-      <section>
-          <FormularioCadastro handleSubmit={handleSubmit}/>
-          <ListaDeNotas notas={notas}/>
-      </section>
+      <BrowserRouter>
+          <Header/>
+          <Footer/>
+      </BrowserRouter>
   );
 }
 
