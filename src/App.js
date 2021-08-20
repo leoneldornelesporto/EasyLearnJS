@@ -1,7 +1,7 @@
 import Header from './components/partials/header';
 import Footer from './components/partials/footer';
-import {BrowserRouter} from 'react-router-dom';
 import Routes from "./Routes";
+const BrowserRouter = require("react-router-dom").BrowserRouter;
 
 function App() {
   return (
