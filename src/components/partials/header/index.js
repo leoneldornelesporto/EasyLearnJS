@@ -15,7 +15,7 @@ function Header() {
                             </svg>
                         </svg>
                     </Link>
-                    <form onSubmit="/cursos" id="headerBusca-form"
+                    <form action="/cursos" id="headerBusca-form"
                           className="headerBusca-form headerBusca-form--retratil" aria-hidden="true">
                         <label htmlFor="headerBusca-campoBusca">Qual curso procura?</label>
                         <input type="search" className="skipKeyPress headerBusca-form-input" id="headerBusca-campoBusca"
