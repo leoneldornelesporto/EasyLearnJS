@@ -67,11 +67,11 @@
     margin-top:1em;
     padding:.4em 0
 }
-.btn-facebook-login{
-    background-color:#4e6ba7;
+.btn-cadastrar{
+    background-color: #a2fdbe;
     margin-top:1em
 }
-.btn-facebook-login,.btn-google-login{
+.btn-cadastrar{
     font-size:1em;
     min-width:195px;
     text-decoration:none;
@@ -157,10 +157,6 @@
     margin:3em 0 1em
 }
 @media (min-width:940px){
-    .sign{
-        flex-direction:row;
-        justify-content:space-between
-    }
     .forgotPassword,.signin{
         width:45%
     }

@@ -1,0 +1,1 @@
+"use strict";var showTasksBySection=function(s){$(s.currentTarget).toggleClass("courseSectionList-moreInfo__rotate"),$("#pausedCourses").toggleClass("myCourses__paused__list__show")},sectionMoreInfo=$(".myCourses__paused-showAll");sectionMoreInfo.on("click",function(s){return showTasksBySection(s)});

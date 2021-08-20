@@ -29,7 +29,11 @@
     border-bottom:1px solid #2b7adf
 }
 .content-menu-button:after,.header-hamburguinho,.header-logo,.header-nav-link:before{
-    filter:brightness(100)
+    width: 80px;
+    height: 36px;
+    text-decoration: none;
+    color: #fdfdfd;
+    filter:brightness(100);
 }
 .header-news-button{
     /*background:url(/assets/images/header/icon-news-bell-white.svg) no-repeat 50%*/

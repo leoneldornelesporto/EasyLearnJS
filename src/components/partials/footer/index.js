@@ -1,10 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {FooterArea} from './styles';
 
 function Footer(){
     return(
-        <FooterArea>
             <div className="footer container">
                 <a data-savepage-href="/dashboard" href="https://cursos.alura.com.br/dashboard" className="footer-logo">
 
@@ -129,7 +127,6 @@ function Footer(){
                     </div>
                 </section>
             </div>
-        </FooterArea>
     );
 }
 export default Footer;
