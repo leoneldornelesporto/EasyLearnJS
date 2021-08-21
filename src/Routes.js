@@ -1,7 +1,9 @@
 import React from 'react';
 import About from './pages/About';
-import Signin from './pages/Signin';
-import Cursos from './pages/Cursos';
+import BuscarCursos from './pages/BuscarCursos';
+import Signin from './pages/Cadastro';
+import EsqueciSenha from './pages/EsqueciSenha';
+import Cursos from "./pages/Cursos";
 import {Route, Switch} from "react-router-dom";
 
 export default () => {
@@ -13,8 +15,14 @@ export default () => {
             <Route path="/signin">
                 <Signin/>
             </Route>
+            <Route path="/esquecisenha">
+                <EsqueciSenha/>
+            </Route>
             <Route path="/cursos">
                 <Cursos/>
+            </Route>
+            <Route path="/buscarcursos">
+                <BuscarCursos/>
             </Route>
         </Switch>
     );
