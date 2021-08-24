@@ -1,7 +1,8 @@
 import React from 'react';
 import About from './pages/About';
 import BuscarCursos from './pages/BuscarCursos';
-import Signin from './pages/Cadastro';
+import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
 import EsqueciSenha from './pages/EsqueciSenha';
 import Cursos from "./pages/Cursos";
 import Principal from "./pages/Principal";
@@ -14,7 +15,10 @@ export default () => {
                 <About/>
             </Route>
             <Route path="/signin">
-                <Signin/>
+                <Login/>
+            </Route>
+            <Route path="/signup">
+                <Cadastro/>
             </Route>
             <Route path="/esquecisenha">
                 <EsqueciSenha/>

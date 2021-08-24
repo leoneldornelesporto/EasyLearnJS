@@ -170,7 +170,7 @@ const BuscarCursos = () => {
     return(
         <div>
             <section className="banner bootcamp-banner-background-theme">
-                <div className="container_1">
+                <div className="container">
                     <h1 className="banner-title">
                         Cursos
                     </h1>

@@ -27,7 +27,7 @@ function Header() {
             <header className="header headerDesktop bootcamp-header-dark-theme" >
                 <div className="container">
                     <div className="header-logo--wrapper ">
-                        <Link to="/dashboard" className="header-logo">
+                        <Link to="/" className="header-logo">
                             <h3>EasyLearn</h3>
                         </Link>
                     </div>
@@ -42,11 +42,13 @@ function Header() {
                               to="/signin">
                             Login</Link>
                     </div>
+                    <Link className="headerUnlogged-cta-button headerUnlogged-cta-button bootcamp-primary-button-theme"
+                       to="/signup">Matricule-se</Link>
                 </div>
             </header>
             <div className="natural-header bootcamp-header-dark-theme" >
                 <div className="header-logo--wrapper ">
-                    <Link href="/dashboard" className="header-logo">
+                    <Link href="/" className="header-logo">
                         <h3>EASYLEARN</h3>
                     </Link>
                 </div>

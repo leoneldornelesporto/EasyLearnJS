@@ -1,62 +1,58 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 
 const Cadastro = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordRepeat, setPasswordRepeat] = useState('');
+    const [email, setEmail] = useState('');
+
+    async function cadastro(e){
+        e.preventDefault();
+
+        if (password === passwordRepeat){
+            alert("Cadastro realizado com sucesso, confirme seu e-mail para acessar a plataforma");
+            window.location.href = "/signin";
+        }else{
+            alert("Senha Incorreta");
+        }
+    }
+
     return(
         <div className="login-wrap">
             <div className="login-html">
-                <input id="tab-1" type="radio" name="tab" className="sign-in" checked/><label htmlFor="tab-1"
-                                                                                             className="tab">Sign
-                    In</label>
-                    <input id="tab-2" type="radio" name="tab" className="sign-up"/><label htmlFor="tab-2" className="tab">Sign Up</label>
-                        <div className="login-form">
-                            <div className="sign-in-htm">
-                                <div className="group">
-                                    <label htmlFor="user" className="label">Username</label>
-                                    <input id="user" type="text" className="input"/>
-                                </div>
-                                <div className="group">
-                                    <label htmlFor="pass" className="label">Password</label>
-                                    <input id="pass" type="password" className="input" data-type="password"/>
-                                </div>
-                                <div className="group">
-                                    <input id="check" type="checkbox" className="check" checked/>
-                                        <label htmlFor="check"><span className="icon"></span> Keep me Signed in</label>
-                                </div>
-                                <div className="group">
-                                    <input type="submit" className="button" value="Sign In"/>
-                                </div>
-                                <div className="hr"></div>
-                                <div className="foot-lnk">
-                                    <Link to="/esquecisenha">Esqueci minha senha</Link>
-                                </div>
+                <input id="tab-1" type="radio" name="tab" className="sign-in" checked/>
+                <label htmlFor="tab-1" className="tab">Sign Up</label>
+                <input id="tab-2" type="radio" name="tab" className="sign-up"/><label htmlFor="tab-2" className="tab"></label>
+                <div className="login-form">
+                    <form onSubmit={cadastro}>
+                        <div className="sign-in-htm">
+                            <div className="group">
+                                <label htmlFor="user" className="label">Username</label>
+                                <input  type="text" className="input" onChange={e=>setUsername(e.target.value)}/>
                             </div>
-                            <div className="sign-up-htm">
-                                <div className="group">
-                                    <label htmlFor="user" className="label">Username</label>
-                                    <input id="user" type="text" className="input"/>
-                                </div>
-                                <div className="group">
-                                    <label htmlFor="pass" className="label">Password</label>
-                                    <input id="pass" type="password" className="input" data-type="password"/>
-                                </div>
-                                <div className="group">
-                                    <label htmlFor="pass" className="label">Repeat Password</label>
-                                    <input id="pass" type="password" className="input" data-type="password"/>
-                                </div>
-                                <div className="group">
-                                    <label htmlFor="pass" className="label">Email Address</label>
-                                    <input id="pass" type="text" className="input"/>
-                                </div>
-                                <div className="group">
-                                    <input type="submit" className="button" value="Sign Up"/>
-                                </div>
-                                <div className="hr"></div>
-                                <div className="foot-lnk">
-                                    <label htmlFor="tab-1">Already Member?</label>
-                                </div>
+                            <div class="group">
+                                <label for="pass" class="label">Password</label>
+                                <input id="pass" type="password" class="input" data-type="password" onChange={e=>setPassword(e.target.value)}/>
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">Repeat Password</label>
+                                <input id="pass" type="password" class="input" data-type="password" onChange={e=>setPasswordRepeat(e.target.value)}/>
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">Email Address</label>
+                                <input id="pass" type="text" class="input" onChange={e=>setEmail(e.target.value)}/>
+                            </div>
+                            <div class="group">
+                                <input type="submit" class="button" value="Sign Up"/>
+                            </div>
+                            <div class="hr"></div>
+                            <div class="foot-lnk">
+                                <Link for="tab-1" to="/signin">Already Member?</Link>
                             </div>
                         </div>
+                    </form>
+                </div>
             </div>
         </div>
 );
