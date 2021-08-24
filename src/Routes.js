@@ -4,6 +4,7 @@ import BuscarCursos from './pages/BuscarCursos';
 import Signin from './pages/Cadastro';
 import EsqueciSenha from './pages/EsqueciSenha';
 import Cursos from "./pages/Cursos";
+import Principal from "./pages/Principal";
 import {Route, Switch} from "react-router-dom";
 
 export default () => {
@@ -23,6 +24,9 @@ export default () => {
             </Route>
             <Route path="/buscarcursos">
                 <BuscarCursos/>
+            </Route>
+            <Route path="/">
+                <Principal/>
             </Route>
         </Switch>
     );

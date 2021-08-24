@@ -7,7 +7,7 @@ function Header() {
         <HeaderArea>
             <section className="headerBusca headerBusca-desktop">
                 <div className="container">
-                    <a href="/buscarcursos" aria-label="busca" className="headerBusca-icon"
+                    <a href="/cursos" aria-label="busca" className="headerBusca-icon"
                           role="button" aria-expanded="false" aria-controls="headerBusca-form">
                         <svg className="headerBusca-icon-svg">
                             <svg width="17" height="17" viewBox="0 0 17 17" id="busca">

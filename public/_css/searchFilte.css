@@ -1,0 +1,26 @@
+#show-filter-options{color:#525c65;font-size: 13px;margin: 15px;text-decoration:underline;position:relative;cursor:pointer
+}.filtro-busca--body{max-height: 100vh;overflow:hidden
+ }.busca--wrapper{display:flex;color:#3b4349;font-family:Open Sans,sans-serif
+  }.filtros-busca--title{font-weight: 400;margin-bottom: 15px
+   }#filtros-busca--close{position:relative;cursor:pointer;width: 24px;height: 24px;top: 20px;right: 20px
+    }#filtros-busca--close:after{content: "x";font-weight:bolder;font-family:Open Sans,sans-serif
+     }.busca--filtros--wrapper ul{list-style-type:none
+      }.busca--filtros--wrapper h3{margin: 20px 0 15px
+       }.busca--filtros--wrapper h2{color:#3b4349
+        }#busca--filtrar-resultados{margin-top: 20px;cursor:pointer
+         }#busca--filtros{background-color:#fff;padding: 30px;width: 100vw;left: 0;top: 0;z-index: 2;box-shadow: 5px 5px 6px grey; float: left; margin-left: 500px;
+          }.busca--filtros--categorias li,.busca--filtros--tipos li{margin-top: 10px
+           }.busca--filtro{display:flex;cursor:pointer;width: 100%;margin: 0 0 10px;align-items:center
+            }.busca--filtro:before{content: "";min-width: 20px;height: 20px;border: 1px solid #6d7a86;border-radius: 4px;margin:auto 10px auto 0
+             }.filter-checkbox:checked~.busca--filtro:after{content: "";position:relative;width: 15px;height: 10px;border: 4px solid #2a7ae4;border-top: 0;border-right: 0;transform:rotate(-45deg);margin-bottom: 5px;left: 2px
+              }#busca--filtrar-resultados{color:#fff;font-family:Open Sans,normal,sans-serif;font-style:normal;font-weight: 700;background:#2a7ae4;padding: 16px 32px;border: 1px solid #2a7ae4;border-radius: 8px;margin-left: 18vw
+               }.busca--filtros--wrapper>*{position:relative;left: 18vw
+                }.filtros-busca--title{margin-left: 18vw
+                 }@media (min-width: 720px){#busca.show-filter{margin-left: 300px
+}#busca--filtros{width: 100%;max-width: 260px;margin:initial;left:auto;top:auto;z-index:auto;box-shadow:none
+ }.filtro-busca--body{max-height:none;overflow:initial
+  }.busca--filtros--wrapper>*,.busca--listagem-filtros{position:static;left:auto
+   }#busca--filtrar-resultados,.filtros-busca--title{margin-left: 0
+    }.filter-checkbox:checked~.busca--filtro:after{left: 32px
+     }
+}
