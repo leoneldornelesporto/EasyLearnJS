@@ -5,6 +5,6 @@ const api = create({
     headers: { Accept: 'application/json' },
 })
 
-export async function teste() {
+export async function getAllCursos() {
     return (await api.get('/v1/curso')).data;
 }

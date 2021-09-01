@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
-import {teste} from '../../helpers/EasyLearnApi';
+import {getAllCursos} from '../../helpers/EasyLearnApi';
 
 const EsqueciSenha = () => {
     const [emailRecuperacao, setEmailRecuperacao] = useState('');
+    const [allCursos, setAllCursos] = useState([]);
+
+    getAllCursos().then(function(result) {
+        return setAllCursos(result);
+    })
 
     async function recuperarSenha(e){
         e.preventDefault();
         alert("E-mail enviado para "+emailRecuperacao+", confira sua caixa de entrada e confirme o código.");
-
-        console.log(teste()); // ya
-
+        console.log(allCursos[0]);
         //window.location.href = "/signin";
     }
 
