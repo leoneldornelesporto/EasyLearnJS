@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import {authHeader} from "../../helpers/auth-header";
 
 const Cadastro = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState('');
-
 
     async function handleClick({ target }) {
         setChecked(target.checked);
@@ -19,6 +19,8 @@ const Cadastro = () => {
 
         if (username === 'leonel' && password === '12345'){
             alert("entrou");
+            localStorage.setItem("user",username+':'+password);
+            alert(authHeader().Authorization);
         }else{
             alert("senha errada");
         }
