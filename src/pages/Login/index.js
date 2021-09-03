@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import {authHeader} from "../../helpers/auth-header";
+import {doLogin} from "../../helpers/AuthHandler";
+import {signUp} from '../../helpers/EasyLearnApi';
 
 const Cadastro = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState('');
+    const [authorize, setAuthorize] = useState('');
 
     async function handleClick({ target }) {
         setChecked(target.checked);
@@ -13,16 +15,15 @@ const Cadastro = () => {
 
     async function login(e){
         e.preventDefault();
-        console.log(username);
-        console.log(password);
-        console.log(checked);
 
-        if (username === 'leonel' && password === '12345'){
-            alert("entrou");
-            localStorage.setItem("user",username+':'+password);
-            alert(authHeader().Authorization);
+        await signUp(username,password).then(function(result) {
+            return setAuthorize(result);
+        })
+
+        if (authorize != null){
+            doLogin(authorize.authorizationCode,checked);
         }else{
-            alert("senha errada");
+            alert("Usuário ou Senha incorretos.");
         }
     }
 

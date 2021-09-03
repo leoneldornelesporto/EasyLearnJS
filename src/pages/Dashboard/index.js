@@ -1,8 +1,13 @@
 import React from 'react';
 import './style.css';
+import {getAuthorization, isLogged} from "../../helpers/AuthHandler";
 
 const Dashboard = () => {
 
+
+
+    console.log(isLogged());
+    console.log(getAuthorization());
 
     return(
         <section className="categoryExplorer">
