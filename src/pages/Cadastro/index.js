@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import {postAluno} from "../../helpers/EasyLearnApi";
 
 const Cadastro = () => {
     const [username, setUsername] = useState('');
@@ -12,6 +13,11 @@ const Cadastro = () => {
 
         if (password === passwordRepeat){
             alert("Cadastro realizado com sucesso, confirme seu e-mail para acessar a plataforma");
+
+            console.log(postAluno(username,password,email).then(function(result) {
+                return result
+            }))
+
             window.location.href = "/signin";
         }else{
             alert("Senha Incorreta");

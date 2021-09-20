@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {doLogin} from "../../helpers/AuthHandler";
-import {signUp} from '../../helpers/EasyLearnApi';
+import {signUp, v1SignUp} from '../../helpers/EasyLearnApi';
+import Cookies from "js-cookie";
 
 const Cadastro = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState('');
     const [authorize, setAuthorize] = useState('');
+    const [usuario, setUsuario] = useState('');
 
     async function handleClick({ target }) {
         setChecked(target.checked);
@@ -16,14 +18,21 @@ const Cadastro = () => {
     async function login(e){
         e.preventDefault();
 
-        await signUp(username,password).then(function(result) {
+        signUp(username,password).then(function(result) {
             return setAuthorize(result);
         })
 
-        if (authorize != null){
-            doLogin(authorize.authorizationCode,checked);
-        }else{
+        v1SignUp(username,password).then(function(result) {
+            return setUsuario(result)
+        })
+
+        Cookies.set("nome",usuario.nome)
+
+        if (authorize === ''){
             alert("Usuário ou Senha incorretos.");
+        }else{
+            await doLogin(authorize.authorizationCode,checked);
+            window.location.href = '/dashboard'; //manda para a rota home
         }
     }
 

@@ -1,0 +1,1125 @@
+.header,.header-menu{
+    font-family:Open Sans,sans-serif
+}
+.header,body,html{
+    -webkit-overflow-scrolling:touch
+}
+body{
+    -webkit-font-smoothing:antialiased
+}
+.headerDesktop{
+    display:none;
+    visibility:hidden
+}
+
+.headerMobile{
+    width:100vw;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:3;
+    overflow:scroll;
+    transform:translateX(0);
+    transition:transform .5s;
+    -webkit-transition:-webkit-width 0s,-webkit-transform .5s ease-in-out
+}
+.headerMobile--collapsed{
+    transform:translateX(-100%)
+}
+.headerMobile-collapsed-top{
+    position:relative;
+    height:65px;
+    background-color:#747c81
+}
+.natural-header{
+    border-top:4px solid #2a7ae4;
+    padding:18px;
+    box-sizing:border-box;
+    width:100%;
+    text-align:center;
+    background-color:#fff;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    align-items:center;
+    position:relative
+}
+.header-hamburguinho{
+    /*background:url(/assets/images/header/hamburguinho.svg) no-repeat 0;*/
+    background-size:100%;
+    width:24px;
+    height:16px;
+    box-shadow:none;
+    border:none;
+    position:absolute;
+    top:50%;
+    left:20px;
+    transform:translateY(-50%);
+    outline:none
+}
+.header-hamburguinho--branco{
+    /*background-image:url(/assets/images/header/hamburguinho.svg);*/
+    filter:brightness(100)
+}
+[data-product=alura] .header-logo{
+    width:80px
+}
+[data-product=musicdot] .header-logo{
+    width:112px
+}
+[data-product=aluralingua] .header-logo{
+    width:130px
+}
+[data-product=alurastart] .header-logo{
+    width:125px
+}
+.header-content-menu{
+    text-transform:uppercase
+}
+.headerMobile-content-headline{
+    background:#fff;
+    justify-content:space-between;
+    position:relative;
+    padding:20px
+}
+.content-headline-profile,.headerMobile-content-headline{
+    display:flex;
+    align-items:center
+}
+.headline-profile-avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    margin-right:15px
+}
+.profile-info-name{
+    color:#747c81;
+    text-transform:uppercase;
+    font-weight:600;
+    font-size:14px
+}
+.header-profile-pontos .pointsGrid{
+    display:none
+}
+.header-nav{
+    border:1px solid #f1f0f2
+}
+.content-menu-section,.headerMobile-content-headline{
+    border-bottom:1px solid #f1f0f2
+}
+.headerMobile-content{
+    height:100%;
+    background:#fff
+}
+.user-nav .content-menu-button{
+    width:auto
+}
+.content-menu-button{
+    background:transparent;
+    border:none;
+    color:#747c81;
+    padding:1.8em 1.5em;
+    font-weight:600;
+    text-transform:uppercase;
+    font-size:.82rem;
+    letter-spacing:.02rem;
+    font-family:Open sans,sans-serif;
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items:center;
+    outline:none;
+    cursor:pointer;
+    position:relative
+}
+.menu-section--collapsed{
+    overflow:hidden
+}
+.button-mobile--expanded:after{
+    transform:rotate(180deg);
+    transition-duration:.7s
+}
+.content-menu-button:after{
+    content:"";
+    display:block;
+    width:12px;
+    height:7px;
+    /*background:url(/assets/images/header/arrow-down.svg) no-repeat 50%;*/
+    margin-left:10px;
+    transition-duration:.7s
+}
+.headerBusca-desktop{
+    display:none
+}
+.profile--alert:before{
+    width:20px;
+    height:20px;
+    display:inline-block;
+    content:"";
+    /*background:url(/assets/images/icon-alert.svg) no-repeat 50%;*/
+    position:absolute;
+    left:45px;
+    bottom:20px
+}
+@media (min-width:720px){
+    .headerDesktop{
+        height:80px;
+        display:block;
+        text-transform:uppercase;
+        visibility:visible
+    }
+    .headerDesktop .container{
+        height:100%;
+        width:96%;
+        display:flex;
+        align-items:center;
+        justify-content:space-between
+    }
+    .headerMobile,.natural-header{
+        display:none;
+        visibility:hidden
+    }
+    .headerDesktop-content-menu{
+        height:100%;
+        display:flex;
+        align-items:center
+    }
+    .header-logo{
+        width:80px;
+        height:36px
+    }
+    .content-menu-section{
+        position:relative;
+        margin-right:10px;
+        height:100%;
+        display:flex;
+        align-items:center
+    }
+    .content-menu-section-profile{
+        margin-right:0
+    }
+    .content-menu-title{
+        border:none;
+        height:100%
+    }
+    .content-menu-button{
+        font-weight:600;
+        font-size:14px;
+        padding:0;
+        height:100%;
+        text-decoration:none
+    }
+    .content-menu-section-levelMenu{
+        display:none
+    }
+    .profile-info-name{
+        display:flex;
+        align-items:center
+    }
+    .profile-info-name:after{
+        content:"";
+        display:block;
+        width:12px;
+        height:7px;
+        background:url(https://cursos.alura.com.br/assets/images/header/arrow-down.svg) no-repeat 50%;
+        margin-left:10px
+    }
+    .profile-info-name-text-wrapper{
+        display:none
+    }
+    .headline-profile-avatar{
+        width:45px;
+        height:45px;
+        margin-right:0
+    }
+    .headerBusca-icon{
+        left:110px;
+        top:100%
+    }
+    .headerBusca-form{
+        display:flex;
+        width:100%;
+        align-items:center
+    }
+    .headerBusca-submit{
+        margin-left:5px
+    }
+    .headerBusca-desktop{
+        display:block
+    }
+    .profile--alert:before{
+        left:30px;
+        bottom:15px
+    }
+}
+@media(min-width:900px){
+    .content-menu-section-levelMenu{
+        text-align:right;
+        display:flex
+    }
+    .header-profile-pontos .pointsGrid{
+        display:block
+    }
+    .content-menu-section-community,.content-menu-section-contents,.content-menu-section-courses,.content-menu-section-news{
+        margin-right:20px
+    }
+}
+@media(min-width:1100px){
+    .content-menu-section-news{
+        margin-right:50px
+    }
+    .content-menu-section-community,.content-menu-section-contents,.content-menu-section-courses{
+        margin-right:40px
+    }
+    .headline-profile-avatar{
+        margin-right:20px
+    }
+    .profile-info-name-text-wrapper{
+        display:block
+    }
+}
+.header-news-button{
+    background:url(https://cursos.alura.com.br/assets/images/header/icon-news-bell.svg) no-repeat 50%;
+    border:none;
+    width:22px;
+    height:25px;
+    position:relative;
+    outline:none
+}
+.header-news-button.notification-not-seen:after{
+    content:"";
+    display:block;
+    position:absolute;
+    top:0;
+    right:0;
+    background-color:#da5d5d;
+    border-radius:50%;
+    width:10px;
+    height:10px;
+    transform:translateY(-25%)
+}
+.header-news{
+    top:80%;
+    right:5px;
+    transform:scale(0);
+    transform-origin:top right;
+    transition:transform .25s;
+    position:absolute;
+    width:90%;
+    z-index:1;
+    background:#fff;
+    box-shadow:0 4px 5px 0 rgba(0,0,0,.04);
+    border:1px solid #dfe8eb
+}
+.header-news.header-nav--active{
+    transform:scale(1)
+}
+.header-news-text{
+    display:block;
+    line-height:5em;
+    text-transform:uppercase;
+    letter-spacing:.2px;
+    font-size:.9em;
+    font-weight:600;
+    color:#747c81;
+    padding:0 20px;
+    border-bottom:1px solid #dfe9ed
+}
+.header-news-text-warning{
+    background-color:rgba(218,93,93,.8);
+    color:#fff;
+    font-size:.7em;
+    text-decoration:none;
+    line-height:1.5;
+    text-align:left;
+    padding:18px 20px;
+    display:flex
+}
+.header-news-text-warning:before{
+    /*background:url(/assets/images/header/icon-warning.svg) no-repeat 50%;*/
+    content:"";
+    display:block;
+    border:none;
+    width:40px;
+    height:25px;
+    vertical-align:middle;
+    margin-right:15px
+}
+.header-news-list{
+    text-align:left;
+    line-height:1.5
+}
+.header-news-item--highlighted{
+    font-weight:700;
+    background-color:#eff1f9
+}
+.header-news-item-link{
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+    color:#747c81;
+    position:relative;
+    padding:4px 14px
+}
+.header-news-item-link:hover{
+    opacity:.96
+}
+.header-news-item-link-icon{
+    vertical-align:middle;
+    display:inline-block;
+    height:45px;
+    width:45px;
+    padding:8px;
+    border:1px solid #d8d8d8
+}
+.header-news-span a{
+    color:#454d4d;
+    display:block
+}
+.news__item{
+    display:flex;
+    justify-content:flex-start;
+    width:100%;
+    border-bottom:1px solid #dfe9ed;
+    padding:10px 0;
+    text-transform:none;
+    transition:.3s
+}
+.news__item:hover{
+    background:rgba(161,176,192,.15);
+    transition-duration:.3s
+}
+.news__icon{
+    width:35px;
+    height:35px;
+    margin-right:15px
+}
+.news__information{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start
+}
+.news__kind{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    color:#8696a0
+}
+.news__kind-course{
+    padding:3px 5px;
+    color:#f9fbfc;
+    background-color:#3fb8b0
+}
+.news__name{
+    font-size:13px;
+    font-weight:600;
+    color:#747c81
+}
+.news__publishedDate{
+    font-size:12px;
+    color:#8696a0
+}
+.news__more{
+    margin-left:0;
+    text-align:center;
+    color:#fff;
+    background-color:#747c81;
+    text-decoration:none;
+    cursor:pointer
+}
+.news__information{
+    width:208px
+}
+@media (min-width:411px){
+    .news__information{
+        width:260px
+    }
+}
+@media (min-width:720px){
+    .header-news{
+        width:400px;
+        top:90%;
+        right:-25px;
+        border:1px solid #dfe8eb
+    }
+    .header-news:before{
+        content:"";
+        display:block;
+        width:14px;
+        height:14px;
+        position:absolute;
+        top:0;
+        right:14px;
+        transform:translateY(-50%) rotate(45deg);
+        background-color:#fff;
+        border-left:1px solid #dfe8eb;
+        border-top:1px solid #dfe8eb;
+        z-index:-1
+    }
+    .header-news-button{
+        /*height:100%;*/
+        cursor:pointer
+    }
+    .header-news-button.notification-not-seen:after{
+        /*op:25px;*/
+        transform:none
+    }
+}
+.header-nav-link:before{
+    content:"";
+    display:inline-block;
+    background-size:20px 21px;
+    border:none;
+    width:26px;
+    height:25px;
+    vertical-align:middle;
+    margin-right:15px;
+    background:no-repeat 50%
+}
+.header-nav-link{
+    display:flex;
+    align-items:center;
+    padding:1.5em 0 1.5em 1.5em;
+    color:#747c81;
+    letter-spacing:.02rem;
+    font-size:.82rem;
+    text-decoration:none;
+    font-weight:600;
+    vertical-align:middle;
+    transition:.3s
+}
+.header-nav-link:not(:last-of-type){
+    border-bottom:1px solid #ffffff
+}
+.header-nav-link:first-child:hover~.header-nav-arrow,.header-nav-link:hover{
+    background-color: #6bd0fe;
+    transition:.3s
+}
+.header-item-link--dashboard:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-dashboard.svg)
+}
+.header-item-link--careers:before{
+    /*background-image:url(/assets/images/header/icon-careers.svg)*/
+}
+.header-item-link--challenges:before{
+    /*background-image:url(/assets/images/header/icon-challenges.svg)*/
+}
+.header-item-link--degrees:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-degrees.svg)
+}
+.header-item-link--alura-mais:before{
+    /*background-image:url(/assets/images/header/icon-alura-mais.svg)*/
+}
+.header-item-link--projects:before{
+    /*background-image:url(/assets/images/header/icon-projects.svg)*/
+}
+.header-nav-link--courses:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-activities.svg)
+}
+.header-nav-link--dashboardAdmin:before{
+    /*background-image:url(/assets/images/header/icon-dashboard.svg)*/
+}
+.header-item-link--forum:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-forum.svg)
+}
+.header-item-link--forum-interactions:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-forum-interactions.svg)
+}
+.header-nav-link--ranking:before{
+    /*background-image:url(/assets/images/header/icon-ranking.svg)*/
+}
+.header-nav-link--public-user-guides:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-user-guides.svg)
+}
+.header-nav-link--news:before{
+    /*background-image:url(/assets/images/header/icon-news.svg)*/
+}
+.header-item-link--recommendations:before{
+    /*background-image:url(/assets/images/header/icon-recommendations.svg)*/
+}
+.header-nav-link--reviews:before{
+    /*background-image:url(/assets/images/header/icon-reviews.svg)*/
+}
+.header-nav-link--profile:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-profile.svg)
+}
+.header-nav-link--profile-edit:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-profile-edit.svg)
+}
+.header-item-link--teams:before{
+    /*background-image:url(/assets/images/header/icon-team.svg)*/
+}
+.header-nav-link--activities:before{
+    /*background-image:url(/assets/images/header/icon-activities.svg)*/
+}
+.header-nav-link--user-guides:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-user-guides.svg)
+}
+.header-nav-link--user-notes:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-note.svg)
+}
+.header-nav-link--purchases:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-billing.svg)
+}
+.header-nav-link--logout:before{
+    background-image:url(https://cursos.alura.com.br/assets/images/header/icon-logout.svg)
+}
+.header-item-link--like-a-boss:before{
+    /*background-image:url(/assets/images/podcast/icon-likeaboss-menu.svg)*/
+}
+.header-item-link--hipsters:before{
+    /*background-image:url(/assets/images/podcast/icon-hipsters.svg)*/
+}
+.header-item-link--scuba:before{
+    /*background-image:url(/assets/images/podcast/icon-scuba.svg)*/
+}
+.header-item-link--layers:before{
+    /*background-image:url(/assets/images/podcast/icon-layers.svg)*/
+}
+.header-item-link--carreirasemfronteiras:before{
+    /*background-image:url(/assets/images/podcast/icon-carreirasemfronteiras.svg)*/
+}
+.header-item-link--oracle-webinar:before{
+    /*background-image:url(/assets/images/header/icon-webnar.svg)*/
+}
+.header-item-link--oracle-empregaone:before{
+    /*background-image:url(/assets/images/header/icon-empregaone.svg)*/
+}
+.header-item-link--podcasts:before{
+    /*background-image:url(/assets/images/header/icon-podcasts.svg)*/
+}
+.header-item-link--cases:before{
+    /*background-image:url(/assets/images/header/icon-cases.svg)*/
+}
+.header-link-admin,.header-link-company{
+    padding-right:15px;
+    margin-left:auto
+}
+.header-link-admin{
+    color:#f76a6a;
+    font-size:10px;
+    display:flex;
+    vertical-align:middle
+}
+.header-link-admin:before{
+    /*background-image:url(/assets/images/header/icon-admin.svg)*/
+}
+.header-link-company{
+    color:#6ab9f7;
+    font-size:10px;
+    display:flex;
+    vertical-align:middle
+}
+.header-link-company:before{
+    /*background-image:url(/assets/images/header/icon-business.svg)*/
+}
+.header-link-admin:before,.header-link-company:before{
+    content:"";
+    display:inline-block;
+    background-size:16px 12px;
+    border:none;
+    width:16px;
+    height:12px;
+    vertical-align:middle;
+    margin-right:5px;
+    background-repeat:no-repeat;
+    background-position:50%
+}
+.header-list-item--alert:after{
+    width:20px;
+    height:20px;
+    margin-right:15px;
+    display:inline-block;
+    content:"";
+    /*background:url(/assets/images/icon-alert.svg) no-repeat 50%*/
+}
+.header-nav{
+    display:none
+}
+#headerNews{
+    display:block
+}
+.--border{
+    border-bottom:1px solid #e8eef1
+}
+.header-section-description{
+    padding:5px;
+    background-color:#2187ed;
+    margin:16px 20px 0;
+    color:#fff;
+    font-size:8px;
+    font-weight:700
+}
+.--margin-top{
+    margin-top:10px
+}
+@media (min-width:720px){
+    .header-nav{
+        display:block
+    }
+    .header-nav-arrow{
+        content:"";
+        display:block;
+        width:14px;
+        height:14px;
+        top:0;
+        right:13px;
+        transform:translateY(-50%) rotate(45deg);
+        border-left:1px solid #dfe8eb;
+        border-top:1px solid #dfe8eb;
+        z-index:-1;
+        transition:.3s
+    }
+    .header-nav,.header-nav-arrow{
+        position:absolute;
+        background-color:#fff
+    }
+    .header-nav{
+        border:1px solid #dfe8eb;
+        top:90%;
+        right:-15px;
+        width:320px;
+        box-shadow:0 4px 5px 0 rgba(0,0,0,.04);
+        transform:scale(0);
+        transform-origin:top right;
+        transition:transform .25s;
+        z-index:10;
+        outline:none
+    }
+    .page-header--container .header-nav{
+        right:-32px;
+        top:107%
+    }
+    .header-nav#headerNews{
+        right:-11px
+    }
+    .header-nav--active{
+        transform:scale(1)
+    }
+    .content-menu-section{
+        border:none
+    }
+}
+.headerUnlogged{
+    flex:1;
+    text-align:right;
+    font-size:13px
+}
+.headerUnlogged-cta{
+    display:inline-block
+}
+.headerUnlogged-cta-text{
+    display:none
+}
+.headerUnlogged-cta-button{
+    color:#fff;
+    background:#5ad678;
+    padding:8px 15px;
+    border-radius:2px
+}
+.headerUnlogged-cta-button,.headerUnlogged-login{
+    display:inline-block;
+    text-decoration:none;
+    font-weight:700
+}
+.headerUnlogged-login{
+    color:#747c81;
+    border:2px solid #747c81;
+    padding:6px 13px;
+    border-radius:2px
+}
+@media (min-width:720px){
+    .headerUnlogged-cta-text{
+        display:inline-block;
+        color:#747c81;
+        font-weight:700;
+        margin-right:10px
+    }
+}
+.career-header--color-mobile{
+    background-color:#ffd773
+}
+.career-header--color-programacao{
+    background-color:#84d171
+}
+.career-header--color-front-end{
+    background-color:#73d8f4
+}
+.career-header--color-devops,.career-header--color-infraestrutura{
+    background-color:#e24d4d
+}
+.career-header--color-design-ux{
+    background-color:#b866ed
+}
+.career-header--color-marketing-digital{
+    background-color:#6b5be2
+}
+.career-header--color-data-science{
+    background-color:#9cd33b
+}
+.career-header--color-inovacao-gestao{
+    background-color:#ff8c2a
+}
+.career-header--color-iniciante{
+    background-image:linear-gradient(180deg,#0ea0dd,#0d88d9 50%,#0c72d6)
+}
+.career-header--color-basico{
+    background-image:linear-gradient(0deg,#5c8be8,#52a1e0 49%,#44b0cf)
+}
+.career-header--color-pre-intermediario{
+    background-image:linear-gradient(180deg,#47dbe0,#3ac5d3 48%,#2cadc4)
+}
+.career-header--color-intermediario{
+    background-image:linear-gradient(180deg,#7a8df5,#7177e7 53%,#6964dd)
+}
+.career-header--color-avancado{
+    background-image:linear-gradient(-180deg,#3b5995,#313785)
+}
+.career-header--color-ingles-iniciante{
+    background-image:linear-gradient(180deg,#0ea0dd,#0d88d9 50%,#0c72d6)
+}
+.career-header--color-ingles-basico{
+    background-image:linear-gradient(0deg,#5c8be8,#52a1e0 49%,#44b0cf)
+}
+.career-header--color-ingles-pre-intermediario{
+    background-image:linear-gradient(180deg,#47dbe0,#3ac5d3 48%,#2cadc4)
+}
+.career-header--color-ingles-intermediario{
+    background-image:linear-gradient(180deg,#7a8df5,#7177e7 53%,#6964dd)
+}
+.career-header--color-ingles-avancado{
+    background-image:linear-gradient(-180deg,#3b5995,#313785)
+}
+.career-header--color-espanhol-basico,.career-header--color-espanhol-iniciante,.career-header--color-espanhol-intermediario,.career-header--color-espanhol-pre-intermediario{
+    background-image:linear-gradient(180deg,#f55,#df4653 50%,#d22c3a)
+}
+.career-header{
+    color:#fff
+}
+.career-header__container{
+    position:relative;
+    z-index:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding-bottom:18px
+}
+.career-header__tag{
+    position:relative;
+    display:inline-block;
+    font-size:14px;
+    text-transform:uppercase;
+    font-weight:600;
+    background-color:rgba(0,0,0,.15);
+    padding:15px 35px 15px 65px
+}
+.career-header__tag:before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:35px;
+    transform:translateY(-50%);
+    height:21px;
+    width:20px;
+    /*background:url(/assets/images/learningGuide/headerIcons/icon-flag.svg) 50% no-repeat;*/
+    background-size:cover
+}
+.career-header__logo{
+    height:120px;
+    width:120px;
+    align-self:center;
+    margin:40px 0 25px
+}
+.career-header__title{
+    align-self:center;
+    font-size:28px;
+    font-weight:800;
+    text-shadow:0 2px 9px rgba(101,103,122,.1);
+    text-align:center;
+    line-height:1.15;
+    margin-bottom:40px
+}
+.career-header__certificate{
+    display:block;
+    margin-top:40px
+}
+.career-header__btn-certificate{
+    border:2px solid #525c65;
+    color:#525c65;
+    background:#fff;
+    font-size:13px;
+    padding:10px;
+    text-align:center;
+    border-radius:4px;
+    width:150px;
+    height:44px;
+    text-decoration:none;
+    box-shadow:none;
+    font-weight:600;
+    cursor:pointer
+}
+.career-header__btn-certificate:before{
+    content:"";
+    display:inline-block;
+    height:21px;
+    width:12px;
+    margin-right:5px;
+    vertical-align:middle;
+    /*-webkit-mask-image:url(/assets/images/header/icon-course-complete.svg);*/
+    background-color:#525c65;
+    -webkit-mask-size:cover
+}
+.career-header__btn-certificate:hover{
+    opacity:.8
+}
+.estimated-time{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    font-size:13px;
+    padding-left:32px
+}
+.estimated-time:before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translateY(-50%);
+    height:22px;
+    width:22px;
+    /*background:url(/assets/images/learningGuide/headerIcons/icon-time.svg) 50% no-repeat;*/
+    background-size:cover
+}
+.estimated-time__horas{
+    font-size:14px
+}
+.career-header__progress{
+    display:flex;
+    justify-content:center;
+    margin-top:38px;
+    width:100%
+}
+.career-header__steps{
+    display:flex
+}
+.career-header__step{
+    position:relative;
+    height:12px;
+    width:12px;
+    background-color:#f9fbfd;
+    border-radius:50%;
+    box-shadow:0 2px 6px 0 rgba(0,0,0,.09)
+}
+.career-header__step:not(:last-child):after{
+    content:"";
+    z-index:-10;
+    position:absolute;
+    top:50%;
+    right:6px;
+    transform:translate(100%,-50%);
+    height:4px;
+    width:20px;
+    background-color:#f9fbfd;
+    box-shadow:0 2px 6px 0 rgba(0,0,0,.09)
+}
+.career-header__step:not(:last-child){
+    margin-right:8px
+}
+.career-header__step.career-header__step--completed,.career-header__step.career-header__step--completed:not(:last-child):after{
+    background-color:#7ee195
+}
+.career-header__fraction{
+    font-weight:800
+}
+.career-header__text{
+    display:none
+}
+.career-header__btn-seguir{
+    width:183px;
+    position:absolute;
+    border-bottom:1px solid rgba(0,0,0,.04);
+    left:-1px;
+    bottom:-56px;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    padding:20px 0 13px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase
+}
+@media (min-width:731px){
+    .career-header__container{
+        padding-bottom:30px
+    }
+    .career-header__tag{
+        padding:20px 40px 20px 70px
+    }
+    .career-header__tag:before{
+        left:38px
+    }
+    .career-header__logo{
+        position:absolute;
+        top:50%;
+        right:3%;
+        transform:translateY(-50%);
+        z-index:-1;
+        height:150px;
+        width:400px;
+        margin:0;
+        background-size:100% 75%;
+        background-position:50%;
+        background-repeat:no-repeat;
+        opacity:.3
+    }
+    .career-header__logo--category-mobile{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-mobile.svg)*/
+    }
+    .career-header__logo--category-programacao{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-programacao.svg)*/
+    }
+    .career-header__logo--category-front-end{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-front-end.svg)*/
+    }
+    .career-header__logo--category-infraestrutura{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-infraestrutura.svg)*/
+    }
+    .career-header__logo--category-devops{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-devops.svg)*/
+    }
+    .career-header__logo--category-design-ux{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-design-ux.svg)*/
+    }
+    .career-header__logo--category-marketing-digital{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-marketing-digital.svg)*/
+    }
+    .career-header__logo--category-inovacao-gestao{
+        /*background-image:url(/assets/images/learningGuide/careerHeader/anima-inovacao-gestao.svg)*/
+    }
+    .career-header__title{
+        margin:60px 0 45px;
+        font-size:36px;
+        line-height:normal;
+        text-align:left;
+        max-width:70%;
+        align-self:flex-start
+    }
+    .career-header__progress{
+        position:absolute;
+        right:0;
+        bottom:15px;
+        padding:10px 10px 9px;
+        background-color:#fff;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        margin-top:0;
+        max-width:100px;
+        box-shadow:0 2px 6px 0 rgba(0,0,0,.09)
+    }
+    .career-header__steps{
+        flex-wrap:wrap
+    }
+    .career-header__step{
+        height:10px;
+        width:10px;
+        background-color:#ecf2f5;
+        border-radius:0;
+        box-shadow:none
+    }
+    .career-header__step:not(:last-child):after{
+        display:none
+    }
+    .career-header__step:nth-child(n){
+        margin:0 4px 4px 0
+    }
+    .career-header .career-header__step:nth-child(6n){
+        margin:0
+    }
+    .career-header__text{
+        display:flex;
+        flex-direction:column;
+        color:#516a84
+    }
+    .career-header__fraction{
+        font-size:20px;
+        margin-top:1px
+    }
+    .career-header__finished{
+        font-size:13px;
+        line-height:1.15
+    }
+}
+@media (min-width:960px){
+    .career-header__container{
+        padding-bottom:76px
+    }
+    .career-header__title{
+        margin:98px 0 53px;
+        line-height:normal
+    }
+    .career-header__logo{
+        opacity:.3;
+        height:55%;
+        width:45%;
+        right:4%
+    }
+    .career-header__progress{
+        top:0;
+        bottom:unset
+    }
+}
+@media (min-width:1280px){
+    .career-header__tag{
+        font-size:16px;
+        padding:27px 44px 26px 81px
+    }
+    .career-header__tag:before{
+        left:44px;
+        height:22px;
+        width:23px
+    }
+    .career-header__title{
+        max-width:45%
+    }
+    .estimated-time{
+        font-size:14px;
+        padding-left:44px
+    }
+    .estimated-time:before{
+        height:28px;
+        width:28px
+    }
+    .estimated-time__hours{
+        font-size:16px
+    }
+    .career-header__logo{
+        opacity:1;
+        height:300px;
+        width:630px;
+        right:2%
+    }
+    .career-header__progress{
+        max-width:115px;
+        padding:12px 12px 11px
+    }
+    .career-header__step{
+        height:11px;
+        width:11px
+    }
+    .career-header__step:nth-child(n){
+        margin:0 5px 5px 0
+    }
+    .career-header__fraction{
+        font-size:24px;
+        margin:3px 0;
+        line-height:1
+    }
+    .career-header__finished{
+        font-size:14px
+    }
+}

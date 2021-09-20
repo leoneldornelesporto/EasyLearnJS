@@ -1,0 +1,1 @@
+"use strict";$("#closeWelcomeVideo").on("click",function(e){e.preventDefault(),document.cookie="closeWelcomeVideo=true",$(e.target).parents(".alert").hide()});

@@ -1,6 +1,6 @@
 .company-logo__wrapper .company-logo,.content-menu-button,.header,.header-nav,.header-nav-arrow,.header-nav-link,.header-nav:before,.headerMobile-collapsed-top,.headerMobile-content,.headerMobile-content-headline,.levelMenu-header-user-points-xp-points,.natural-header,.profile-info-name{
-    background-color:#051932;
-    color:#fff
+    /*background-color: #eef0f8;*/
+    /*color: #0060be*/
 }
 .header-news-text,.news__kind,.news__name,.news__publishedDate{
     color:#fff

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {getAllCursos} from '../../helpers/EasyLearnApi';
+import {Link} from "react-router-dom";
 
 const Cursos = () => {
 
@@ -26,8 +27,8 @@ const Cursos = () => {
                                     <li className="card-list__item" data-course-name={value.nome}
                                         data-started-at="" data-finished-at="">
                                         <div className="course-card  course-card--simple-card bootcamp-background-dark-section">
-                                            <a className="course-card__course-link " data-recommendationId="" data-courseid=""
-                                               data-recommendationsource="" href={"curso/detalhe/".concat(value.uuid)}></a>
+                                            <Link className="course-card__course-link " data-recommendationId="" data-courseid=""
+                                               data-recommendationsource="" to={"/curso_detalhe=".concat(value.uuid)}></Link>
                                             <div className="course-card__progress ">
                                                 <div className="course-card__bar" aria-hidden="true"></div>
                                                 <span className="course-card__number" aria-label="Progresso do curso">%</span>

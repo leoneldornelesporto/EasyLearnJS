@@ -1,0 +1,1 @@
+"use strict";$(".check-other-tracks").click(function(e){e.preventDefault();var t=e.target.closest(".warning-card-main").id,c=e.target.closest(".check-other-tracks").dataset.redirectUrl;$.post("/learningGuide/markAsSeen",{code:t}).done(function(e){window.location=void 0!==c?c:e}).fail(function(e){window.alert(e.responseText)})});
