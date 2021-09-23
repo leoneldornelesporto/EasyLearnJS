@@ -1,19 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {getCursoByUuid, getModuloByUuid} from '../../helpers/EasyLearnApi';
+import {getCursoByUuid} from '../../helpers/EasyLearnApi';
 import {useParams} from "react-router";
-import {Link} from "react-router-dom";
+import Cookies from "js-cookie";
 
 const CursoDetalhe = () => {
 
     const { id } = useParams();
     const [curso, setAllCursos] = useState([]);
-
+    let cont =0;
     useEffect(()=>{
         getCursoByUuid(id).then(function(result) {
             return setAllCursos(result);
         })
     },[])
 
+    Cookies.set('UuidCurso', curso.uuid);
+
+    console.log(Cookies.get('UuidCurso'))
     try{
         return(
             <div className="container">
@@ -163,24 +166,6 @@ const CursoDetalhe = () => {
                 <section className="course-content">
                     <div className="container">
                         <div className="course-content-aside">
-                            <div className="course-content-details course-degrees">
-                                <h2 className="course-title course-content-subtitle course-degrees-title">
-                                    Formação com esse curso
-                                </h2>
-                                <a href="/formacao-jogos-unity" className="lista-guides__link">
-                                    <div className="course-card">
-                                        <li className="course-degrees-item">
-                                            <p className="course-degrees-aside-text">
-                                                <img className="lista-guides__icone-formacao"
-                                                     src="https://www.alura.com.br/assets/api/formacoes/categorias/programacao.svg"/>
-                                                <span className="lista-guides__nome">
-                           Jogos com Unity
-                           </span>
-                                            </p>
-                                        </li>
-                                    </div>
-                                </a>
-                            </div>
                             <div className="course-content-details">
                                 <section className="course-content-instructors">
                                     <h2 className="course-title course-content-subtitle bootcamp-text-color">
@@ -191,7 +176,7 @@ const CursoDetalhe = () => {
                                             <div className="instructors-item-photo">
                                                 <a href="/user/RicardoBugan" className="instructor-item-link">
                                                     <img className="instructors-item-img"
-                                                         src="https://www.gravatar.com/avatar/8c6fa3f5341d2b26a22b88871950c5ab.png?r=PG&amp;size=100x100&amp;date=2021-09-19&amp;d=https%3A%2F%2Fcursos.alura.com.br%2Fassets%2Fimages%2Fforum%2Favatar_r.png"
+                                                         src={curso.avatar}
                                                          alt="instructor Ricardo Bugan Debs"/>
                                                 </a>
                                             </div>
@@ -199,25 +184,21 @@ const CursoDetalhe = () => {
                                                 <div className="instructor-item-header">
                                                     <a href="/user/RicardoBugan"
                                                        className="instructor-item-link bootcamp-text-color">
-                                                        <h3 className="instructor-item-name bootcamp-text-color">Ricardo Bugan
-                                                            Debs
+                                                        <h3 className="instructor-item-name bootcamp-text-color">{curso.nomeProfessor}
                                                         </h3>
                                                     </a>
                                                     <p>
                                                         <a target="_blank" rel="noopener nofollow"
                                                            className="instrutores-item-linkedin bootcamp-text-color"
-                                                           href="https://www.linkedin.com/in/ricardo-bugan-b0581379/">
-                                                            <img src="/assets/images/course/linkedin.svg"/> Linkedin
+                                                           href={curso.linkedin}>
+                                                            <img src="https://cursos.alura.com.br/assets/images/course/linkedin.svg"/> Linkedin
                                                         </a>
                                                     </p>
                                                 </div>
                                             </div>
                                         </li>
                                         <div>
-                                            <p className="instructor-item-description bootcamp-text-color">Ricardo é designer de
-                                                jogos, programador e instrutor. Trabalha desenvolvendo jogos desde 2012 e está
-                                                sempre em busca de novas quests. Como instrutor, vê jogos como mundos interativos
-                                                onde as pessoas entram para aprender.
+                                            <p className="instructor-item-description bootcamp-text-color">{curso.biografia}
                                             </p>
                                         </div>
                                     </ul>
@@ -260,7 +241,7 @@ const CursoDetalhe = () => {
                                             return (
                                                 <li className="courseSection-listItem">
                                                     <div className="courseSection-listItem__wrapper">
-                                                        <a href="/course/flappybirdunity1/section/6040/tasks"
+                                                        <a href={"/modulo_detalhe="+value.id}
                                                            className="courseSectionList-section">
                                                             <div className="courseSectionList-sectionTitle bootcamp-text-color">
                                                                 {value.titulo}
@@ -279,7 +260,15 @@ const CursoDetalhe = () => {
                                                             <div className="courseSectionList-details">
                                                                 <aside className="courseSectionList-sectionProgress"
                                                                        aria-label="0 exercícios feitos de 12">
-                                                                    <span className=""> 0</span> / 12
+                                                                    <span hidden="true">{cont=0}</span>
+                                                                    {
+                                                                        value.aulaDto.map((value,index)=> {
+                                                                            if (value.visualizada === true){
+                                                                                cont++;
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                    {cont}/ {value.aulaDto.length}
                                                                 </aside>
                                                                 <span className="courseSectionList-separation"></span>
                                                                 <span className="courseSectionList-sectionTime"
@@ -312,11 +301,10 @@ const CursoDetalhe = () => {
             </div>
         );
     }
-    catch (e){
-        return(
+    catch (e) {
+        return (
             <div/>
         )
     }
-
 }
 export default CursoDetalhe;

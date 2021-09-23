@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 function Footer(){
     return(
-            <div className="footer container">
+            <footer className="footer container">
                 <a data-savepage-href="/dashboard" href="https://cursos.alura.com.br/dashboard" className="footer-logo">
 
                 </a>
@@ -126,7 +126,7 @@ function Footer(){
                         </ul>
                     </div>
                 </section>
-            </div>
+            </footer>
     );
 }
 export default Footer;

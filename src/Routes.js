@@ -9,6 +9,8 @@ import Principal from "./pages/Principal";
 import Dashboard from "./pages/Dashboard";
 import {Route, Switch} from "react-router-dom";
 import CursoDetalhe from "./pages/CursoDetalhe";
+import ModuloDetalhe from "./pages/ModuloDetalhe";
+import AulaDetalhe from "./pages/AulaDetalhe";
 
 export default () => {
     return(
@@ -28,8 +30,14 @@ export default () => {
             <Route path="/cursos">
                 <Cursos/>
             </Route>
+            <Route path="/aula_detalhe=:id">
+                <AulaDetalhe/>
+            </Route>
             <Route path="/curso_detalhe=:id">
                 <CursoDetalhe/>
+            </Route>
+            <Route path="/modulo_detalhe=:id">
+                <ModuloDetalhe/>
             </Route>
             <Route path="/buscarcursos">
                 <BuscarCursos/>

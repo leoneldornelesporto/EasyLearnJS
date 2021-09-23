@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getAllCursos} from '../../helpers/EasyLearnApi';
 import {Link} from "react-router-dom";
 
@@ -6,9 +6,11 @@ const Cursos = () => {
 
     const [allCursos, setAllCursos] = useState([]);
 
-    getAllCursos().then(function(result) {
-        return setAllCursos(result);
-    })
+    useEffect(()=>{
+        getAllCursos().then(function(result) {
+            return setAllCursos(result);
+        })
+    },[])
 
     return(
         <div>
