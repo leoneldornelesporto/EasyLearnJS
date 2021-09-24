@@ -14,6 +14,14 @@ export async function getCursoByUuid(uuid) {
     return (await api.get('/v1/curso/uuid/'+uuid)).data;
 }
 
+export async function getCursoByNome(nome) {
+    return (await api.get('/v1/curso/nome/'+nome)).data;
+}
+
+export async function getCursoByIdCategoria(id) {
+    return (await api.get('/v1/curso/categoria/'+id)).data;
+}
+
 export async function signUp(usuario,senha) {
     return (await api.get('/login/signin','authorization',{headers:{usuario:usuario, senha:senha}})).data;
 }
@@ -27,15 +35,15 @@ export async function postAluno(username,password,email) {
 }
 
 export async function protectedPmodulo(id,authorization) {
-    return (await api.get('/v1/protectedP/modulo/'+id,null,{headers:{Authorization:authorization}})).data;
+    return (await api.get('/v1/protectedA/modulo/'+id,null,{headers:{Authorization:authorization}})).data;
 }
 
 export async function protectedPmoduloByUuid(uuid,authorization) {
-    return (await api.get('v1/protectedP/modulo/curso/'+uuid,null,{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo/curso/'+uuid,null,{headers:{Authorization:authorization}})).data;
 }
 
 export async function findModuloByUuidCursoAndIdAula(uuid,id,authorization) {
-    return (await api.get('v1/protectedP/curso/'+uuid+'/aula/'+id+'/modulo',null,{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/curso/'+uuid+'/aula/'+id+'/modulo',null,{headers:{Authorization:authorization}})).data;
 }
 
 export async function getCursoByUuidAndIdAula(uuid,id,authorization) {
@@ -43,5 +51,5 @@ export async function getCursoByUuidAndIdAula(uuid,id,authorization) {
 }
 
 export async function getAulaByUuidCursoAndIdAula(uuid,id,authorization) {
-    return (await api.get('v1/protectedP/modulo/curso/'+uuid+'/aula/'+id,null,{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo/curso/'+uuid+'/aula/'+id,null,{headers:{Authorization:authorization}})).data;
 }

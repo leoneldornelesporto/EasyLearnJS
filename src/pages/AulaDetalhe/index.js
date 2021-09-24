@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {findModuloByUuidCursoAndIdAula, getAulaByUuidCursoAndIdAula, getCursoByUuid} from "../../helpers/EasyLearnApi";
 import Cookies from "js-cookie";
-import {isLogged} from "../../helpers/AuthHandler";
+import {getAuthorization, isLogged} from "../../helpers/AuthHandler";
 
 const AulaDetalhe = () => {
     const { id } = useParams();
@@ -12,7 +12,7 @@ const AulaDetalhe = () => {
     const [verifica, setVerifica] = useState('');
 
     useEffect(()=>{
-        findModuloByUuidCursoAndIdAula(Cookies.get('UuidCurso'),id,'Basic UHJvZmVzc29yOjEyMzQ1').then(function(result) {
+        findModuloByUuidCursoAndIdAula(Cookies.get('UuidCurso'),id,getAuthorization()).then(function(result) {
             return setModulo(result);
         })
     },[])
@@ -24,13 +24,13 @@ const AulaDetalhe = () => {
     },[])
 
     useEffect(()=>{
-        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),id,'Basic UHJvZmVzc29yOjEyMzQ1').then(function(result) {
+        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),id,getAuthorization()).then(function(result) {
             return setAula(result);
         })
     },[])
 
     function verificaProximo(id){
-        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),++id,'Basic UHJvZmVzc29yOjEyMzQ1').then(function(result) {
+        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),++id,getAuthorization()).then(function(result) {
             if(result!==null){
                 return setVerifica(id)
             }
@@ -142,18 +142,19 @@ const AulaDetalhe = () => {
                             <h2 className="task-menu-sections-title">
                                 Aula Atual
                             </h2>
-                            <select className="task-menu-sections-select">
-
-                                {
-                                    curso.moduloDtoList.map((value, index) => {
-
-                                        return (
-                                            <option value={value.id} id="modulo" selected="">{value.titulo}</option>
-                                        );
-                                    })
-                                }
-
-                            </select>
+                            <ul className="task-menu-sections-select" id="nav">
+                                <li><a href="#">Selecione o Modulo</a>
+                                    <ul>
+                                        {
+                                            curso.moduloDtoList.map((value, index) => {
+                                                return (
+                                                    <li><h3><a href={"modulo_detalhe="+value.id}  selected="">{value.titulo}</a></h3></li>
+                                                );
+                                            })
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
                         </section>
 
                         <nav className="task-menu-nav">

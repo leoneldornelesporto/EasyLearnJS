@@ -39,7 +39,7 @@ export default () => {
             <Route path="/modulo_detalhe=:id">
                 <ModuloDetalhe/>
             </Route>
-            <Route path="/buscarcursos">
+            <Route path="/buscar_cursos=:nome">
                 <BuscarCursos/>
             </Route>
             <Route path="/dashboard">

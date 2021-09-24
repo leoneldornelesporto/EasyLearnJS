@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {HeaderArea} from './styles';
 import {Link} from 'react-router-dom';
 import {doLogout, isLogged} from "../../../helpers/AuthHandler";
 import './style.css';
 import Cookies from "js-cookie";
 
-class Header extends React.Component {
-    render() {
+const Header = () => {
+
+        const [pesquisa, setPesquisa] = useState('');
 
         async function signout() {
             doLogout();
             window.location.href = '/signin'; //manda para a rota home
+        }
+
+        async function handleSubmit(e){
+            if(pesquisa !== ''){
+            e.preventDefault()
+            window.location.href = "/buscar_cursos="+pesquisa; //manda para a rota home
+            }
+            setPesquisa('')
         }
 
         if (!isLogged()) {
@@ -27,13 +36,13 @@ class Header extends React.Component {
                                     </svg>
                                 </svg>
                             </a>
-                            <form action="/buscarcursos" id="headerBusca-form"
+                            <form onSubmit={handleSubmit} id="headerBusca-form"
                                   className="headerBusca-form headerBusca-form--retratil"
                                   aria-hidden="true">
                                 <label htmlFor="headerBusca-campoBusca">Qual curso procura?</label>
                                 <input type="search" className="skipKeyPress headerBusca-form-input"
                                        id="headerBusca-campoBusca"
-                                       name="query" placeholder="Digite aqui a busca"/>
+                                       name="query" placeholder="Digite aqui a busca" onChange={e=>setPesquisa(e.target.value)}/>
                                 <button className="headerBusca-submit" type="submit">Buscar</button>
                             </form>
                         </div>
@@ -41,7 +50,7 @@ class Header extends React.Component {
                     <header className="header headerDesktop bootcamp-header-dark-theme">
                         <div className="container">
                             <div className="header-logo--wrapper ">
-                                <Link to="/" className="header-logo">
+                                <Link to="/dashboard" className="header-logo">
                                     <h3>EasyLearn</h3>
                                 </Link>
                             </div>
@@ -63,7 +72,7 @@ class Header extends React.Component {
                     </header>
                     <div className="natural-header bootcamp-header-dark-theme">
                         <div className="header-logo--wrapper ">
-                            <Link href="/" className="header-logo">
+                            <Link to="/dashboard" className="header-logo">
                                 <h3>EASYLEARN</h3>
                             </Link>
                         </div>
@@ -89,7 +98,7 @@ class Header extends React.Component {
                 <HeaderArea>
                     <section className="headerBusca headerBusca-desktop">
                         <div className="container">
-                            <a href="/cursos" aria-label="busca" className="headerBusca-icon"
+                            <a href="/buscar_cursos" aria-label="busca" className="headerBusca-icon"
                                role="button" aria-expanded="false" aria-controls="headerBusca-form">
                                 <svg className="headerBusca-icon-svg">
                                     <svg width="17" height="17" viewBox="0 0 17 17" id="busca">
@@ -98,13 +107,13 @@ class Header extends React.Component {
                                     </svg>
                                 </svg>
                             </a>
-                            <form action="/buscarcursos" id="headerBusca-form"
+                            <form onSubmit={handleSubmit} id="headerBusca-form"
                                   className="headerBusca-form headerBusca-form--retratil"
                                   aria-hidden="true">
                                 <label htmlFor="headerBusca-campoBusca">Qual curso procura?</label>
                                 <input type="search" className="skipKeyPress headerBusca-form-input"
                                        id="headerBusca-campoBusca"
-                                       name="query" placeholder="Digite aqui a busca"/>
+                                       name="query" placeholder="Digite aqui a busca" onChange={e=>setPesquisa(e.target.value)}/>
                                 <button className="headerBusca-submit" type="submit">Buscar</button>
                             </form>
                         </div>
@@ -112,7 +121,7 @@ class Header extends React.Component {
                     <header className="header headerDesktop">
                         <div className="container">
                             <div className="header-logo--wrapper ">
-                                <Link href="/" className="header-logo">
+                                <Link to="/dashboard" className="header-logo">
                                     <h3>EASYLEARN</h3>
                                 </Link>
                             </div>
@@ -153,7 +162,7 @@ class Header extends React.Component {
                                     </a>
                                     <nav id="contentList" className="header-nav bootcamp-background-dark-section"
                                          aria-hidden="true" role="region" tabIndex="-1" aria-labelledby="courseLabel">
-                                        <a href="/formacoes" className="header-nav-link header-item-link--degrees"
+                                        <a href="/cursos" className="header-nav-link header-item-link--degrees"
                                            tabIndex="-1">
                                             Cursos
                                         </a>
@@ -326,7 +335,6 @@ class Header extends React.Component {
                 </HeaderArea>
             );
         }
-    }
 }
 
 export default Header;
