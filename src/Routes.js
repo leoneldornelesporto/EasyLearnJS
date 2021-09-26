@@ -11,12 +11,16 @@ import {Route, Switch} from "react-router-dom";
 import CursoDetalhe from "./pages/CursoDetalhe";
 import ModuloDetalhe from "./pages/ModuloDetalhe";
 import AulaDetalhe from "./pages/AulaDetalhe";
+import Perfil from "./pages/Perfil";
 
 export default () => {
     return(
         <Switch>
             <Route path="/about">
                 <About/>
+            </Route>
+            <Route path="/my_profile">
+                <Perfil/>
             </Route>
             <Route path="/signin">
                 <Login/>

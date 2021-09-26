@@ -5,6 +5,7 @@ import {doLogout, isLogged} from "../../../helpers/AuthHandler";
 import './style.css';
 import Cookies from "js-cookie";
 
+
 const Header = () => {
 
         const [pesquisa, setPesquisa] = useState('');
@@ -20,6 +21,25 @@ const Header = () => {
             window.location.href = "/buscar_cursos="+pesquisa; //manda para a rota home
             }
             setPesquisa('')
+        }
+
+        function imagemAvatar() {
+                if(Cookies.get("avatar")!=='null') {
+                    return (
+                            <img
+                                src={Cookies.get("avatar")}
+                                alt="Foto de Leonel Dorneles Porto"
+                                className="headline-profile-avatar headline-profile-avatar"/>
+                    )
+                }
+                else{
+                    return (
+                            <img
+                                src="https://suap.ifsul.edu.br/static/comum/img/default.jpg"
+                                alt="Foto de Leonel Dorneles Porto"
+                                className="headline-profile-avatar headline-profile-avatar"/>
+                    )
+                }
         }
 
         if (!isLogged()) {
@@ -296,10 +316,8 @@ const Header = () => {
                                     <a role="button" tabIndex="0" aria-label="minha conta"
                                        className="content-menu-button menu-button-desktop profile-info-name"
                                        aria-expanded="true" aria-controls="profileList">
-                                        <img
-                                            src="https://www.gravatar.com/avatar/6030f04345752f96aaf23f5a0095db29.png?r=PG&amp;size=60x60&amp;date=2021-09-05&amp;d=https%3A%2F%2Fcursos.alura.com.br%2Fassets%2Fimages%2Fforum%2Favatar_l.png"
-                                            alt="Foto de Leonel Dorneles Porto"
-                                            className="headline-profile-avatar headline-profile-avatar"/>
+
+                                        {imagemAvatar()}
                                         <span className="profile-info-name-text-wrapper"><span
                                             className="screenReader-only">perfil de</span>{Cookies.get('nome')}</span>
                                     </a>

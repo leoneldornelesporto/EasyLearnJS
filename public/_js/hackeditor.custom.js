@@ -182,6 +182,73 @@ function setupHackEditor(params = {}) {
         return toolbar;
     }
 
+    function findSubmitElement(counterElement) {
+        const formElement = counterElement.closest('form');
+
+        if(formElement) {
+            return formElement.querySelector('[type=submit]');
+        } else {
+            return document.querySelector('[data-submittable=true]');
+        }
+    }
+
+    function showCounter(textElement, counter, currLength, maxLength) {
+        const submitElement = findSubmitElement(counter);
+
+        counter.classList.remove('disabled');
+
+        if(currLength > maxLength) {
+            counter.classList.add('max-length-reached');
+            const maxLengthExceededMessage = textElement.dataset.maxlengthExceededMessage;
+            counter.innerHTML = `${currLength}/${maxLength} - ${maxLengthExceededMessage}`;
+            submitElement.disabled = true;
+        } else if(currLength == maxLength) {
+            counter.classList.add('max-length-reached');
+            const maxLengthReachedMessage = textElement.dataset.maxlengthReachedMessage;
+            counter.innerHTML = `${currLength}/${maxLength} - ${maxLengthReachedMessage}`;
+            submitElement.disabled = false;
+        } else {
+            counter.classList.remove('max-length-reached');
+            counter.innerHTML = `${currLength}/${maxLength}`;
+            submitElement.disabled = false;
+        }
+    }
+
+    function hideCounter(counter) {
+        const submitElement = findSubmitElement(counter);
+
+        counter.classList.add('disabled');
+        counter.innerHTML = '';
+        submitElement.disabled = false;
+    }
+
+    function manipulateCharacterCount(counterElement) {
+        const hackEditorWrapper = counterElement.closest('.hackeditor');
+        if(!hackEditorWrapper) return;
+
+        const textElement = hackEditorWrapper.querySelector('textarea');
+
+        const textMaxLength = textElement.dataset.maxlength;
+        if (!textMaxLength) return;
+
+        const textLength = textElement.value.length;
+
+        const minNotifiableLength = textMaxLength * 0.4;
+        const shouldShowCounter = textLength >= minNotifiableLength || window.matchMedia('(max-width: 425px)').matches;
+
+        if(shouldShowCounter) {
+            showCounter(textElement, counterElement, textLength, textMaxLength);
+        } else {
+            hideCounter(counterElement);
+        }
+    }
+
+    const characterCounter = {
+        className: "character-counter",
+        defaultValue: null,
+        onUpdate: element => manipulateCharacterCount(element)
+    };
+
     const defaultEditorOptions = {
         autoDownloadFontAwesome: false,
         syncSideBySidePreviewScroll: true,
@@ -203,7 +270,7 @@ function setupHackEditor(params = {}) {
             uploadImageError(this, errorMessage);
         },
         imageUploadFunction: uploadImage,
-        status: ['upload-image'],
+        status: ['upload-image', characterCounter],
         // TODO - Remover pra caso o preview fique lado-a-lado, se não vai ficar esquisito prever a imagem nos dois lados.
         previewImagesInEditor: true,
         imageTexts: {
@@ -222,8 +289,6 @@ function setupHackEditor(params = {}) {
         shortcuts: {
             "toggleFullScreen": null,
         }
-
-        
     }
 
     const updateOutputField = (editor) => {

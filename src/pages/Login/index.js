@@ -26,7 +26,10 @@ const Cadastro = () => {
             return setUsuario(result)
         })
 
-        Cookies.set("nome",usuario.nome)
+        Cookies.set("nome",usuario.nomeCompleto)
+        Cookies.set("email",username)
+        Cookies.set("senha",password)
+        Cookies.set("avatar",usuario.avatar)
 
         if (authorize === ''){
             alert("Usuário ou Senha incorretos.");
