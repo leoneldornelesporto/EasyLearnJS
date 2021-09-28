@@ -31,11 +31,11 @@ export async function v1SignUp(usuario,senha) {
 }
 
 export async function postAluno(username,password,email) {
-    return (await api.post('/v1/SalvarAluno',{nomeCompleto:username,senha:password,email:email})).data;
+    return (await api.post('/v1/salvar/aluno',{nomeCompleto:username,senha:password,email:email})).data;
 }
 
-export async function putAluno(id,authorization,nomeCompleto,nomeNosCertificados,usuarioNaUrl,cpf,biografia,dataDeNascimento,ocupacao,linkedin,twitter,github,linkPersonalizado,empresa,cargo,instituicao,curso,privacidadeDoPerfil) {
-    return (await api.put('/v1/protectedA/aluno/'+id,{nomeCompleto:nomeCompleto,nomeNosCertificados:nomeNosCertificados,usuarioNaUrl:usuarioNaUrl,cpf:cpf,biografia:biografia,dataDeNascimento:dataDeNascimento,ocupacao:ocupacao,linkedin:linkedin,twitter:twitter,github:github,linkPersonalizado:linkPersonalizado,empresa:empresa,cargo:cargo,instituicao:instituicao,curso:curso,privacidadeDoPerfil:privacidadeDoPerfil},{headers:{Authorization:authorization}})).data;
+export async function putAluno(id,authorization,avatar,nomeCompleto,nomeNosCertificados,usuarioNaUrl,cpf,biografia,dataDeNascimento,ocupacao,linkedin,twitter,github,linkPersonalizado,empresa,cargo,instituicao,curso,privacidadeDoPerfil) {
+    return (await api.put('/v1/protectedA/aluno/'+id,{avatar:avatar,nomeCompleto:nomeCompleto,nomeNosCertificados:nomeNosCertificados,usuarioNaUrl:usuarioNaUrl,cpf:cpf,biografia:biografia,dataDeNascimento:dataDeNascimento,ocupacao:ocupacao,linkedin:linkedin,twitter:twitter,github:github,linkPersonalizado:linkPersonalizado,empresa:empresa,cargo:cargo,instituicao:instituicao,curso:curso,privacidadeDoPerfil:privacidadeDoPerfil},{headers:{Authorization:authorization}})).data;
 }
 
 export async function protectedPmodulo(id,authorization) {

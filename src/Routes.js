@@ -12,6 +12,9 @@ import CursoDetalhe from "./pages/CursoDetalhe";
 import ModuloDetalhe from "./pages/ModuloDetalhe";
 import AulaDetalhe from "./pages/AulaDetalhe";
 import Perfil from "./pages/Perfil";
+import CursosMatriculados from "./pages/CursoMatriculado";
+import AgendamentoTutoria from "./pages/AgendamentoTutoria";
+import Forum from "./pages/Forum";
 
 export default () => {
     return(
@@ -48,6 +51,15 @@ export default () => {
             </Route>
             <Route path="/dashboard">
                 <Dashboard/>
+            </Route>
+            <Route path="/courses_mine">
+                <CursosMatriculados/>
+            </Route>
+            <Route path="/agendamento_tutoria">
+                <AgendamentoTutoria/>
+            </Route>
+            <Route path="/forum">
+                <Forum/>
             </Route>
             <Route path="/">
                 <Principal/>

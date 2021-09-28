@@ -104,7 +104,7 @@ const AulaDetalhe = () => {
                             <div className="task-menu-header-info">
                                 <a className="task-menu-header-info-title" href={"/curso_detalhe=" + curso.uuid}
                                    title="Ir para página do curso">
-                                    <img src="https://www.alura.com.br/assets/api/cursos/flappybirdunity1.svg"
+                                    <img src={curso.imagemIcon}
                                          alt="ícone Unity 2D parte 1: Criando seu primeiro jogo 2D"
                                          className="task-menu-header-info-title-icon " width="37.5px" height="37.5px"/>
                                     <h2 className="task-menu-header-info-title-text">{curso.nome}
@@ -117,17 +117,6 @@ const AulaDetalhe = () => {
                                 </div>
                             </div>
                         </section>
-                        <form className="task-menu-header-search" target="_blank"
-                              action="/search/course/flappybirdunity1"
-                              method="get">
-                            <label className="task-menu-header-search-title" htmlFor="query">Buscar neste curso</label>
-                            <input className="task-menu-header-search-input" name="query" id="query" type="text"
-                                   required=""/>
-                            <button className="task-menu-header-search-button">Buscar <img aria-hidden="true"
-                                                                                           className="task-menu-header-search-button-img"
-                                                                                           src="https://cursos.alura.com.br/assets/images/classPage/icon-new-page.svg"/>
-                            </button>
-                        </form>
                         <section className="task-menu-section sr-only">
                             <div className="task-menu-section-title">
             <span className="task-menu-section-title-number ">Aula<strong>01</strong>

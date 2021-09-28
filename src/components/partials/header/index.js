@@ -159,7 +159,7 @@ const Header = () => {
                                            tabIndex="-1">
                                             Dashboard
                                         </a>
-                                        <a href="/courses/mine" className="header-nav-link header-nav-link--courses"
+                                        <a href="courses_mine" className="header-nav-link header-nav-link--courses"
                                            tabIndex="-1">
                                             Meus Cursos
                                         </a>
@@ -206,7 +206,7 @@ const Header = () => {
                                            tabIndex="-1">
                                             Fórum
                                         </a>
-                                        <a href="/forum/participacao"
+                                        <a href="/agendamento_tutoria"
                                            className="header-nav-link header-item-link--forum-interactions bootcamp-text-color"
                                            tabIndex="-1">
                                             Agendar Atendimento com o Tutor

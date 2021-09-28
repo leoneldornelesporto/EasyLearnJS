@@ -18,18 +18,23 @@ const Cadastro = () => {
     async function login(e){
         e.preventDefault();
 
-        signUp(username,password).then(function(result) {
-            return setAuthorize(result);
-        })
+        try{
+            await signUp(username,password).then(function(result) {
+                return setAuthorize(result);
+            })
 
-        v1SignUp(username,password).then(function(result) {
-            return setUsuario(result)
-        })
+            await v1SignUp(username,password).then(function(result) {
+                return setUsuario(result)
+            })
+        }catch (e) {
+            console.log(e)
+        }
 
         Cookies.set("nome",usuario.nomeCompleto)
         Cookies.set("email",username)
         Cookies.set("senha",password)
         Cookies.set("avatar",usuario.avatar)
+        console.log("Authorize"+authorize)
 
         if (authorize === ''){
             alert("Usuário ou Senha incorretos.");
