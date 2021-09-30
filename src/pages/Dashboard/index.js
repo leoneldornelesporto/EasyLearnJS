@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import {isLogged} from "../../helpers/AuthHandler";
+import {isLogged} from "../../context/AuthHandler";
 
 const Dashboard = () => {
     if (isLogged()) {

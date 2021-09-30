@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {getAllCursos} from '../../helpers/EasyLearnApi';
+import React, {useContext, useEffect} from 'react';
 import {Link} from "react-router-dom";
+import {CursoContext} from "../../context/CursoProvider";
 
 const Cursos = () => {
 
-    const [allCursos, setAllCursos] = useState([]);
+    const {cursos,retornarTodosOsCursos} = useContext(CursoContext);
 
     useEffect(()=>{
-        getAllCursos().then(function(result) {
-            return setAllCursos(result);
-        })
+        retornarTodosOsCursos();
     },[])
 
     return(
@@ -24,7 +22,7 @@ const Cursos = () => {
             <div className="container">
                 <ul className="card-list allCourses__card-list" id="">
                     {
-                            allCursos.map((value,index)=>{
+                        cursos.map((value, index)=>{
                                 return (
                                     <li className="card-list__item" data-course-name={value.nome}
                                         data-started-at="" data-finished-at="">

@@ -1,45 +1,45 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {HeaderArea} from './styles';
 import {Link} from 'react-router-dom';
-import {doLogout, isLogged} from "../../../helpers/AuthHandler";
+import {isLogged} from "../../../context/AuthHandler";
 import './style.css';
 import Cookies from "js-cookie";
-
+import {AuthUserContext} from "../../../context/AuthUserProvider";
 
 const Header = () => {
+    const {sigOut} = useContext(AuthUserContext);
+    const [pesquisa, setPesquisa] = useState('');
 
-        const [pesquisa, setPesquisa] = useState('');
+    async function signout() {
+        sigOut();
+        window.location.href = '/signin'; //manda para a rota home
+    }
 
-        async function signout() {
-            doLogout();
-            window.location.href = '/signin'; //manda para a rota home
+    async function handleSubmit(e){
+        if(pesquisa !== ''){
+        e.preventDefault()
+        window.location.href = "/buscar_cursos="+pesquisa; //manda para a rota home
         }
+        setPesquisa('')
+    }
 
-        async function handleSubmit(e){
-            if(pesquisa !== ''){
-            e.preventDefault()
-            window.location.href = "/buscar_cursos="+pesquisa; //manda para a rota home
+    function imagemAvatar() {
+            if(Cookies.get("avatar")!=='null') {
+                return (
+                        <img
+                            src={Cookies.get("avatar")}
+                            alt="Foto de Leonel Dorneles Porto"
+                            className="headline-profile-avatar headline-profile-avatar"/>
+                )
             }
-            setPesquisa('')
-        }
-
-        function imagemAvatar() {
-                if(Cookies.get("avatar")!=='null') {
-                    return (
-                            <img
-                                src={Cookies.get("avatar")}
-                                alt="Foto de Leonel Dorneles Porto"
-                                className="headline-profile-avatar headline-profile-avatar"/>
-                    )
-                }
-                else{
-                    return (
-                            <img
-                                src="https://suap.ifsul.edu.br/static/comum/img/default.jpg"
-                                alt="Foto de Leonel Dorneles Porto"
-                                className="headline-profile-avatar headline-profile-avatar"/>
-                    )
-                }
+            else{
+                return (
+                        <img
+                            src="https://suap.ifsul.edu.br/static/comum/img/default.jpg"
+                            alt="Foto de Leonel Dorneles Porto"
+                            className="headline-profile-avatar headline-profile-avatar"/>
+                )
+            }
         }
 
         if (!isLogged()) {

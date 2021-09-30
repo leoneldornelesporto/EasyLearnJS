@@ -1,44 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {findModuloByUuidCursoAndIdAula, getAulaByUuidCursoAndIdAula, getCursoByUuid} from "../../helpers/EasyLearnApi";
 import Cookies from "js-cookie";
-import {getAuthorization, isLogged} from "../../helpers/AuthHandler";
+import {getAuthorization, isLogged} from "../../context/AuthHandler";
+import {CursoContext} from "../../context/CursoProvider";
 
 const AulaDetalhe = () => {
+
+    const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
+
     const { id } = useParams();
-    const [modulo, setModulo] = useState('');
-    const [curso, setAllCursos] = useState([]);
-    const [aula, setAula] = useState([]);
-    const [verifica, setVerifica] = useState('');
 
     useEffect(()=>{
-        findModuloByUuidCursoAndIdAula(Cookies.get('UuidCurso'),id,getAuthorization()).then(function(result) {
-            return setModulo(result);
-        })
+        retornarModuloPorUuidCursoEIdDaAula(Cookies.get('UuidCurso'),id,getAuthorization());
     },[])
 
     useEffect(()=>{
-        getCursoByUuid(Cookies.get('UuidCurso')).then(function(result) {
-            return setAllCursos(result);
-        })
+        retornarCursosPorUuid(Cookies.get('UuidCurso'));
     },[])
 
     useEffect(()=>{
-        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),id,getAuthorization()).then(function(result) {
-            return setAula(result);
-        })
+        retornarAulaPorUuidCursoEIdAula(Cookies.get('UuidCurso'),id,getAuthorization());
     },[])
 
-    function verificaProximo(id){
-        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),++id,getAuthorization()).then(function(result) {
-            if(result!==null){
-                return setVerifica(id)
-            }
-            return setVerifica(false)
-        })
-    }
-
-    verificaProximo(id)
+    verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
 
     function body(){
         if(isLogged()) {
@@ -102,12 +86,12 @@ const AulaDetalhe = () => {
                             <button title="Fechar menu" aria-label="Fechar menu" type="button"
                                     className="openMenu-button task-menu-button "></button>
                             <div className="task-menu-header-info">
-                                <a className="task-menu-header-info-title" href={"/curso_detalhe=" + curso.uuid}
+                                <a className="task-menu-header-info-title" href={"/curso_detalhe=" + cursos.uuid}
                                    title="Ir para página do curso">
-                                    <img src={curso.imagemIcon}
+                                    <img src={cursos.imagemIcon}
                                          alt="ícone Unity 2D parte 1: Criando seu primeiro jogo 2D"
                                          className="task-menu-header-info-title-icon " width="37.5px" height="37.5px"/>
-                                    <h2 className="task-menu-header-info-title-text">{curso.nome}
+                                    <h2 className="task-menu-header-info-title-text">{cursos.nome}
                                     </h2>
                                 </a>
                                 <div className="task-menu-header-info-progress">
@@ -135,7 +119,7 @@ const AulaDetalhe = () => {
                                 <li><a href="#">Selecione o Modulo</a>
                                     <ul>
                                         {
-                                            curso.moduloDtoList.map((value, index) => {
+                                            cursos.moduloDtoList.map((value, index) => {
                                                 return (
                                                     <li><h3><a href={"modulo_detalhe="+value.id}  selected="">{value.titulo}</a></h3></li>
                                                 );

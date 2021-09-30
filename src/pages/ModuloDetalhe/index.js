@@ -1,37 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {getAulaByUuidCursoAndIdAula, getCursoByUuid, protectedPmodulo} from "../../helpers/EasyLearnApi";
 import Cookies from "js-cookie";
-import {getAuthorization, isLogged} from "../../helpers/AuthHandler";
+import {getAuthorization, isLogged} from "../../context/AuthHandler";
+import {CursoContext} from "../../context/CursoProvider";
+import {ModuloContext} from "../../context/ModuloContext";
 
 const ModuloDetalhe = () => {
+
+    const {cursos,modulo,verifica,retornarCursosPorUuid,retornarModulos} = useContext(CursoContext);
+    const {idAula,retornarModuloPeloId} = useContext(ModuloContext);
+
     const { id } = useParams();
-    const [modulo, setModulo] = useState('');
-    const [curso, setAllCursos] = useState([]);
-    const [verifica, setVerifica] = useState('');
 
     useEffect(()=>{
-        protectedPmodulo(id,getAuthorization()).then(function(result) {
-            return setModulo(result);
-        })
+        retornarModulos(id,getAuthorization());
     },[])
 
     useEffect(()=>{
-        getCursoByUuid(Cookies.get('UuidCurso')).then(function(result) {
-            return setAllCursos(result);
-        })
+        retornarCursosPorUuid(Cookies.get('UuidCurso'));
     },[])
 
-    function verificaProximo(id){
-        getAulaByUuidCursoAndIdAula(Cookies.get('UuidCurso'),++id,getAuthorization()).then(function(result) {
-            if(result!==null){
-                return setVerifica(id)
-            }
-            return setVerifica(false)
-        })
+    if(idAula===''){
+        retornarModuloPeloId(id,getAuthorization());
     }
-
-    verificaProximo(id)
 
     function body(){
         if(isLogged()) {
@@ -52,13 +43,13 @@ const ModuloDetalhe = () => {
                                 <span className="task-body-header-title-text">{modulo.titulo}</span>
                             </h1>
                             {
-                                verifica !== false ?
+                                idAula!==''?
                                     <div className="task-body-header-actions">
-                                        <a href={"/aula_detalhe=" + verifica} aria-hidden="true"
+                                        <a href={"/aula_detalhe=" + idAula} aria-hidden="true"
                                            className="task-actions-button task-actions-button-next task-submit bootcamp-primary-button-theme"
                                         >Próxima Atividade</a>
                                     </div>
-                                    :
+                                :
                                     <div></div>
                             }
                             <div className="theater-video settings">
@@ -95,12 +86,12 @@ const ModuloDetalhe = () => {
                             <button title="Fechar menu" aria-label="Fechar menu" type="button"
                                     className="openMenu-button task-menu-button "></button>
                             <div className="task-menu-header-info">
-                                <a className="task-menu-header-info-title" href={"/curso_detalhe="+curso.uuid}
+                                <a className="task-menu-header-info-title" href={"/curso_detalhe="+cursos.uuid}
                                    title="Ir para página do curso">
                                     <img src="https://www.alura.com.br/assets/api/cursos/flappybirdunity1.svg"
                                          alt="ícone Unity 2D parte 1: Criando seu primeiro jogo 2D"
                                          className="task-menu-header-info-title-icon " width="37.5px" height="37.5px"/>
-                                    <h2 className="task-menu-header-info-title-text">{curso.nome}
+                                    <h2 className="task-menu-header-info-title-text">{cursos.nome}
                                     </h2>
                                 </a>
                                 <div className="task-menu-header-info-progress">
@@ -138,13 +129,13 @@ const ModuloDetalhe = () => {
                             <ul className="task-menu-sections-select" id="nav">
                                 <li><a href="#">Selecione o Modulo</a>
                                     <ul>
-                                {
-                                    curso.moduloDtoList.map((value, index) => {
-                                        return (
-                                                <li><h3><a href={"modulo_detalhe="+value.id}  selected="">{value.titulo}</a></h3></li>
-                                        );
-                                    })
-                                }
+                                        {
+                                            cursos.moduloDtoList.map((value, index) => {
+                                                return (
+                                                    <li><h3><a href={"modulo_detalhe="+value.id}  selected="">{value.titulo}</a></h3></li>
+                                                );
+                                            })
+                                        }
                                     </ul>
                                 </li>
                             </ul>

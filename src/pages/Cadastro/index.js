@@ -1,23 +1,17 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
-import {postAluno} from "../../helpers/EasyLearnApi";
+import {AlunoContext} from "../../context/AlunoProvider";
 
 const Cadastro = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordRepeat, setPasswordRepeat] = useState('');
-    const [email, setEmail] = useState('');
+
+    const {username,setUsername,password,setPassword,passwordRepeat,setPasswordRepeat,email,setEmail,salvarAluno} = useContext(AlunoContext);
 
     async function cadastro(e){
         e.preventDefault();
 
         if (password === passwordRepeat){
             alert("Cadastro realizado com sucesso, confirme seu e-mail para acessar a plataforma");
-
-            console.log(postAluno(username,password,email).then(function(result) {
-                return result
-            }))
-
+            salvarAluno(email,password,username);
             window.location.href = "/signin";
         }else{
             alert("Senha Incorreta");

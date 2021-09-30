@@ -1,24 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {getCursoByUuid} from '../../helpers/EasyLearnApi';
+import React, {useContext, useEffect} from 'react';
 import {useParams} from "react-router-dom";
 
 import Cookies from "js-cookie";
-import {isLogged} from "../../helpers/AuthHandler";
+import {isLogged} from "../../context/AuthHandler";
+import {CursoContext} from "../../context/CursoProvider";
 
 const CursoDetalhe = () => {
 
     const { id } = useParams();
-    const [curso, setAllCursos] = useState([]);
+    const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
+
     let cont =0;
 
     useEffect(()=>{
-        getCursoByUuid(id).then(function(result) {
-            return setAllCursos(result);
-        })
+        retornarCursosPorUuid(id);
     },[])
 
-    Cookies.set('UuidCurso', curso.uuid);
-
+    Cookies.set('UuidCurso', cursos.uuid);
     console.log(Cookies.get('UuidCurso'))
 
     function body(){
@@ -33,7 +31,7 @@ const CursoDetalhe = () => {
                                 <div className="container course-header-banner-breadcrumb">
                                     <a href="/category/programacao" className="course-header-banner-breadcrumb__category"
                                        aria-label="Programação">
-                                        {curso.categoria}
+                                        {cursos.categoria}
                                     </a>
                                 </div>
                                 <div className="course-header-banner__wrapper">
@@ -41,7 +39,7 @@ const CursoDetalhe = () => {
                                         <div className="course-header-logo-area">
                                             <div className="course-header-banner-logo">
                                                 <div className="courseLogo">
-                                                    <img src={curso.imagemIcon} alt=""
+                                                    <img src={cursos.imagemIcon} alt=""
                                                          className="courseLogo-course"/>
                                                 </div>
                                             </div>
@@ -49,7 +47,7 @@ const CursoDetalhe = () => {
                                                 <h1 className="course-header-banner-title"
                                                     aria-label="Curso de Unity 2D parte 1: Criando seu primeiro jogo 2D">
                                                     Curso de <br/>
-                                                    <strong>{curso.nome}</strong>
+                                                    <strong>{cursos.nome}</strong>
                                                 </h1>
                                             </div>
                                         </div>
@@ -61,7 +59,7 @@ const CursoDetalhe = () => {
                                                     <div className="course-header-summary__info__wrapper">
                                                         <p className="course-header-summary__text">Carga horária</p>
                                                         <p className="course-header-summary__title"
-                                                           aria-label="Carga horária: 8h">{curso.cargaHoraria}</p>
+                                                           aria-label="Carga horária: 8h">{cursos.cargaHoraria}</p>
                                                     </div>
                                                 </div>
                                                 <div className="course-header-summary__info summary-score">
@@ -74,7 +72,7 @@ const CursoDetalhe = () => {
                                                     <div className="course-header-summary__info__wrapper">
                                                         <p className="course-header-summary__text">Atualizado em</p>
                                                         <p className="course-header-summary__title"
-                                                           aria-label="Atualizado em 27/03/2020">{curso.data}</p>
+                                                           aria-label="Atualizado em 27/03/2020">{cursos.data}</p>
                                                     </div>
                                                 </div>
                                                 <div className="course-header-summary__info summary-student">
@@ -183,7 +181,7 @@ const CursoDetalhe = () => {
                                                 <div className="instructors-item-photo">
                                                     <a href="/user/RicardoBugan" className="instructor-item-link">
                                                         <img className="instructors-item-img"
-                                                             src={curso.avatar}
+                                                             src={cursos.avatar}
                                                              alt="instructor Ricardo Bugan Debs"/>
                                                     </a>
                                                 </div>
@@ -191,13 +189,13 @@ const CursoDetalhe = () => {
                                                     <div className="instructor-item-header">
                                                         <a href="/user/RicardoBugan"
                                                            className="instructor-item-link bootcamp-text-color">
-                                                            <h3 className="instructor-item-name bootcamp-text-color">{curso.nomeProfessor}
+                                                            <h3 className="instructor-item-name bootcamp-text-color">{cursos.nomeProfessor}
                                                             </h3>
                                                         </a>
                                                         <p>
                                                             <a target="_blank" rel="noopener nofollow"
                                                                className="instrutores-item-linkedin bootcamp-text-color"
-                                                               href={curso.linkedin}>
+                                                               href={cursos.linkedin}>
                                                                 <img src="https://cursos.alura.com.br/assets/images/course/linkedin.svg"/> Linkedin
                                                             </a>
                                                         </p>
@@ -205,7 +203,7 @@ const CursoDetalhe = () => {
                                                 </div>
                                             </li>
                                             <div>
-                                                <p className="instructor-item-description bootcamp-text-color">{curso.biografia}
+                                                <p className="instructor-item-description bootcamp-text-color">{cursos.biografia}
                                                 </p>
                                             </div>
                                         </ul>
@@ -222,12 +220,12 @@ const CursoDetalhe = () => {
                             <div className="course-content-details-sectionList">
                                 <div className="course-content-sectionList">
                                     <div className="course-content-calls">
-                                        <h2 className="course-content-calls__title bootcamp-text-color">{curso.moduloDtoList[0].tituloSecundario}
+                                        <h2 className="course-content-calls__title bootcamp-text-color">{cursos.moduloDtoList[0].tituloSecundario}
                                         </h2>
                                         <div className="course-content-calls__wrapper">
                                             <ul className="course-content-calls__list">
                                                 {
-                                                    curso.moduloDtoList[0].subtitulo.map((value,index)=> {
+                                                    cursos.moduloDtoList[0].subtitulo.map((value, index)=> {
                                                         return (
                                                             <li className="course-content-calls__item bootcamp-text-color">
                                                                 {value}
@@ -244,7 +242,7 @@ const CursoDetalhe = () => {
                                     <ul className="courseSectionList">
 
                                         {
-                                            curso.moduloDtoList.map((value,index)=>{
+                                            cursos.moduloDtoList.map((value, index)=>{
                                                 return (
                                                     <li className="courseSection-listItem">
                                                         <div className="courseSection-listItem__wrapper">

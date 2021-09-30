@@ -1,59 +1,32 @@
-import React, {useEffect, useState} from 'react';
-import {putAluno, signUp, v1SignUp} from "../../helpers/EasyLearnApi";
+import React, {useContext, useEffect} from 'react';
 import Cookies from "js-cookie";
-import {doLogin, getAuthorization} from "../../helpers/AuthHandler";
+import {getAuthorization} from "../../context/AuthHandler";
+import {AuthUserContext} from "../../context/AuthUserProvider";
+import {AlunoContext} from "../../context/AlunoProvider";
 
 const Perfil = () => {
 
-    const [authorize, setAuthorize] = useState('');
-    const [avatar, setAvatar] = useState('');
-    const [nomeCompleto, setNomeCompleto] = useState('');
-    const [nomeNosCertificados, setNomeNosCertificados] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [passwordRepeat, setPasswordRepeat] = useState('');
-    const [usuarioNaUrl, setUsuarioNaUrl] = useState('');
-    const [biografia, setBiografia] = useState('');
-    const [dia, setDia] = useState('');
-    const [mes, setMes] = useState('');
-    const [ano, setAno] = useState('');
-    const [dataNascimento, setDataNascimento] = useState('');
-    const [ocupacao, setOcupacao] = useState('');
-    const [linkedin, setLinkedin] = useState('');
-    const [twitter, setTwitter] = useState('');
-    const [github, setGithub] = useState('');
-    const [linkPersonalizado, setLinkPersonalizado] = useState('');
-    const [privacidade, setPrivacidade] = useState('');
-    const [empresa, setEmpresa] = useState('');
-    const [cargo, setCargo] = useState('');
-    const [instituicao, setInstituicao] = useState('');
-    const [curso, setCurso] = useState('');
-    const [usuario, setUsuario] = useState('');
-    const [result,setResult]= useState('');
-
-    console.log(Cookies.get("email"))
-    console.log(Cookies.get("senha"))
+    const {aluno,signIn,signInV1} = useContext(AuthUserContext);
+    const {id,setId,authorization,setAuthorization,avatar,setAvatar,nomeCompleto,setNomeCompleto,nomeNosCertificados,setNomeNosCertificados,usuarioNaUrl,setUsuarioNaUrl,cpf,setCpf,biografia,setBiografia,setDia,setMes,setAno,dataNascimento,ocupacao,setOcupacao,linkedin,setLinkedin,twitter,setTwitter,github,setGithub,linkPersonalizado,setLinkPersonalizado,empresa,setEmpresa,cargo,setCargo,instituicao,setInstituicao,curso,setCurso,privacidadeDoPerfil,setPrivacidadeDoPerfil,result,alterarAluno,} = useContext(AlunoContext);
 
     useEffect(()=>{
-        v1SignUp(Cookies.get("email"),Cookies.get("senha")).then(function(result) {
-            return setUsuario(result)
-        })
+        signInV1(Cookies.get("email"),Cookies.get("senha"));
     },[])
 
-    function privacidadeDoPerfil(){
+    function privacidadePerfil(){
             return (
                 <div className="form-privacy-wrapper">
                     <label className="form-label-checkbox form-radio">
                         <input id="publicProfile1" name="publicProfile"
                                className="privacy__select" type="radio" value="true"
-                               onChange={e=>setPrivacidade(e.target.value)}
-
+                               onChange={e=>setPrivacidadeDoPerfil(e.target.value)}
                         />
                         Público
                     </label>
                     <label className="form-label-checkbox form-radio">
                         <input id="publicProfile2" name="publicProfile"
                                className="privacy__select" type="radio" value="false"
-                               onChange={e=>setPrivacidade(e.target.value)}
+                               onChange={e=>setPrivacidadeDoPerfil(e.target.value)}
 
                         />
                         Privado
@@ -62,45 +35,14 @@ const Perfil = () => {
             )
     }
 
-
-
-    console.log(usuario);
-
     async function salvarPerfil(e) {
         e.preventDefault()
 
-        console.log(getAuthorization())
-        console.log(authorize)
-        console.log(usuario.id)
-        console.log(nomeCompleto)
-        console.log(nomeNosCertificados)
-        console.log(cpf)
-        console.log(usuarioNaUrl)
-        console.log(dia+'/'+mes+'/'+ano)
-        setDataNascimento(dia+'/'+mes+'/'+ano)
-        console.log(ocupacao)
-        console.log(linkedin)
-        console.log(github)
-        console.log(twitter)
-        console.log(linkPersonalizado)
-        console.log(privacidade)
-        console.log(empresa)
-        console.log(cargo)
-        console.log(instituicao)
-        console.log(curso)
-        console.log(biografia)
-        console.log(avatar)
-
         try{
-            signUp(Cookies.get("email"),Cookies.get("senha")).then(function(result) {
-                return setAuthorize(result);
-            })
-
-            await doLogin(authorize.authorizationCode);
-
-            putAluno(usuario.id,getAuthorization(),avatar,nomeCompleto,nomeNosCertificados,usuarioNaUrl,cpf,biografia,dataNascimento,ocupacao,linkedin,twitter,github,linkPersonalizado,empresa,cargo,instituicao,curso,privacidade).then(function(result) {
-                setResult(result)
-            })
+            signIn(Cookies.get("email"),Cookies.get("senha"));
+            setId(aluno.id);
+            setAuthorization(getAuthorization());
+            alterarAluno(id,authorization,avatar,nomeCompleto,nomeNosCertificados,usuarioNaUrl,cpf,biografia,dataNascimento,ocupacao,linkedin,twitter,github,linkPersonalizado,empresa,cargo,instituicao,curso,privacidadeDoPerfil);
 
             if(result.status !== 401){
                 alert("Perfil editado com Sucesso")
@@ -110,28 +52,24 @@ const Perfil = () => {
             console.log(e)
             window.location.href = '/my_profile'; //manda para a rota home
         }
-
     }
-
-    console.log("result")
-    console.log(result.status)
 
 
     function dataDeNascimento() {
-        if(usuario.dataDeNascimento !== undefined && usuario.dataDeNascimento !== null){
+        if(aluno.dataDeNascimento !== undefined && aluno.dataDeNascimento !== null){
             return (
                 <>
                     <input id="birthDateDay" name="birthDateDay" placeholder="DD" type="number"
                            className="form-input birth-date form-2-digits checklist-field"
-                           defaultValue={usuario.dataDeNascimento.substring(0,2)} size="2" maxLength="2" onChange={e=>setDia(e.target.value)}/>
+                           defaultValue={aluno.dataDeNascimento.substring(0,2)} size="2" maxLength="2" onChange={e=>setDia(e.target.value)}/>
                     <span className="birth-date-slash">/</span>
                     <input id="birthDateMonth" name="birthDateMonth" placeholder="MM"
                            type="number" className="form-input birth-date form-2-digits"
-                           defaultValue={usuario.dataDeNascimento.substring(3,5)} onChange={e=>setMes(e.target.value)} size="2" maxLength="2"/>
+                           defaultValue={aluno.dataDeNascimento.substring(3,5)} onChange={e=>setMes(e.target.value)} size="2" maxLength="2"/>
                     <span className="birth-date-slash">/</span>
                     <input id="birthDateYear" name="birthDateYear" placeholder="AAAA"
                            type="number" className="form-input birth-date form-4-digits"
-                           defaultValue={usuario.dataDeNascimento.substring(6,10)} onChange={e=>setAno(e.target.value)} size="4" maxLength="4"/>
+                           defaultValue={aluno.dataDeNascimento.substring(6,10)} onChange={e=>setAno(e.target.value)} size="4" maxLength="4"/>
                 </>
             )
         }
@@ -140,15 +78,18 @@ const Perfil = () => {
                 <>
                     <input id="birthDateDay" name="birthDateDay" placeholder="DD" type="number"
                            className="form-input birth-date form-2-digits checklist-field"
-                           value="DD" size="2" maxLength="2"/>
+                           size="2" maxLength="2"
+                           onChange={e=>setDia(e.target.value)}/>
                     <span className="birth-date-slash">/</span>
                     <input id="birthDateMonth" name="birthDateMonth" placeholder="MM"
                            type="number" className="form-input birth-date form-2-digits"
-                           value="MM" size="2" maxLength="2"/>
+                           size="2" maxLength="2"
+                           onChange={e=>setMes(e.target.value)}/>
                     <span className="birth-date-slash">/</span>
                     <input id="birthDateYear" name="birthDateYear" placeholder="AAAA"
                            type="number" className="form-input birth-date form-4-digits"
-                           value="YYYY" size="4" maxLength="4"/>
+                           size="4" maxLength="4"
+                           onChange={e=>setAno(e.target.value)}/>
                 </>
             )
         }
@@ -181,7 +122,7 @@ const Perfil = () => {
                                                htmlFor="userProfileInformationForm-name">Nome completo</label>
                                         <input id="userProfileInformationForm-name" name="name"
                                                className="form-input checklist-field" required="required" type="text" onChange={e=>setNomeCompleto(e.target.value)}
-                                               placeholder={usuario.nomeCompleto}/>
+                                               defaultValue={aluno.nomeCompleto}/>
                                     </div>
                                     <div className="form-line-field">
                                         <label htmlFor="userProfileInformationForm-nameForCertificate"
@@ -191,7 +132,7 @@ const Perfil = () => {
                                         </label>
                                         <input id="userProfileInformationForm-nameForCertificate"
                                                name="nameForCertificate" className="form-input checklist-field"
-                                               required="required" type="text" placeholder={usuario.nomeNoCertificado} onChange={e=>setNomeNosCertificados(e.target.value)}/>
+                                               required="required" type="text" defaultValue={aluno.nomeNoCertificado} onChange={e=>setNomeNosCertificados(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className="form-line">
@@ -205,7 +146,7 @@ const Perfil = () => {
                                                    disabled="" value="http://localhost:3000/user/"/>
                                                 <input id="userProfileInformationForm-username" name="username"
                                                        className="form-input editProfile-form-input-urlUsername checklist-field"
-                                                       required="required" type="text" placeholder={usuario.usuarioNaUrl}
+                                                       required="required" type="text" defaultValue={aluno.usuarioNaUrl}
                                                        autoComplete="false" onChange={e=>setUsuarioNaUrl(e.target.value)}/>
                                         </div>
                                         <div className="form-line-field">
@@ -213,7 +154,7 @@ const Perfil = () => {
                                                    htmlFor="userProfileInformationForm-name">Cpf</label>
                                             <input id="userProfileInformationForm-name" name="cpf"
                                                    className="form-input checklist-field" required="required" type="text" onChange={e=>setCpf(e.target.value)}
-                                                   placeholder={usuario.cpf}/>
+                                                   defaultValue={aluno.cpf}/>
                                         </div>
 
                                         <div className="form-line-field">
@@ -221,13 +162,13 @@ const Perfil = () => {
                                                    htmlFor="userProfileInformationForm-name">Selecione a foto</label>
                                             <input id="userProfileInformationForm-name" name="cpf"
                                                    className="form-input checklist-field" required="required" type="text" onChange={e=>setAvatar(e.target.value)}
-                                                   placeholder={usuario.avatar}/>
+                                                   defaultValue={aluno.avatar}/>
                                         </div>
                                     </div>
                                     <div className="form-line-field">
                                         <label htmlFor="email" className="form-label bootcamp-text-color">E-mail</label>
                                         <input id="email" className="form-input" type="text" disabled=""
-                                               value={usuario.email}/>
+                                               value={aluno.email}/>
                                     </div>
                                 </div>
                                 <div className="form-line changePassword-wrapper">
@@ -240,7 +181,7 @@ const Perfil = () => {
                                 <label htmlFor="userProfileInformationForm-biography.bio"
                                        className="form-label bootcamp-text-color">Biografia</label>
                                 <textarea id="userProfileInformationForm-biography.bio" name="biography.bio"
-                                          className="form-input form-textarea checklist-field" placeholder={usuario.biografia} onChange={e=>setBiografia(e.target.value)}></textarea>
+                                          className="form-input form-textarea checklist-field" defaultValue={aluno.biografia} onChange={e=>setBiografia(e.target.value)}></textarea>
                                 <div className="form-birth-date">
                                     <div>
 
@@ -281,7 +222,7 @@ const Perfil = () => {
                                         <input type="hidden" value="COMPANY" name="extraInfosForm[2].type"/>
                                             <input id="userProfileInformationForm-COMPANY"
                                                    className="form-input checklist-field COMPANY WORKING WORKING_STUDYING occupation-field"
-                                                   onChange={e=>setEmpresa(e.target.value)} placeholder={usuario.empresa} name="extraInfosForm[2].value"/>
+                                                   onChange={e=>setEmpresa(e.target.value)} defaultValue={aluno.empresa} name="extraInfosForm[2].value"/>
                                     </div>
                                     <div className="form-line-field wrapper-occupation-field display-none" >
                                         <label htmlFor="userProfileInformationForm-POSITION"
@@ -291,7 +232,7 @@ const Perfil = () => {
                                         <input type="hidden" value="POSITION" name="extraInfosForm[3].type"/>
                                             <input id="userProfileInformationForm-POSITION"
                                                    className="form-input checklist-field POSITION WORKING WORKING_STUDYING occupation-field"
-                                                   onChange={e=>setCargo(e.target.value)}placeholder={usuario.cargo} name="extraInfosForm[3].value"/>
+                                                   onChange={e=>setCargo(e.target.value)} defaultValue={aluno.cargo} name="extraInfosForm[3].value"/>
                                     </div>
                                     <div className="form-line-field wrapper-occupation-field display-none">
                                         <label htmlFor="userProfileInformationForm-INSTITUTION"
@@ -301,7 +242,7 @@ const Perfil = () => {
                                         <input type="hidden" value="INSTITUTION" name="extraInfosForm[4].type"/>
                                             <input id="userProfileInformationForm-INSTITUTION"
                                                    className="form-input checklist-field INSTITUTION STUDYING WORKING_STUDYING occupation-field"
-                                                   onChange={e=>setInstituicao(e.target.value)} placeholder={usuario.instituicao} name="extraInfosForm[4].value"/>
+                                                   onChange={e=>setInstituicao(e.target.value)} defaultValue={aluno.instituicao} name="extraInfosForm[4].value"/>
                                     </div>
                                     <div className="form-line-field wrapper-occupation-field display-none">
                                         <label htmlFor="userProfileInformationForm-COURSE"
@@ -311,7 +252,7 @@ const Perfil = () => {
                                         <input type="hidden" value="COURSE" name="extraInfosForm[5].type"/>
                                             <input id="userProfileInformationForm-COURSE"
                                                    className="form-input checklist-field COURSE STUDYING WORKING_STUDYING occupation-field"
-                                                   onChange={e=>setCurso(e.target.value)} placeholder={usuario.curso} name="extraInfosForm[5].value"/>
+                                                   onChange={e=>setCurso(e.target.value)} defaultValue={aluno.curso} name="extraInfosForm[5].value"/>
                                     </div>
                                 </div>
                                 <div className="form-group-header">
@@ -328,7 +269,7 @@ const Perfil = () => {
                                         </label>
                                         <input type="hidden" value="LINKEDIN" name="extraInfosForm[6].type"/>
                                             <input id="userProfileInformationForm-LINKEDIN"
-                                                   className="form-input checklist-field LINKEDIN" placeholder={usuario.linkedin}
+                                                   className="form-input checklist-field LINKEDIN" defaultValue={aluno.linkedin}
                                                    onChange={e=>setLinkedin(e.target.value)}
                                                    name="extraInfosForm[6].value"/>
                                     </div>
@@ -342,7 +283,7 @@ const Perfil = () => {
                                         </label>
                                         <input type="hidden" value="TWITTER" name="extraInfosForm[7].type"/>
                                             <input id="userProfileInformationForm-TWITTER"
-                                                   className="form-input checklist-field TWITTER  " placeholder={usuario.twitter}
+                                                   className="form-input checklist-field TWITTER  " defaultValue={aluno.twitter}
                                                    onChange={e=>setTwitter(e.target.value)}
                                                    name="extraInfosForm[7].value"/>
                                     </div>
@@ -360,11 +301,11 @@ const Perfil = () => {
                         (link completo)
                         </span>
                                         </label>
-                                        <input type="hidden" value="GITHUB" name="extraInfosForm[8].type"/>
-                                            <input id="userProfileInformationForm-GITHUB"
-                                                   className="form-input checklist-field GITHUB  " placeholder={usuario.github}
+                                        <input type="hidden" value="link-personalizado" name="extraInfosForm[8].type"/>
+                                            <input id="userProfileInformationForm-link-personalizado"
+                                                   className="form-input checklist-field GITHUB"
                                                    onChange={e=>setGithub(e.target.value)}
-                                                   placeholder={usuario.github} name="extraInfosForm[8].value"/>
+                                                   defaultValue={aluno.github} name="extraInfosForm[9].value"/>
                                     </div>
                                     <div className="form-line-field ">
                                         <div className="portfolio-label-wrapper">
@@ -385,7 +326,7 @@ const Perfil = () => {
                                             <input id="userProfileInformationForm-PORTFOLIO"
                                                    className="form-input checklist-field PORTFOLIO  "
                                                    onChange={e=>setLinkPersonalizado(e.target.value)}
-                                                   placeholder={usuario.linkPersonalizado} name="extraInfosForm[9].value"/>
+                                                   defaultValue={aluno.linkPersonalizado} name="extraInfosForm[9].value"/>
                                     </div>
                                 </div>
                                 <div className="form-group-header">
@@ -396,7 +337,7 @@ const Perfil = () => {
                                 </div>
                                 <div className="form-line">
                                     <div className="form-line-field form-privacy-container">
-                                        {privacidadeDoPerfil()}
+                                        {privacidadePerfil()}
                                         <span className="form-warning bootcamp-text-color">É necessário aguardar alguns dias para que suas informações sumam das ferramentas de busca (Google, Bing, etc), pois é necessário que elas façam a reindexação das páginas. Lembre-se também de clicar em "Salvar" logo abaixo para que a mudança de privacidade seja feita.</span>
                                     </div>
                                 </div>

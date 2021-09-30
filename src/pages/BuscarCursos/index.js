@@ -1,26 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {getCursoByIdCategoria, getCursoByNome} from "../../helpers/EasyLearnApi";
+import React, {useContext, useEffect} from 'react';
 import {useParams} from "react-router-dom";
+import {CategoriaContext} from "../../context/CategoriaProvider";
+import {CursoContext} from "../../context/CursoProvider";
 
 const BuscarCursos = () => {
+
+    const {curso,opcao,setOpcao,retornarCursoPorIdCategoria} = useContext(CategoriaContext);
+    const {cursos,errorMessage,retornarCursosPorNome} = useContext(CursoContext);
+
     const { nome } = useParams();
-    const [curso, setAllCursos] = useState([]);
-    const [opcao, setOpcao] = useState('');
 
     async function findCursoByCategoria(e){
         e.preventDefault()
-
-            getCursoByIdCategoria(opcao).then(function (result) {
-                setAllCursos(result);
-            })
+        retornarCursoPorIdCategoria(opcao);
     }
 
     useEffect(()=>{
-        getCursoByNome(nome).then(function (result) {
-            setAllCursos(result);
-        })
+        retornarCursosPorNome(nome);
     },[])
 
+    console.log(curso.length);
     return(
         <div>
             <div>
@@ -87,30 +86,53 @@ const BuscarCursos = () => {
             <div className="container_1">
                 <ul className="card-list allCourses__card-list" id="">
                     {
-                        curso !== null?
-                            curso.map((value,index)=>{
-                                return (
-                                    <li className="card-list__item" data-course-name={value.nome}
-                                        data-started-at="" data-finished-at="">
-                                        <div className="course-card  course-card--simple-card bootcamp-background-dark-section">
-                                            <a className="course-card__course-link " data-recommendationId="" data-courseid=""
-                                               data-recommendationsource="" href={"curso_detalhe=".concat(value.uuid)}></a>
-                                            <div className="course-card__progress ">
-                                                <div className="course-card__bar" aria-hidden="true"></div>
-                                                <span className="course-card__number" aria-label="Progresso do curso">%</span>
-                                            </div>
-                                            <div className="course-card__content-wrapper">
-                                                <div className="course-card__content">
-                                                    <img className="course-card__icon" aria-hidden="true" alt=""
-                                                         src={value.imagemIcon}/>
-                                                    <span className="course-card__name">{value.descricao}</span>
+                        cursos !== null?
+                                cursos.map((value,index)=>{
+                                    return (
+                                        <li className="card-list__item" data-course-name={value.nome}
+                                            data-started-at="" data-finished-at="">
+                                            <div className="course-card  course-card--simple-card bootcamp-background-dark-section">
+                                                <a className="course-card__course-link " data-recommendationId="" data-courseid=""
+                                                   data-recommendationsource="" href={"curso_detalhe=".concat(value.uuid)}></a>
+                                                <div className="course-card__progress ">
+                                                    <div className="course-card__bar" aria-hidden="true"></div>
+                                                    <span className="course-card__number" aria-label="Progresso do curso">%</span>
+                                                </div>
+                                                <div className="course-card__content-wrapper">
+                                                    <div className="course-card__content">
+                                                        <img className="course-card__icon" aria-hidden="true" alt=""
+                                                             src={value.imagemIcon}/>
+                                                        <span className="course-card__name">{value.descricao}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                )})
+                                        </li>
+                                    )})
                             :
-                            <div></div>
+                            curso.length !== 0?
+                                curso.map((value,index)=>{
+                                    return (
+                                        <li className="card-list__item" data-course-name={value.nome}
+                                            data-started-at="" data-finished-at="">
+                                            <div className="course-card  course-card--simple-card bootcamp-background-dark-section">
+                                                <a className="course-card__course-link " data-recommendationId="" data-courseid=""
+                                                   data-recommendationsource="" href={"curso_detalhe=".concat(value.uuid)}></a>
+                                                <div className="course-card__progress ">
+                                                    <div className="course-card__bar" aria-hidden="true"></div>
+                                                    <span className="course-card__number" aria-label="Progresso do curso">%</span>
+                                                </div>
+                                                <div className="course-card__content-wrapper">
+                                                    <div className="course-card__content">
+                                                        <img className="course-card__icon" aria-hidden="true" alt=""
+                                                             src={value.imagemIcon}/>
+                                                        <span className="course-card__name">{value.descricao}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    )})
+                            :
+                            <div>Não tem nenhum cursos com a busca - {nome}</div>
                     }
                 </ul>
             </div>
