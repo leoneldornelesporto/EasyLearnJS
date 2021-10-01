@@ -7,9 +7,11 @@ import {AlunoProvider} from "./context/AlunoProvider";
 import {CursoProvider} from "./context/CursoProvider";
 import {CategoriaProvider} from "./context/CategoriaProvider";
 import {ModuloProvider} from "./context/ModuloContext";
+import {MatriculaProvider} from "./context/MatriculaContext";
 
 function App() {
   return (
+      <MatriculaProvider>
       <ModuloProvider>
       <CategoriaProvider>
       <CursoProvider>
@@ -25,6 +27,7 @@ function App() {
       </CursoProvider>
       </CategoriaProvider>
       </ModuloProvider>
+      </MatriculaProvider>
   );
 }
 export default App;
