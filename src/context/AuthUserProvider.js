@@ -28,7 +28,7 @@ export const AuthUserProvider = ({children}) => {
         try {
             const response = await login(email,pass);
             setAuthorize(response.authorizationCode);
-            doLogin(authorize,checked);
+            await doLogin(authorize,checked);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao realizar signIn.');

@@ -15,6 +15,7 @@ import Perfil from "./pages/Perfil";
 import CursosMatriculados from "./pages/CursoMatriculado";
 import AgendamentoTutoria from "./pages/AgendamentoTutoria";
 import Forum from "./pages/Forum";
+import Formacao from "./pages/Formacao";
 
 export default () => {
     return(
@@ -60,6 +61,9 @@ export default () => {
             </Route>
             <Route path="/forum">
                 <Forum/>
+            </Route>
+            <Route path="/formacoes">
+                <Formacao/>
             </Route>
             <Route path="/">
                 <Principal/>

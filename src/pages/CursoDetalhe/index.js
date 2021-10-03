@@ -2,13 +2,22 @@ import React, {useContext, useEffect} from 'react';
 import {useParams} from "react-router-dom";
 
 import Cookies from "js-cookie";
-import {isLogged} from "../../context/AuthHandler";
+import {getAuthorization, isLogged} from "../../context/AuthHandler";
 import {CursoContext} from "../../context/CursoProvider";
+import {AuthUserContext} from "../../context/AuthUserProvider";
+import {MatriculaContext} from "../../context/MatriculaContext";
 
 const CursoDetalhe = () => {
 
     const { id } = useParams();
+    const {aluno,signIn,signInV1} = useContext(AuthUserContext);
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
+    const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
+
+
+    useEffect(()=>{
+        signInV1(Cookies.get("email"),Cookies.get("senha"));
+    },[])
 
     let cont =0;
 
@@ -16,8 +25,39 @@ const CursoDetalhe = () => {
         retornarCursosPorUuid(id);
     },[])
 
-    Cookies.set('UuidCurso', cursos.uuid);
-    console.log(Cookies.get('UuidCurso'))
+    useEffect(()=>{
+        verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization())
+    },[])
+
+    function matricular() {
+        verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization())
+        console.log(matriculas)
+        salvarMatricula(getAuthorization(),aluno.id,cursos.id,0,0);
+        window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
+    }
+
+    useEffect(()=>{
+        retornarCursosPorUuid(id);
+    },[])
+
+    function verificarSeEstaMatriculado(){
+        if(matriculas.status!==400){
+            return (
+                <a href={'/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id}
+                         className="course-header-button startContinue-button bootcamp-primary-button-theme"
+                         aria-label="Iniciar Curso">
+                Acessar Curso
+            </a>);
+        }else{
+            return (
+                <a onClick={matricular}
+                           className="course-header-button startContinue-button bootcamp-primary-button-theme"
+                           aria-label="Iniciar Curso">
+                Iniciar Curso
+            </a>
+            );
+        }
+    }
 
     function body(){
 
@@ -98,11 +138,8 @@ const CursoDetalhe = () => {
                                 <div className="container">
                                     <div className="course-header-headline-actions bootcamp-banner-background-theme">
                                         <div className="container">
-                                            <a href="/courses/flappybirdunity1/tryToEnroll"
-                                               className="course-header-button startContinue-button bootcamp-primary-button-theme"
-                                               aria-label="Iniciar Curso">
-                                                Iniciar Curso
-                                            </a>
+                                            {verificarSeEstaMatriculado()}
+
                                             <div className="course-header-button-wrapper">
                                                 <div className="course-header-button-menu">
                                                     <ul className="course-header-button-menu__list">
