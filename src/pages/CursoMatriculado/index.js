@@ -10,15 +10,13 @@ const CursosMatriculados = () => {
     const {aluno,signIn,signInV1} = useContext(AuthUserContext);
     const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
 
-    useEffect( () => {
+    if(matriculas===null){
         signInV1(Cookies.get("email"), Cookies.get("senha"));
         verificarSeEstouMatriculadoEmAlgumCursoById(aluno.id, getAuthorization());
-    },[])
+    }
 
     function cursosMatriculados(){
         try{
-            verificarSeEstouMatriculadoEmAlgumCursoById(aluno.id, getAuthorization());
-            if(matriculas.status!==400){
                 for(let i=0;i<matriculas.length;i++){
                     return(
                         <li className="card-list__item" data-course-name={matriculas[i].nome}
@@ -50,18 +48,20 @@ const CursosMatriculados = () => {
                             </div>
                         </li>
                     )
-                }
             }
         }
         catch (e) {
-            verificarSeEstouMatriculadoEmAlgumCursoById(aluno.id, getAuthorization());
             return (<div>Vazia</div>)
         }
     }
 
+    if(matriculas===null){
+        signInV1(Cookies.get("email"), Cookies.get("senha"));
+        verificarSePauseiAlgumCursoMatricula(aluno.id, getAuthorization());
+    }
+
     function cursosPausado(){
         try{
-            if(cursosPausados.status!==404){
                 for(let i=0;i<cursosPausados.length;i++){
                     verificarSePauseiAlgumCursoMatricula(aluno.id, getAuthorization());
                     return(
@@ -95,10 +95,8 @@ const CursosMatriculados = () => {
                         </li>
                     )
                 }
-            }
         }
         catch (e) {
-            verificarSePauseiAlgumCursoMatricula(aluno.id, getAuthorization());
             return (<div>Vazia</div>)
         }
     }

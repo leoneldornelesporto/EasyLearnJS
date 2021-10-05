@@ -14,7 +14,7 @@ const Formacao = () => {
             for (let i = 0; i < programacao.length; i++) {
                 return (
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+programacao[i].id} className="formacao__link">
                             <h4 className="formacao__title">{programacao[i].titulo}</h4>
                             <p className="formacao__size">{programacao[i].quantidadeDeCursos > 1 ? programacao[i].quantidadeDeCursos + " Cursos" : programacao[i].quantidadeDeCursos + " Curso"}<span
                                 className="formacao__arrow formacoes_programacao_fonte">&gt;</span></p>
@@ -38,7 +38,7 @@ const Formacao = () => {
             for (let i = 0; i < frontend.length; i++) {
                 return (
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+frontend[i].id} className="formacao__link">
                             <h4 className="formacao__title">{frontend[i].titulo}</h4>
                             <p className="formacao__size">{frontend[i].quantidadeDeCursos > 1 ? frontend[i].quantidadeDeCursos + " Cursos" : frontend[i].quantidadeDeCursos + " Curso"}<span
                                 className="formacao__arrow formacoes_front_end_fonte">&gt;</span></p>
@@ -61,7 +61,7 @@ const Formacao = () => {
             for (let i = 0; i < datascience.length; i++) {
                 return (
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+datascience[i].id} className="formacao__link">
                             <h4 className="formacao__title">{datascience[i].titulo}</h4>
                             <p className="formacao__size">{datascience[i].quantidadeDeCursos > 1 ? datascience[i].quantidadeDeCursos + " Cursos" : datascience[i].quantidadeDeCursos + " Curso"}<span
                                 className="formacao__arrow formacoes_data_science_fonte">&gt;</span></p>
@@ -84,7 +84,7 @@ const Formacao = () => {
             for (let i = 0; i < devops.length; i++) {
                 return (
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+devops[i].id} className="formacao__link">
                             <h4 className="formacao__title">{devops[i].titulo}</h4>
                             <p className="formacao__size">{devops[i].quantidadeDeCursos > 1 ? devops[i].quantidadeDeCursos + " Cursos" : devops[i].quantidadeDeCursos + " Curso"}<span
                                 className="formacao__arrow formacoes_data_science_fonte">&gt;</span></p>
@@ -107,7 +107,7 @@ const Formacao = () => {
             for(let i=0; i<uxdesign.length; i++){
                 return(
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+uxdesign[i].id} className="formacao__link">
                             <h4 className="formacao__title">{uxdesign[i].titulo}</h4>
                             <p className="formacao__size">{uxdesign[i].quantidadeDeCursos > 1 ? uxdesign[i].quantidadeDeCursos+" Cursos":uxdesign[i].quantidadeDeCursos+" Curso"}<span
                                 className="formacao__arrow formacoes_ux_design_fonte">&gt;</span></p>
@@ -130,7 +130,7 @@ const Formacao = () => {
             for (let i = 0; i < mobile.length; i++) {
                 return (
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+mobile[i].id} className="formacao__link">
                             <h4 className="formacao__title">{mobile[i].titulo}</h4>
                             <p className="formacao__size">{mobile[i].quantidadeDeCursos > 1 ? mobile[i].quantidadeDeCursos + " Cursos" : mobile[i].quantidadeDeCursos + " Curso"}<span
                                 className="formacao__arrow formacoes_mobile_fonte">&gt;</span></p>
@@ -153,7 +153,7 @@ const Formacao = () => {
             for (let i = 0; i < inovacaoGestao.length; i++) {
                 return (
                     <div className="formacao__informations">
-                        <a href="/formacao-jogos-unity" className="formacao__link">
+                        <a href={"/formacoes_detalhe="+inovacaoGestao[i].id} className="formacao__link">
                             <h4 className="formacao__title">{inovacaoGestao[i].titulo}</h4>
                             <p className="formacao__size">{inovacaoGestao[i].quantidadeDeCursos > 1 ? inovacaoGestao[i].quantidadeDeCursos + " Cursos" : inovacaoGestao[i].quantidadeDeCursos + " Curso"}<span
                                 className="formacao__arrow formacoes_gestao_fonte">&gt;</span></p>

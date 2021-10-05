@@ -39,7 +39,6 @@ export const AuthUserProvider = ({children}) => {
     const signInV1 = async (email, pass) => {
         try {
             const response = await loginV1(email,pass);
-            console.log(response)
             setAluno(response);
         } catch (response) {
             setErrorMessage(response);

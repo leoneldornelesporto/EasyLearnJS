@@ -115,19 +115,18 @@ const AulaDetalhe = () => {
                             <h2 className="task-menu-sections-title">
                                 Aula Atual
                             </h2>
-                            <ul className="task-menu-sections-select" id="nav">
-                                <li><a href="#">Selecione o Modulo</a>
-                                    <ul>
-                                        {
-                                            cursos.moduloDtoList.map((value, index) => {
-                                                return (
-                                                    <li><h3><a href={"modulo_detalhe="+value.id}  selected="">{value.titulo}</a></h3></li>
-                                                );
-                                            })
-                                        }
-                                    </ul>
-                                </li>
-                            </ul>
+                            <div className="dropdown">
+                                <button className="mainmenubtn">Main Menu</button>
+                                <div className="dropdown-child">
+                                    {
+                                        cursos.moduloDtoList.map((value, index) => {
+                                            return (
+                                                <a href={"modulo_detalhe="+value.id}  target="_blank">{value.titulo}</a>
+                                            );
+                                        })
+                                    }
+                                </div>
+                            </div>
                         </section>
 
                         <nav className="task-menu-nav">

@@ -1,11 +1,12 @@
 import React, {createContext, useState} from 'react';
-import {findAllFormacoesByIdCategoria} from "./Controller/FormacaoController";
+import {findAllFormacoesByIdCategoria, findFormacoesById} from "./Controller/FormacaoController";
 import {getAuthorization} from "./AuthHandler";
 
 export const FormacaoContext = createContext({});
 
 export const FormacaoProvider = ({children}) => {
 
+    const [formacao, setFormacao] = useState(null);
     const [programacao, setProgramacao] = useState(null);
     const [frontend, setFrontend] = useState(null);
     const [datascience, setDatascience] = useState(null);
@@ -103,9 +104,22 @@ export const FormacaoProvider = ({children}) => {
         }
     };
 
+    const retornarFormacaoPorId = async (idFormacao) => {
+        try {
+            const response = await findFormacoesById(getAuthorization(),idFormacao);
+            setFormacao(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     return (
         <FormacaoContext.Provider
             value={{
+                formacao,
+                setFormacao,
                 programacao,
                 setProgramacao,
                 frontend,
@@ -130,6 +144,7 @@ export const FormacaoProvider = ({children}) => {
                 retornarTodasFormacoesUxDesign,
                 retornarTodasFormacoesMobile,
                 retornarTodasFormacoesInovacaoGestao,
+                retornarFormacaoPorId,
             }}>
             {children}
         </FormacaoContext.Provider>
