@@ -1,8 +1,139 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './style.css';
 import {isLogged} from "../../context/AuthHandler";
+import {FormacaoContext} from "../../context/FormacaoProvider";
 
 const Dashboard = () => {
+
+    const {programacao,frontend,datascience,devops,uxdesign,mobile,inovacaoGestao,retornarTodasFormacoesProgramacao,retornarTodasFormacoesFrontend,retornarTodasFormacoesDataScience,retornarTodasFormacoesDevops,retornarTodasFormacoesUxDesign, retornarTodasFormacoesMobile, retornarTodasFormacoesInovacaoGestao} = useContext(FormacaoContext);
+
+    if(programacao===null){
+        retornarTodasFormacoesProgramacao();
+    }
+
+    function formacaoProgramacao(){
+        try {
+            for (let i = 0; i < programacao.length; i++) {
+                return (
+                <a className="categoryExplorer-item categoryExplorer-degree"
+                   href={"formacoes_detalhe="+programacao[i].id}>{programacao[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+
+    if(frontend===null){
+        retornarTodasFormacoesFrontend();
+    }
+
+    function formacaoFrontend(){
+        try {
+            for (let i = 0; i < frontend.length; i++) {
+                return (
+                    <a className="categoryExplorer-item categoryExplorer-degree"
+                       href={"formacoes_detalhe="+frontend[i].id}>{frontend[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    if(datascience===null){
+        retornarTodasFormacoesDataScience();
+    }
+
+    function formacaoDatascience(){
+        try {
+            for (let i = 0; i < datascience.length; i++) {
+                return (
+                    <a className="categoryExplorer-item categoryExplorer-degree"
+                       href={"formacoes_detalhe="+datascience[i].id}>{datascience[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    if(devops===null){
+        retornarTodasFormacoesDevops();
+    }
+
+    function formacaoDevops(){
+        try {
+            for (let i = 0; i < devops.length; i++) {
+                return (
+                    <a className="categoryExplorer-item categoryExplorer-degree"
+                       href={"formacoes_detalhe="+devops[i].id}>{devops[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    if(uxdesign===null){
+        retornarTodasFormacoesUxDesign();
+    }
+
+    function formacaoUxDesign(){
+        try{
+            for(let i=0; i<uxdesign.length; i++){
+                return(
+                    <a className="categoryExplorer-item categoryExplorer-degree"
+                       href={"formacoes_detalhe="+uxdesign[i].id}>{uxdesign[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    if(mobile===null){
+        retornarTodasFormacoesMobile();
+    }
+
+    function formacaoMobile(){
+        try {
+            for (let i = 0; i < mobile.length; i++) {
+                return (
+                    <a className="categoryExplorer-item categoryExplorer-degree"
+                       href={"formacoes_detalhe="+mobile[i].id}>{mobile[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    if(inovacaoGestao===null){
+        retornarTodasFormacoesInovacaoGestao();
+    }
+
+    function formacaoInovacaoGestao(){
+        try {
+            for (let i = 0; i < inovacaoGestao.length; i++) {
+                return (
+                    <a className="categoryExplorer-item categoryExplorer-degree"
+                       href={"formacoes_detalhe="+inovacaoGestao[i].id}>{inovacaoGestao[i].titulo}</a>
+                );
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     if (isLogged()) {
 
         return (
@@ -37,34 +168,14 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">Programação</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/programacao">Ver todos os cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#programacao">Ver todas as
-                                            formações</a>
+                                           href="/cursos_por_categoria=1">Ver todos os cursos</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria Programação">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-jogos-unity">Formação Jogos com
-                                                Unity</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-desenvolvedor-php">Formação
-                                                PHP</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-certificacao-java">Formação
-                                                Certificação Java</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-raspberry-pi">Formação Raspberry
-                                                Pi</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-internet-das-coisas-iot">Formação
-                                                Internet das Coisas</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-certificacao-csharp">Formação
-                                                Certificação C# Programming</a>
+                                            {formacaoProgramacao()}
                                         </div>
                                     </div>
                                 </nav>
@@ -81,29 +192,14 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">Front-end</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/front-end">Ver todos os cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#front-end">Ver todas as formações</a>
+                                           href="/cursos_por_categoria=2">Ver todos os cursos</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria Front-end">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-acessibilidade-web">Formação
-                                                Acessibilidade Web</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-html-e-css">Formação HTML e
-                                                CSS</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-front-end">Formação Front-end</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-react-js">Formação React JS</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-angular">Formação Angular</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-vuejs">Formação Vue.js</a>
+                                            {formacaoFrontend()}
                                         </div>
                                     </div>
                                 </nav>
@@ -119,36 +215,14 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">Data Science</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/data-science">Ver todos os cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#data-science">Ver todas as
-                                            formações</a>
+                                           href="/cursos_por_categoria=3">Ver todos os cursos</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria Data Science">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-microsoft-sql-server-2017">Formação
-                                                SQL com Microsoft SQL Server 2017</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-business-intelligence-data-warehouse">Formação
-                                                BI e Data Warehouse com SQL Server e Power BI</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-oracle-mysql">Formação SQL com
-                                                MySQL
-                                                Server da Oracle</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-oracle-database-sql-plsql">Formação
-                                                SQL com Oracle Database</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-python-data-science">Formação
-                                                Python
-                                                para Data Science</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-matematica-programacao-data-science">Formação
-                                                Matemática para Programação e Data Science</a>
+                                            {formacaoDatascience()}
                                         </div>
                                     </div>
                                 </nav>
@@ -164,32 +238,14 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">DevOps</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/devops">Ver todos os cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#devops">Ver todas as formações</a>
+                                           href="/cursos_por_categoria=4">Ver todos os cursos</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria DevOps">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-redes">Formação Administrador de
-                                                Redes</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-seguranca-de-aplicacoes">Formação
-                                                Segurança de aplicações</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-amazon-web-services">Formação
-                                                Amazon
-                                                Web Services</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-certificacao-lpi-linux-essentials">Formação
-                                                Certificação LPI Linux Essentials</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-kafka">Formação Apache Kafka</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-owasp">Formação OWASP</a>
+                                            {formacaoDevops()}
                                         </div>
                                     </div>
                                 </nav>
@@ -205,34 +261,14 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">UX &amp; Design</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/design-ux">Ver todos os cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#design-ux">Ver todas as formações</a>
+                                           href="/cursos_por_categoria=5">Ver todos os cursos</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria UX &amp; Design">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-motion-design">Formação Motion
-                                                Design</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-unreal-engine">Formação Unreal
-                                                Engine</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-grafica-illustrator">Formação
-                                                Produção
-                                                Gráfica com Illustrator</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-pinturadigital-photoshop">Formação
-                                                Pintura Digital no Photoshop</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-ilustra-publicitaria">Formação
-                                                Ilustração Publicitária no Photoshop</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-producao-indesign">Formação
-                                                InDesign</a>
+                                            {formacaoUxDesign()}
                                         </div>
                                     </div>
                                 </nav>
@@ -248,25 +284,14 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">Mobile</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/mobile">Ver todos os cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#mobile">Ver todas as formações</a>
+                                           href="/cursos_por_categoria=6">Ver todos os cursos</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria Mobile">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-android">Formação Android</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-testes-automatizados-android">Formação
-                                                Testes automatizados no Android</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-arquiteto-android">Formação
-                                                Arquitetura Android</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-flutter">Formação Flutter</a>
+                                            {formacaoMobile()}
                                         </div>
                                     </div>
                                 </nav>
@@ -282,37 +307,15 @@ const Dashboard = () => {
                                     <div className="categoryExplorer-category-info">
                                         <h3 className="categoryExplorer-category-title">Inovação &amp; Gestão</h3>
                                         <a className="categoryExplorer-category-link"
-                                           href="https://cursos.alura.com.br/category/inovacao-gestao">Ver todos os
+                                           href="/cursos_por_categoria=7">Ver todos os
                                             cursos</a>
-                                        <a className="categoryExplorer-category-link categoryExplorer-category-link--careers"
-                                           href="https://cursos.alura.com.br/formacoes#inovacao-gestao">Ver todas as
-                                            formações</a>
                                     </div>
                                 </section>
                                 <nav className="categoryExplorer-pages"
                                      aria-label="Carreiras da categoria Inovação &amp; Gestão">
                                     <div className="categoryExplorer-page" data-translate="0">
                                         <div className="categoryExplorer-list-career">
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-business-agility">Formação
-                                                Business
-                                                Agility</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-certificacao-itil-foundation">Formação
-                                                Certificação da biblioteca de infraestrutura de tecnologia da informação -
-                                                Fundamentos v3</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-certificacao-cobit-5">Formação
-                                                Certificação Cobit 5</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-certificacao-pmp-capm-pmi">Formação
-                                                Certificação PMP e CAPM do PMI</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-vendas-de-alta-performance">Formação
-                                                Vendas de Alta Performance</a>
-                                            <a className="categoryExplorer-item categoryExplorer-degree"
-                                               href="https://cursos.alura.com.br/formacao-comunicacao">Formação
-                                                Comunicação</a>
+                                            {formacaoInovacaoGestao()}
                                         </div>
                                     </div>
                                 </nav>

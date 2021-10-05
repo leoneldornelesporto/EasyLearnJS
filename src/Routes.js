@@ -18,6 +18,7 @@ import Forum from "./pages/Forum";
 import Formacao from "./pages/Formacao";
 import FormacaoDetalhe from "./pages/FormacaoDetalhe";
 import PlanoDeEstudo from "./pages/PlanoDeEstudos";
+import CursosPorCategoria from "./pages/CursosPorCategoria";
 
 export default () => {
     return(
@@ -72,6 +73,9 @@ export default () => {
             </Route>
             <Route path="/planos-estudos-publicos">
                 <PlanoDeEstudo/>
+            </Route>
+            <Route path="/cursos_por_categoria=:id">
+                <CursosPorCategoria/>
             </Route>
             <Route path="/">
                 <Principal/>

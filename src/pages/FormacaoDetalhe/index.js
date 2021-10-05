@@ -154,9 +154,116 @@ const FormacaoDetalhe = () => {
                     </section>
                 )
             }
+
+            if(formacao[0].categoria==="Ux & Design"){
+                return(
+                    <section className="formacao__background-color--programacao formacoes_ux_design">
+                        <div className="container">
+                            <img className="formacoes__icon"
+                                 src="https://www.alura.com.br/assets/api/formacoes/categorias/branco/design-ux.svg" alt=""/>
+                            <div className="formacao-header-headline">
+                                <h1 className="formacao-headline-titulo">{formacao[0].titulo}</h1>
+                                <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
+                            </div>
+                        </div>
+                        <div className="formacao-dados container">
+                            <div className="formacao-header-dados">
+                                <div
+                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
+                                    <div className="formacao-finalizado-cursos">
+                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
+                                                 className="guide-card__progress-bar__svg" fill="none">
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div className="formacao-finalizado-texto">
+               <span className="formacao-finalizado-fracao">
+               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
+               </span>
+                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )
+            }
+
+            if(formacao[0].categoria==="Mobile"){
+                return(
+                    <section className="formacao__background-color--programacao formacoes_mobile">
+                        <div className="container">
+                            <img className="formacoes__icon"
+                                 src="https://www.alura.com.br/assets/api/formacoes/categorias/branco/mobile.svg" alt=""/>
+                            <div className="formacao-header-headline">
+                                <h1 className="formacao-headline-titulo">{formacao[0].titulo}</h1>
+                                <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
+                            </div>
+                        </div>
+                        <div className="formacao-dados container">
+                            <div className="formacao-header-dados">
+                                <div
+                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
+                                    <div className="formacao-finalizado-cursos">
+                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
+                                                 className="guide-card__progress-bar__svg" fill="none">
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div className="formacao-finalizado-texto">
+               <span className="formacao-finalizado-fracao">
+               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
+               </span>
+                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )
+            }
+
+            if(formacao[0].categoria==="Inovação & Gestão"){
+                return(
+                    <section className="formacao__background-color--programacao formacoes_gestao">
+                        <div className="container">
+                            <img className="formacoes__icon"
+                                 src="https://www.alura.com.br/assets/api/formacoes/categorias/branco/inovacao-gestao.svg" alt=""/>
+                            <div className="formacao-header-headline">
+                                <h1 className="formacao-headline-titulo">{formacao[0].titulo}</h1>
+                                <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
+                            </div>
+                        </div>
+                        <div className="formacao-dados container">
+                            <div className="formacao-header-dados">
+                                <div
+                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
+                                    <div className="formacao-finalizado-cursos">
+                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
+                                                 className="guide-card__progress-bar__svg" fill="none">
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div className="formacao-finalizado-texto">
+               <span className="formacao-finalizado-fracao">
+               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
+               </span>
+                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )
+            }
         }catch (e) {
             console.log(e);
         }
+
+
     }
 
     function professor(){

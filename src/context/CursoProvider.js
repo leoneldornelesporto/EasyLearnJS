@@ -13,7 +13,7 @@ export const CursoContext = createContext({});
 
 export const CursoProvider = ({children}) => {
 
-    const [cursos, setAllCursos] = useState([]);
+    const [cursos, setAllCursos] = useState(null);
     const [errorMessage, setErrorMessage] = useState({});
     const [modulo, setModulo] = useState('');
     const [aula, setAula] = useState([]);
@@ -52,6 +52,7 @@ export const CursoProvider = ({children}) => {
     };
 
     const retornarCursosPorIdDaCategoria = async (id) => {
+        console.log("aqui")
         try {
             const response = await getCursoByIdCategoria(id);
             setAllCursos(response);
