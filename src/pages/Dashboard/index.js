@@ -152,9 +152,9 @@ const Dashboard = () => {
                     <div className="container">
                         <h2 className="headline">Descubra novos cursos</h2>
                         <h3 className="categoryExplorer-title categoryExplorer-title--categories"
-                            id="categoryExplorer-title--categories">Categorias</h3>
+                            id="categoryExplorer-title--categories">Formação</h3>
                         <h3
-                            className="categoryExplorer-title categoryExplorer-title--careers">Formações</h3>
+                            className="categoryExplorer-title categoryExplorer-title--careers">Cursos</h3>
                         <ul className="categoryExplorer-list">
                             <li className="categoryExplorer-list-category"
                                 aria-labelledby="categoryExplorer-title--categories">
