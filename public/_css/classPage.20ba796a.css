@@ -63,3 +63,7 @@
 .dropdown:hover .dropdown-child {
     display: block;
 }
+
+.porcentagem-curso{
+    background-image: linear-gradient(to right, #9de482, #9de482 50%, transparent 50%);
+}

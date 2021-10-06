@@ -1,5 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {
+    assistirAulaSave,
+    assistiuAula,
     findAllMatriculas,
     saveMatricula,
     verificarSeEstouMatriculadoEmAlgumCursoPorId,
@@ -7,13 +9,15 @@ import {
     verificarSeEstouMatriculadoEmAlgumCursoPorUuid,
     verificarSePauseiAlgumCursoNaMinhaMatricula
 } from "./Controller/MatriculaController";
+import {getAuthorization} from "./AuthHandler";
 
 export const MatriculaContext = createContext({});
 
 export const MatriculaProvider = ({children}) => {
 
     const [matriculas, setMatriculas] = useState(null);
-    const [cursosPausados,setCursosPausados] = useState(null)
+    const [cursosPausados,setCursosPausados] = useState(null);
+    const [resposta,setResposta] = useState(false);
     const [errorMessage, setErrorMessage] = useState({});
 
     const retornarTodasMatriculas = async (authorization) => {
@@ -82,6 +86,28 @@ export const MatriculaProvider = ({children}) => {
         }
     };
 
+    const retornaAulasAssistida = async (idAluno,idAula) => {
+        try {
+            const response = await assistiuAula(idAluno,idAula,getAuthorization());
+            setResposta(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const registraAulaAssistida = async (idAluno,idAula) => {
+        try {
+            const response = await assistirAulaSave(idAluno,idAula,getAuthorization());
+            setResposta(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     return (
         <MatriculaContext.Provider
             value={{
@@ -89,6 +115,8 @@ export const MatriculaProvider = ({children}) => {
                 setMatriculas,
                 cursosPausados,
                 setCursosPausados,
+                resposta,
+                setResposta,
                 errorMessage,
                 setErrorMessage,
                 retornarTodasMatriculas,
@@ -97,6 +125,8 @@ export const MatriculaProvider = ({children}) => {
                 verificarMatriculaPorUuid,
                 verificarSeEstouMatriculadoEmAlgumCursoById,
                 verificarSePauseiAlgumCursoMatricula,
+                retornaAulasAssistida,
+                registraAulaAssistida,
             }}>
             {children}
         </MatriculaContext.Provider>

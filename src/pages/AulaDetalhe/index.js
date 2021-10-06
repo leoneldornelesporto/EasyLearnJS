@@ -1,14 +1,21 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import Cookies from "js-cookie";
 import {getAuthorization, isLogged} from "../../context/AuthHandler";
 import {CursoContext} from "../../context/CursoProvider";
+import {MatriculaContext} from "../../context/MatriculaContext";
 
 const AulaDetalhe = () => {
 
     const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
+    const {retornaAulasAssistida,registraAulaAssistida,resposta} = useContext(MatriculaContext);
+    const [resp,setResp] = useState(null);
 
     const { id } = useParams();
+
+    //retornaAulasAssistida(Cookies.get('idUser'),id);
+    //registraAulaAssistida(Cookies.get('idUser'),id);
+
 
     useEffect(()=>{
         retornarModuloPorUuidCursoEIdDaAula(Cookies.get('UuidCurso'),id,getAuthorization());
@@ -24,11 +31,37 @@ const AulaDetalhe = () => {
 
     verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
 
+    function clicouProximo() {
+        //alert("clicou");
+    }
+
+    function verificarSeEstouMatriculado(){
+        if(Cookies.get('matricula')==='true'){
+            return(<></>)
+        }
+        else{
+            return(
+                <div className="task-body-alert">
+                    <div className="container">
+                        <div className="task-body-alert__alert">
+                            <div className="task-body-alert__wrapper">
+                                <p>Você ainda não se matriculou neste curso!</p> <p>Para registrar seu progresso no
+                                curso, <a className="task-alert-link" href="/courses/rebranding/tryToEnroll">matricule-se
+                                    agora</a>!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
+
     function body(){
         if(isLogged()) {
 
             try {
                 return (<section className="task-body">
+                    {verificarSeEstouMatriculado()}
                     <header className="task-body-header">
                         <div className="container">
                             <button title="" aria-label="" type="button" className="theatermode openMenu-button task-menu-button
@@ -45,9 +78,11 @@ const AulaDetalhe = () => {
                             {
                                 verifica !== false ?
                                     <div className="task-body-header-actions">
+                                        <form onChange={clicouProximo()}>
                                         <a href={"/aula_detalhe=" + verifica} aria-hidden="true"
                                            className="task-actions-button task-actions-button-next task-submit bootcamp-primary-button-theme"
                                         >Próxima Atividade</a>
+                                        </form>
                                     </div>
                                     :
                                     <div></div>
@@ -95,9 +130,8 @@ const AulaDetalhe = () => {
                                     </h2>
                                 </a>
                                 <div className="task-menu-header-info-progress">
-                                    <span className="task-menu-header-info-progress-percentage ">%</span>
-                                    <span className="task-menu-header-info-progress-bar"
-                                    ></span>
+                                    <span className="task-menu-header-info-progress-percentage ">50%</span>
+                                    <span className="task-menu-header-info-progress-bar porcentagem-curso"></span>
                                 </div>
                             </div>
                         </section>
@@ -138,11 +172,12 @@ const AulaDetalhe = () => {
                                 {
                                     modulo.aulaDto.map((value, index) => {
                                         return (
-                                            <li className="task-menu-nav-item">
+                                            <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
                                                 <a href={"/aula_detalhe=" + value.id}
                                                    className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
-                                                    <svg className="task-menu-nav-item-svg "
-                                                         aria-label="Atividade de Vídeo não concluída">
+                                                    <svg className={index===0 || index===2?"task-menu-nav-item-svg task-menu-nav-item-svg--done":"task-menu-nav-item-svg"}
+                                                         aria-label="Atividade de Vídeo concluída">
+                                                            <path d="M0 1v22h24v-22h-24zm4 20h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm14 12h-12v-10h12v10zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm-12 10v-6l5 3-5 3z"/>
                                                     </svg>
                                                     <span className="task-menu-nav-item-number">0{++index}</span>
                                                     <span className="task-menu-nav-item-text">
@@ -218,14 +253,16 @@ const AulaDetalhe = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    <iframe width="100%" height="720px" src={aula.urlVideo}
-                                            title="YouTube video player" frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen></iframe>
+                                    <div align="center">
+                                        <iframe width="620px" height="420px%" src={aula.urlVideo}
+                                                title="YouTube video player" frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen></iframe>
+                                    </div>
                                     <section id="transcription"
                                              className="video-transcription video-transcription--inactive transcription-toggle">
                                         <h2 className="video-transcription-title">Transcrição</h2>
-                                        <div className="formattedText" data-external-links="">
+                                        <div className="formattedText"data-external-links="">
                                             <p>{aula.transcricao}</p>
                                         </div>
                                     </section>

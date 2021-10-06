@@ -15,11 +15,11 @@ export async function saveMatricula(authorization,idAluno,idCurso,progresso,esta
 }
 
 export async function verificarSeEstouMatriculadoEmAlgumCursoPorId(idAluno,idCurso,authorization) {
-    return (await api.get('v1/protectedA/matricula/verificaById/'+idAluno+'/'+idCurso,'authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/matricula/verificaById/'+idAluno+'/'+idCurso,'',{headers:{Authorization:authorization}})).data;
 }
 
 export async function verificarSeEstouMatriculadoEmAlgumCursoPorUuid(idAluno,uuid,authorization) {
-    return (await api.get('v1/protectedA/matricula/verificaByUuid/'+idAluno+'/'+uuid,'authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/matricula/verificaByUuid/'+idAluno+'/'+uuid,'',{headers:{Authorization:authorization}})).data;
 }
 
 export async function verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos(idAluno,authorization) {
@@ -28,4 +28,12 @@ export async function verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos(idA
 
 export async function verificarSePauseiAlgumCursoNaMinhaMatricula(idAluno,authorization) {
     return (await api.get('v1/protectedA/matricula/verificaById/cursosPausados/'+idAluno,'',{headers:{Authorization:authorization}})).data;
+}
+
+export async function assistiuAula(idAluno,idAula,authorization) {
+    return (await api.get('v1/protectedA/matricula/assistirAula/'+idAluno+'/'+idAula,'',{headers:{Authorization:authorization}})).data;
+}
+
+export async function assistirAulaSave(idAluno,idAula,authorization) {
+    return (await api.post('v1/protectedA/matricula/assistirAulaSave/'+idAluno+'/'+idAula,'',{headers:{Authorization:authorization}})).data;
 }

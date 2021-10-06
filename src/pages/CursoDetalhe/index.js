@@ -15,24 +15,34 @@ const CursoDetalhe = () => {
     const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
 
 
-    useEffect(()=>{
-        signInV1(Cookies.get("email"),Cookies.get("senha"));
-    },[])
+    try {
+        if(aluno==='' && cursos===null && matriculas===null){
+            signInV1(Cookies.get("email"),Cookies.get("senha"));
+            retornarCursosPorUuid(id);
+            verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization());
+        }
+
+        if(cursos===null){
+            retornarCursosPorUuid(id);
+        }
+
+        if(matriculas===null){
+            verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization());
+        }
+    }
+    catch (e) {
+        console.log("aqui")
+    }
+
+    console.log(matriculas===null)
 
     let cont =0;
-
-    useEffect(()=>{
-        retornarCursosPorUuid(id);
-    },[])
-
-    useEffect(()=>{
-        verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization())
-    },[])
 
     function matricular() {
         verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization())
         console.log(matriculas)
         salvarMatricula(getAuthorization(),aluno.id,cursos.id,0,0);
+        Cookies.set('matricula', true);
         window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
     }
 
@@ -41,7 +51,9 @@ const CursoDetalhe = () => {
     },[])
 
     function verificarSeEstaMatriculado(){
-        if(matriculas.status!==400){
+        Cookies.set('matricula', false);
+        if(matriculas!==null){
+            Cookies.set('matricula', true);
             return (
                 <a href={'/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id}
                          className="course-header-button startContinue-button bootcamp-primary-button-theme"

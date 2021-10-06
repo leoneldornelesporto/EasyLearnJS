@@ -24,11 +24,35 @@ const ModuloDetalhe = () => {
         retornarModuloPeloId(id,getAuthorization());
     }
 
+    console.log(Cookies.get('idUser'))
+
+    function verificarSeEstouMatriculado(){
+        if(Cookies.get('matricula')==='true'){
+            return(<></>)
+        }
+        else{
+            return(
+                <div className="task-body-alert">
+                    <div className="container">
+                        <div className="task-body-alert__alert">
+                            <div className="task-body-alert__wrapper">
+                                <p>Você ainda não se matriculou neste curso!</p> <p>Para registrar seu progresso no
+                                curso, <a className="task-alert-link" href="/courses/rebranding/tryToEnroll">matricule-se
+                                    agora</a>!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
+
     function body(){
         if(isLogged()) {
 
             try {
                 return (<section className="task-body">
+                    {verificarSeEstouMatriculado()}
                     <header className="task-body-header">
                         <div className="container">
                             <button title="" aria-label="" type="button" className="theatermode openMenu-button task-menu-button
@@ -149,11 +173,12 @@ const ModuloDetalhe = () => {
                                 {
                                     modulo.aulaDto.map((value, index) => {
                                         return (
-                                            <li className="task-menu-nav-item">
+                                            <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
                                                 <a href={"/aula_detalhe=" + value.id}
                                                    className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
-                                                    <svg className="task-menu-nav-item-svg "
-                                                         aria-label="Atividade de Vídeo não concluída">
+                                                    <svg className="task-menu-nav-item-svg task-menu-nav-item-svg--done"
+                                                         aria-label="Atividade de Vídeo concluída">
+                                                        <path d="M0 1v22h24v-22h-24zm4 20h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm14 12h-12v-10h12v10zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm-12 10v-6l5 3-5 3z"/>
                                                     </svg>
                                                     <span className="task-menu-nav-item-number">0{++index}</span>
                                                     <span className="task-menu-nav-item-text">

@@ -2,6 +2,7 @@ import React, {createContext, useState} from 'react';
 import {doLogin, doLogout, isLogged} from "./AuthHandler";
 import {login, loginV1} from "./Controller/LoginController";
 import {postAluno} from "./Controller/AlunoController";
+import Cookies from "js-cookie";
 
 export const AuthUserContext = createContext({});
 
@@ -27,6 +28,8 @@ export const AuthUserProvider = ({children}) => {
     const signIn = async (email, pass, checked) => {
         try {
             const response = await login(email,pass);
+            console.log(response)
+            Cookies.set('idUser', response.idUser);
             setAuthorize(response.authorizationCode);
             await doLogin(authorize,checked);
         } catch (response) {
