@@ -5,7 +5,7 @@ import {
     getCursoByIdCategoria,
     getCursoByNome,
     getCursoByUuid,
-    getCursoByUuidAndIdAula, protectedPmodulo, salvarCurso
+    getCursoByUuidAndIdAula, protectedPmodulo, removerCurso, salvarCurso
 } from "./Controller/CursoController";
 import {getAulaByUuidCursoAndIdAula} from "./Controller/AulaController";
 import {getAuthorization} from "./AuthHandler";
@@ -129,6 +129,18 @@ export const CursoProvider = ({children}) => {
     };
 
 
+    const deletarCurso = async (id) => {
+        try {
+            const response = await removerCurso(id,getAuthorization());
+            setAllCursos(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+
     return (
         <CursoContext.Provider
             value={{
@@ -152,6 +164,7 @@ export const CursoProvider = ({children}) => {
                 verificaProximo,
                 retornarModulos,
                 saveCurso,
+                deletarCurso,
             }}>
             {children}
         </CursoContext.Provider>

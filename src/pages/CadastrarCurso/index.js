@@ -8,7 +8,7 @@ const CadastrarCurso = () => {
 
     const {aluno,signInV1} = useContext(AuthUserContext);
     const {categoria,retornaTodasCategorias} = useContext(CategoriaContext);
-    const {cursos,retornarTodosOsCursos,saveCurso} = useContext(CursoContext);
+    const {cursos,retornarTodosOsCursos,saveCurso,deletarCurso} = useContext(CursoContext);
     const [nomeCurso,setNomeCurso] = useState(null);
     const [descricao,setDescricao] = useState(null);
     const [cargaHoraria,setCargaHoraria] = useState(null);
@@ -188,7 +188,7 @@ const CadastrarCurso = () => {
     function excluir(id){
 
         function deletar(){
-            //excluirCategoria(id);
+            deletarCurso(id);
             retornarTodosOsCursos();
         }
 

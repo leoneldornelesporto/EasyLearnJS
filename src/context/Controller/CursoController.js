@@ -41,3 +41,7 @@ export async function protectedPmodulo(id,authorization) {
 export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,authorization) {
     return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo},{headers:{Authorization:authorization}})).data;
 }
+
+export async function removerCurso(id,authorization) {
+    return (await api.delete('v1/protectedP/curso/'+id,null,{headers:{Authorization:authorization}})).data;
+}
