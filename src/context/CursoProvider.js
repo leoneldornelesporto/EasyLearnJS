@@ -5,9 +5,10 @@ import {
     getCursoByIdCategoria,
     getCursoByNome,
     getCursoByUuid,
-    getCursoByUuidAndIdAula, protectedPmodulo
+    getCursoByUuidAndIdAula, protectedPmodulo, salvarCurso
 } from "./Controller/CursoController";
 import {getAulaByUuidCursoAndIdAula} from "./Controller/AulaController";
+import {getAuthorization} from "./AuthHandler";
 
 export const CursoContext = createContext({});
 
@@ -116,6 +117,17 @@ export const CursoProvider = ({children}) => {
         }
     };
 
+    const saveCurso = async (idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo) => {
+        try {
+            const response = await salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,getAuthorization());
+            setAllCursos(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
 
     return (
         <CursoContext.Provider
@@ -139,6 +151,7 @@ export const CursoProvider = ({children}) => {
                 retornarAulaPorUuidCursoEIdAula,
                 verificaProximo,
                 retornarModulos,
+                saveCurso,
             }}>
             {children}
         </CursoContext.Provider>

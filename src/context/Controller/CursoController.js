@@ -37,3 +37,7 @@ export async function getAulaByUuidCursoAndIdAula(uuid,id,authorization) {
 export async function protectedPmodulo(id,authorization) {
     return (await api.get('/v1/protectedA/modulo/'+id,null,{headers:{Authorization:authorization}})).data;
 }
+
+export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,authorization) {
+    return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo},{headers:{Authorization:authorization}})).data;
+}
