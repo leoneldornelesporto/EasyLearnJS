@@ -3,8 +3,7 @@ import {CategoriaContext} from "../../context/CategoriaProvider";
 
 const CadastrarCategoria = () => {
 
-    const {categoria,resposta,retornaTodasCategorias,updateCategoria,excluirCategoria} = useContext(CategoriaContext);
-    const [idCategoria,setIdCategoria] = useState('');
+    const {categoria,resposta,retornaTodasCategorias,saveCategoria,updateCategoria,excluirCategoria} = useContext(CategoriaContext);
     const [nome,setNome] = useState('');
 
     if (categoria===null){
@@ -35,6 +34,49 @@ const CadastrarCategoria = () => {
         catch (e) {
             return(<></>);
         }
+    }
+
+    function criarNovaCategoria(){
+
+        function salvar(e){
+            e.preventDefault();
+            saveCategoria(nome);
+
+            if (resposta!==null){
+                alert("Salvo com Sucesso");
+                retornaTodasCategorias();
+            }
+        }
+
+        return(
+            <div>
+                <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#Salvar">Criar Nova Categoria</button>
+
+                <div className="modal fade" id="Salvar" tabIndex="-1" role="dialog"
+                     aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form onSubmit={salvar}>
+                                <div className="form-group">
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setNome(e.target.value)}/>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" className="btn btn-primary">Salvar mudanças</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     function editar(id){
@@ -119,8 +161,6 @@ const CadastrarCategoria = () => {
         )
     }
 
-    console.log(categoria)
-
     return(
         <>
             <table className="table table-dark">
@@ -135,6 +175,7 @@ const CadastrarCategoria = () => {
                 {retornarCategoria()}
                 </tbody>
             </table>
+            {criarNovaCategoria()}
         </>
     );
 }

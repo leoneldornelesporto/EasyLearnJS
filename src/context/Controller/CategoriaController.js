@@ -14,6 +14,10 @@ export async function getAllCategoria() {
     return (await api.get('/v1/categoria')).data;
 }
 
+export async function salvarCategoria(nome,authorization) {
+    return (await api.post('v1/protectedP/categoria',{nome:nome},{headers:{Authorization:authorization}})).data;
+}
+
 export async function alterarCategoria(id,nome,authorization) {
     return (await api.put('v1/protectedP/categoria/'+id,{nome:nome},{headers:{Authorization:authorization}})).data;
 }

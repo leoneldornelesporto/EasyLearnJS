@@ -3,7 +3,7 @@ import {
     alterarCategoria,
     deleteCategoria,
     getAllCategoria,
-    getCursoByIdCategoria
+    getCursoByIdCategoria, salvarCategoria
 } from "./Controller/CategoriaController";
 import {getAuthorization} from "./AuthHandler";
 
@@ -32,6 +32,17 @@ export const CategoriaProvider = ({children}) => {
         try {
             const response = await getAllCategoria();
             setCategoria(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const saveCategoria = async (nome) => {
+        try {
+            const response = await salvarCategoria(nome,getAuthorization());
+            setResposta(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -78,6 +89,7 @@ export const CategoriaProvider = ({children}) => {
                 retornaTodasCategorias,
                 excluirCategoria,
                 updateCategoria,
+                saveCategoria,
             }}>
             {children}
         </CategoriaContext.Provider>
