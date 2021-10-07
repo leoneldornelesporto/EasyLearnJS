@@ -9,9 +9,11 @@ import {CategoriaProvider} from "./context/CategoriaProvider";
 import {ModuloProvider} from "./context/ModuloContext";
 import {MatriculaProvider} from "./context/MatriculaContext";
 import {FormacaoProvider} from "./context/FormacaoProvider";
+import {AulaProvider} from "./context/AulaProvider";
 
 function App() {
   return (
+      <AulaProvider>
       <FormacaoProvider>
       <MatriculaProvider>
       <ModuloProvider>
@@ -31,6 +33,7 @@ function App() {
       </ModuloProvider>
       </MatriculaProvider>
       </FormacaoProvider>
+      </AulaProvider>
   );
 }
 export default App;

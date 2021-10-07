@@ -22,6 +22,7 @@ import CursosPorCategoria from "./pages/CursosPorCategoria";
 import CadastrarCurso from "./pages/CadastrarCurso";
 import CadastrarCategoria from "./pages/CadastrarCategoria";
 import CadastrarFormacao from "./pages/CadastrarFormacao";
+import CadastrarAula from "./pages/CadastrarAulas";
 
 export default () => {
     return(
@@ -88,6 +89,9 @@ export default () => {
             </Route>
             <Route path="/cadastrar_formacao">
                 <CadastrarFormacao/>
+            </Route>
+            <Route path="/cadastrar_aula">
+                <CadastrarAula/>
             </Route>
             <Route path="/">
                 <Principal/>

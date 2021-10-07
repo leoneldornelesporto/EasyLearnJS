@@ -7,13 +7,15 @@ import {
     getCursoByUuid,
     getCursoByUuidAndIdAula
 } from "./Controller/CursoController";
+import {deletarAula, returnAllAulas, salvarAula} from "./Controller/AulaController";
+import {getAuthorization} from "./AuthHandler";
 
 export const AulaContext = createContext({});
 
 export const AulaProvider = ({children}) => {
 
     const [curso, setAllCursos] = useState([]);
-    const [aula, setAula] = useState([]);
+    const [aula, setAula] = useState(null);
     const [errorMessage, setErrorMessage] = useState({});
     const [modulo, setModulo] = useState('');
 
@@ -83,9 +85,47 @@ export const AulaProvider = ({children}) => {
         }
     };
 
+    const retornarTodasAsAulas = async () => {
+        try {
+            const response = await returnAllAulas(getAuthorization());
+            setAula(response);
+            console.log(aula)
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const saveAula = async (indice,titulo,urlVideo,transcricao) => {
+        try {
+            const response = await salvarAula(indice,titulo,urlVideo,transcricao,getAuthorization());
+            setAula(response);
+            console.log(aula)
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const deleteAula = async (id) => {
+        try {
+            const response = await deletarAula(id,getAuthorization());
+            setAula(response);
+            console.log(aula)
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     return (
         <AulaContext.Provider
             value={{
+                aula,
+                setAula,
                 curso,
                 setAllCursos,
                 errorMessage,
@@ -98,6 +138,9 @@ export const AulaProvider = ({children}) => {
                 retornarCursosPorIdDaCategoria,
                 retornarCursosPorUuidEidAula,
                 retornarModuloPorUuidCursoEIdDaAula,
+                retornarTodasAsAulas,
+                saveAula,
+                deleteAula,
             }}>
             {children}
         </AulaContext.Provider>
