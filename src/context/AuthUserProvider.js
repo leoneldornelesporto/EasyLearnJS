@@ -28,8 +28,9 @@ export const AuthUserProvider = ({children}) => {
     const signIn = async (email, pass, checked) => {
         try {
             const response = await login(email,pass);
-            console.log(response)
             Cookies.set('idUser', response.idUser);
+            Cookies.set('email', email);
+            Cookies.set('pass', pass);
             setAuthorize(response.authorizationCode);
             await doLogin(authorize,checked);
         } catch (response) {

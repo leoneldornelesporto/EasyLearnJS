@@ -19,6 +19,9 @@ import Formacao from "./pages/Formacao";
 import FormacaoDetalhe from "./pages/FormacaoDetalhe";
 import PlanoDeEstudo from "./pages/PlanoDeEstudos";
 import CursosPorCategoria from "./pages/CursosPorCategoria";
+import CadastrarCurso from "./pages/CadastrarCurso";
+import CadastrarCategoria from "./pages/CadastrarCategoria";
+import CadastrarFormacao from "./pages/CadastrarFormacao";
 
 export default () => {
     return(
@@ -76,6 +79,15 @@ export default () => {
             </Route>
             <Route path="/cursos_por_categoria=:id">
                 <CursosPorCategoria/>
+            </Route>
+            <Route path="/cadastrar_curso">
+                <CadastrarCurso/>
+            </Route>
+            <Route path="/cadastrar_categoria">
+                <CadastrarCategoria/>
+            </Route>
+            <Route path="/cadastrar_formacao">
+                <CadastrarFormacao/>
             </Route>
             <Route path="/">
                 <Principal/>

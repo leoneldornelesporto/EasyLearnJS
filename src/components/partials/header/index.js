@@ -7,8 +7,15 @@ import Cookies from "js-cookie";
 import {AuthUserContext} from "../../../context/AuthUserProvider";
 
 const Header = () => {
+
+    const {aluno,signInV1} = useContext(AuthUserContext);
     const {sigOut} = useContext(AuthUserContext);
     const [pesquisa, setPesquisa] = useState('');
+
+
+    if (aluno===''){
+        signInV1(Cookies.get('email'),Cookies.get('pass'))
+    }
 
     async function signout() {
         sigOut();
@@ -24,10 +31,10 @@ const Header = () => {
     }
 
     function imagemAvatar() {
-            if(Cookies.get("avatar")!=='null') {
+            if(aluno.avatar!=='null') {
                 return (
                         <img
-                            src={Cookies.get("avatar")}
+                            src={aluno.avatar}
                             alt="Foto de Leonel Dorneles Porto"
                             className="headline-profile-avatar headline-profile-avatar"/>
                 )
@@ -190,6 +197,26 @@ const Header = () => {
                                            tabIndex="-1">
                                             Formações
                                         </a>
+
+                                        {
+                                            aluno.professor === true?
+                                            <>
+                                                <a href="/cadastrar_categoria" className="header-nav-link header-item-link--degrees"
+                                                   tabIndex="-1">
+                                                    Cadastrar Categoria
+                                                </a>
+                                                <a href="/cadastrar_curso" className="header-nav-link header-item-link--degrees"
+                                                   tabIndex="-1">
+                                                    Cadastrar Cursos
+                                                </a>
+                                                <a href="/cadastrar_formacao" className="header-nav-link header-item-link--degrees"
+                                                   tabIndex="-1">
+                                                    Cadastrar Formações
+                                                </a>
+                                            </>
+                                            :
+                                            <></>
+                                        }
                                         <span className="header-nav-arrow"></span>
                                     </nav>
                                 </div>
@@ -319,7 +346,7 @@ const Header = () => {
 
                                         {imagemAvatar()}
                                         <span className="profile-info-name-text-wrapper"><span
-                                            className="screenReader-only">perfil de</span>{Cookies.get('nome')}</span>
+                                            className="screenReader-only">perfil de</span>{aluno.nomeCompleto}</span>
                                     </a>
                                     <nav id="profileList"
                                          className="header-nav header-nav-profile bootcamp-background-dark-section"

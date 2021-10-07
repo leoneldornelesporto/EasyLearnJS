@@ -254,10 +254,12 @@ const ModuloDetalhe = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    <iframe width="100%" height="720px" src={modulo.aulaDto[0].urlVideo}
-                                            title="YouTube video player" frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen></iframe>
+                                    <div align="center">
+                                        <iframe width="620px" height="420px%" src={modulo.aulaDto[0].urlVideo}
+                                                title="YouTube video player" frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen></iframe>
+                                    </div>
                                     <section id="transcription"
                                              className="video-transcription video-transcription--inactive transcription-toggle">
                                         <h2 className="video-transcription-title">Transcrição</h2>
