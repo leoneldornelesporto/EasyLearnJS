@@ -7,7 +7,7 @@ import {
     getCursoByUuid,
     getCursoByUuidAndIdAula
 } from "./Controller/CursoController";
-import {deletarAula, returnAllAulas, salvarAula} from "./Controller/AulaController";
+import {deletarAula, editarAula, returnAllAulas, salvarAula} from "./Controller/AulaController";
 import {getAuthorization} from "./AuthHandler";
 
 export const AulaContext = createContext({});
@@ -109,6 +109,18 @@ export const AulaProvider = ({children}) => {
         }
     };
 
+    const updateAula = async (id,indice,titulo,urlVideo,transcricao) => {
+        try {
+            const response = await editarAula(id,indice,titulo,urlVideo,transcricao,getAuthorization());
+            setAula(response);
+            console.log(aula)
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     const deleteAula = async (id) => {
         try {
             const response = await deletarAula(id,getAuthorization());
@@ -141,6 +153,7 @@ export const AulaProvider = ({children}) => {
                 retornarTodasAsAulas,
                 saveAula,
                 deleteAula,
+                updateAula,
             }}>
             {children}
         </AulaContext.Provider>

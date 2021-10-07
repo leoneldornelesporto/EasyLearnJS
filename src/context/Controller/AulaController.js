@@ -18,6 +18,10 @@ export async function salvarAula(indice,titulo,urlVideo,transcricao,authorizatio
     return (await api.post('v1/protectedP/aulas',{indice:indice,titulo:titulo,urlVideo:urlVideo,transcricao:transcricao},{headers:{Authorization:authorization}})).data;
 }
 
+export async function editarAula(id,indice,titulo,urlVideo,transcricao,authorization) {
+    return (await api.put('v1/protectedP/aulas/'+id,{indice:indice,titulo:titulo,urlVideo:urlVideo,transcricao:transcricao},{headers:{Authorization:authorization}})).data;
+}
+
 export async function deletarAula(id,authorization) {
     return (await api.delete('v1/protectedP/aulas/'+id,null,{headers:{Authorization:authorization}})).data;
 }

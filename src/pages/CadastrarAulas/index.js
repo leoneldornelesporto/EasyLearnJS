@@ -4,7 +4,7 @@ import {AulaContext} from "../../context/AulaProvider";
 
 const CadastrarAula = () => {
 
-    const {aula,retornarTodasAsAulas,saveAula,deleteAula} = useContext(AulaContext);
+    const {aula,retornarTodasAsAulas,saveAula,updateAula,deleteAula} = useContext(AulaContext);
     const {categoria,resposta,retornaTodasCategorias,saveCategoria,updateCategoria,excluirCategoria} = useContext(CategoriaContext);
     const [nome,setNome] = useState('');
 
@@ -55,7 +55,7 @@ const CadastrarAula = () => {
 
             if (aula!==null){
                 alert("Salvo com Sucesso");
-                retornaTodasCategorias();
+                retornarAulas();
             }
         }
 
@@ -98,13 +98,12 @@ const CadastrarAula = () => {
 
     function editar(id){
 
-        function alterar(e){
-            e.preventDefault();
-            updateCategoria(id,nome);
+        function alterar(){
+            updateAula(id,indice,titulo,urlVideo,transcricao);
 
-            if (resposta!==null){
+            if (aula!==null){
                 alert("Alterado com Sucesso");
-                retornaTodasCategorias();
+                retornarAulas();
             }
         }
 
@@ -126,9 +125,14 @@ const CadastrarAula = () => {
                             </div>
                             <form onSubmit={alterar}>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setNome(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Indice" onChange={e => setIndice(e.target.value)}/>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira o Titulo" onChange={e => setTitulo(e.target.value)}/>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a url do video" onChange={e => setUrlVideo(e.target.value)}/>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Transcricao" onChange={e => setTranscricao(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
