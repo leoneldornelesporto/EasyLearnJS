@@ -8,7 +8,7 @@ const CadastrarCurso = () => {
 
     const {aluno,signInV1} = useContext(AuthUserContext);
     const {categoria,retornaTodasCategorias} = useContext(CategoriaContext);
-    const {cursos,retornarTodosOsCursos,saveCurso,deletarCurso} = useContext(CursoContext);
+    const {cursos,retornarTodosOsCursos,saveCurso,alterarCurso,deletarCurso} = useContext(CursoContext);
     const [nomeCurso,setNomeCurso] = useState(null);
     const [descricao,setDescricao] = useState(null);
     const [cargaHoraria,setCargaHoraria] = useState(null);
@@ -28,6 +28,12 @@ const CadastrarCurso = () => {
     if (categoria===null){
         retornaTodasCategorias();
     }
+
+    console.log(nomeCurso)
+    console.log(categoriaId)
+    console.log(descricao)
+    console.log(cargaHoraria)
+    console.log(imagemIcon)
 
     function retornaCategoria(){
         try{
@@ -142,8 +148,7 @@ const CadastrarCurso = () => {
     function editar(id){
 
         function alterar(e){
-            e.preventDefault();
-            //updateCategoria(id,categoriaSelected);
+            alterarCurso(id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon);
 
             if (cursos!==null){
                 alert("Alterado com Sucesso");
@@ -153,11 +158,11 @@ const CadastrarCurso = () => {
 
         return(
             <div>
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#Salvar-".concat(id)}>
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#Editar-".concat(id)}>
                     Editar
                 </button>
 
-                <div className="modal fade" id={"Salvar-".concat(id)} tabIndex="-1" role="dialog"
+                <div className="modal fade" id={"Editar-".concat(id)} tabIndex="-1" role="dialog"
                      aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -169,9 +174,20 @@ const CadastrarCurso = () => {
                             </div>
                             <form onSubmit={alterar}>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
+                                    <h5>Escolha a categoria</h5>
+                                    {retornaCategoria()}
+                                    <h5>Nome do Curso</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setCategoriaSelected(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Nome do Curso" onChange={e => setNomeCurso(e.target.value)}/>
+                                    <h5>Descrição</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Descrição" onChange={e => setDescricao(e.target.value)}/>
+                                    <h5>Carga Horária</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Carga Horária" onChange={e => setCargaHoraria(e.target.value)}/>
+                                    <h5>Icone do Curso</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a icone do curso" onChange={e => setImagemIcon(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>

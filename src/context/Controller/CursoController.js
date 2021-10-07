@@ -42,6 +42,10 @@ export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,catego
     return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo},{headers:{Authorization:authorization}})).data;
 }
 
+export async function atualizarCurso(id,nome,descricao,cargahoraria,idCategoria,imagemIcon,authorization) {
+    return (await api.put('v1/protectedP/curso/'+id,{nome:nome,descricao:descricao,cargahoraria:cargahoraria,idCategoria:idCategoria,imagemIcon:imagemIcon},{headers:{Authorization:authorization}})).data;
+}
+
 export async function removerCurso(id,authorization) {
     return (await api.delete('v1/protectedP/curso/'+id,null,{headers:{Authorization:authorization}})).data;
 }

@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {
+    atualizarCurso,
     findModuloByUuidCursoAndIdAula,
     getAllCursos,
     getCursoByIdCategoria,
@@ -128,6 +129,17 @@ export const CursoProvider = ({children}) => {
         }
     };
 
+    const alterarCurso = async (id,nome,descricao,cargahoraria,categoriaId,imagemIcon) => {
+        try {
+            const response = await atualizarCurso(id,nome,descricao,cargahoraria,categoriaId,imagemIcon,getAuthorization());
+            setAllCursos(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
 
     const deletarCurso = async (id) => {
         try {
@@ -164,6 +176,7 @@ export const CursoProvider = ({children}) => {
                 verificaProximo,
                 retornarModulos,
                 saveCurso,
+                alterarCurso,
                 deletarCurso,
             }}>
             {children}
