@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {AuthUserContext} from "../../context/AuthUserProvider";
+import {Link} from "react-router-dom";
 
 const EsqueciSenha = () => {
 
@@ -36,7 +37,8 @@ const EsqueciSenha = () => {
                             </div>
                             <div className="hr"></div>
                             <div className="foot-lnk">
-                                <label href="#forgot">Esqueceu sua senha? Digite seu e-mail que enviaremos um link para definir uma nova senha.</label>
+                                <label className="recuperar_senha">
+                                    Esqueceu sua senha? Digite seu e-mail que enviaremos um link para definir uma nova senha.</label>
                             </div>
                         </form>
                     </div>
