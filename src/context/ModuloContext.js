@@ -1,12 +1,13 @@
 import React, {createContext, useState} from 'react';
-import {findModuloById} from "./Controller/ModuloController";
+import {findAllModulos, findModuloById, saveModulo} from "./Controller/ModuloController";
+import {getAuthorization} from "./AuthHandler";
 
 export const ModuloContext = createContext({});
 
 export const ModuloProvider = ({children}) => {
 
     const [idAula, setIdAula] = useState('');
-    const [modulo, setModulo] = useState([]);
+    const [modulo, setModulo] = useState(null);
     const [opcao, setOpcao] = useState('');
     const [errorMessage, setErrorMessage] = useState({});
 
@@ -18,6 +19,28 @@ export const ModuloProvider = ({children}) => {
             console.log(modulo);
             setIdAula(modulo.aulaDto[1].id);
             console.log(idAula);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const retornaTodosOsModulos = async () => {
+        try {
+            const response = await findAllModulos(getAuthorization());
+            setModulo(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const salvarModulo = async (indice,titulo,idCurso,idAula,subtitulo) => {
+        try {
+            const response = await saveModulo(indice,titulo,idCurso,idAula,subtitulo,getAuthorization());
+            setModulo(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -37,6 +60,8 @@ export const ModuloProvider = ({children}) => {
                 errorMessage,
                 setErrorMessage,
                 retornarModuloPeloId,
+                retornaTodosOsModulos,
+                salvarModulo,
             }}>
             {children}
         </ModuloContext.Provider>

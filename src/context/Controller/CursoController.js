@@ -27,7 +27,7 @@ export async function getCursoByUuidAndIdAula(uuid,id,authorization) {
 }
 
 export async function findModuloByUuidCursoAndIdAula(uuid,id,authorization) {
-    return (await api.get('v1/protectedA/curso/' + uuid + '/aula/' + id + '/modulo', null, {headers: {Authorization: authorization}})).data;
+    return (await api.get('v1/protectedX/curso/' + uuid + '/aula/' + id + '/modulo', null, {headers: {Authorization: authorization}})).data;
 }
 
 export async function getAulaByUuidCursoAndIdAula(uuid,id,authorization) {

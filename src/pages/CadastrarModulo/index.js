@@ -1,34 +1,72 @@
 import React, {useContext, useState} from 'react';
 import {AulaContext} from "../../context/AulaProvider";
+import {ModuloContext} from "../../context/ModuloContext";
 
-const CadastrarAula = () => {
+const CadastrarModulo = () => {
 
     const {aula,retornarTodasAsAulas,saveAula,updateAula,deleteAula} = useContext(AulaContext);
-
+    const {modulo,retornaTodosOsModulos} = useContext(ModuloContext);
     const [indice,setIndice] = useState(null);
     const [titulo,setTitulo] = useState(null);
+    const [tituloSecundario,setTituloSecundario] = useState(null);
+    const [idCurso,setIdCurso] = useState(null);
+    const [idAula,setIdAula] = useState([]);
+    const [aulaSelected,setAulaSelected] = useState(null);
+    const [subititulo,setSubititulo] = useState([]);
     const [urlVideo,setUrlVideo] = useState(null);
     const [transcricao,setTranscricao] = useState(null);
+    const arrayDeIds = [];
+
+    if (modulo===null){
+        retornaTodosOsModulos();
+    }
 
     if (aula===null){
         retornarTodasAsAulas();
     }
 
-    console.log(aula)
+    function retornaAula(){
+        try{
+            return(
+                <div className="dropdown">
+                    <button className="btn btn-secondary dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        {aulaSelected===null?"Escolha a Aula":aulaSelected}
+                    </button>
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {
+                            aula.map((value, index)=>{
+                                return (
+                                    <div>
+                                    <a onClick={e => setIdAula(value.id)}>
+                                        <a className="dropdown-item"  onClick={e => setAulaSelected(value.titulo)}>{value.titulo}</a>
+                                    </a>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            );
+        }
+        catch (e) {
+            return(<></>);
+        }
+    }
 
     function retornarAulas(){
         try{
             return(
                 <>
                     {
-                        aula.map((value, index)=>{
+                        modulo.map((value, index)=>{
                             return (
                                 <tr>
                                     <th scope="row">{value.id}</th>
                                     <td>{value.indice}</td>
                                     <td>{value.titulo}</td>
-                                    <td>{value.urlVideo}</td>
-                                    <td>{value.transcricao}</td>
+                                    <td>{value.tituloSecundario}</td>
                                     <td>
                                         <td>{editar(value.id)}</td>
                                         <td>{excluir(value.id)}</td>
@@ -46,7 +84,6 @@ const CadastrarAula = () => {
     }
 
     function criarNovaAula(){
-
         function salvar(){
             saveAula(indice,titulo,urlVideo,transcricao);
 
@@ -72,6 +109,8 @@ const CadastrarAula = () => {
                             </div>
                             <form onSubmit={salvar}>
                                 <div className="form-group">
+                                    <h5>Escolha a Aula</h5>
+                                    {retornaAula()}
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Indice" onChange={e => setIndice(e.target.value)}/>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
@@ -187,8 +226,7 @@ const CadastrarAula = () => {
                     <th scope="col">#</th>
                     <th scope="col">Indice</th>
                     <th scope="col">Titulo</th>
-                    <th scope="col">urlVideo</th>
-                    <th scope="col">transcricao</th>
+                    <th scope="col">tituloSecundario</th>
                     <th scope="col">Operações</th>
                 </tr>
                 </thead>
@@ -201,4 +239,4 @@ const CadastrarAula = () => {
     );
 }
 
-export default CadastrarAula;
+export default CadastrarModulo;

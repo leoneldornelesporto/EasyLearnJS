@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {AuthUserContext} from "../../context/AuthUserProvider";
 
 const EsqueciSenha = () => {
+
+    const {resposta,enviarEmailRecuperarSenha} = useContext(AuthUserContext);
     const [emailRecuperacao, setEmailRecuperacao] = useState('');
 
     async function recuperarSenha(e){
         e.preventDefault();
+        enviarEmailRecuperarSenha(emailRecuperacao);
+        if (resposta!==null){
         alert("E-mail enviado para "+emailRecuperacao+", confira sua caixa de entrada e confirme o código.");
         window.location.href = "/signin";
+        }
     }
 
     return(

@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 import {doLogin, doLogout, isLogged} from "./AuthHandler";
-import {login, loginV1} from "./Controller/LoginController";
+import {enviaEmailEsqueciSenha, login, loginV1, v1EsqueciSenha} from "./Controller/LoginController";
 import {postAluno} from "./Controller/AlunoController";
 import Cookies from "js-cookie";
 
@@ -8,8 +8,10 @@ export const AuthUserContext = createContext({});
 
 export const AuthUserProvider = ({children}) => {
     const [aluno, setAluno] = useState('');
+    const [resposta, setResposta] = useState(null);
     const [user, setUser] = useState(null);
     const [pass, setPass] = useState(null);
+    const [passConfirm, setPassConfirm] = useState(null);
     const [checked, setChecked] = useState(null);
     const [errorMessage, setErrorMessage] = useState({});
     const [authorize, setAuthorize] = useState('');
@@ -26,8 +28,11 @@ export const AuthUserProvider = ({children}) => {
     };
 
     const signIn = async (email, pass, checked) => {
+        alert(email);
+        alert(pass);
         try {
             const response = await login(email,pass);
+            console.log(response)
             Cookies.set('idUser', response.idUser);
             Cookies.set('email', email);
             Cookies.set('pass', pass);
@@ -61,6 +66,28 @@ export const AuthUserProvider = ({children}) => {
         }
     };
 
+    const esqueciASenhaV1 = async (id, email, senha) => {
+        try {
+            const response = await v1EsqueciSenha(id,email,senha);
+            setResposta(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao realizar signIn.');
+            console.log(response);
+        }
+    };
+
+    const enviarEmailRecuperarSenha = async (email) => {
+        try {
+            const response = await enviaEmailEsqueciSenha(email);
+            setResposta(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao realizar signIn.');
+            console.log(response);
+        }
+    };
+
     return (
         <AuthUserContext.Provider
             value={{
@@ -68,11 +95,17 @@ export const AuthUserProvider = ({children}) => {
                 signIn,
                 signInV1,
                 sigOut,
+                esqueciASenhaV1,
+                enviarEmailRecuperarSenha,
+                resposta,
+                setResposta,
                 aluno,
                 user,
                 setUser,
                 pass,
                 setPass,
+                passConfirm,
+                setPassConfirm,
                 checked,
                 setChecked,
                 errorMessage,

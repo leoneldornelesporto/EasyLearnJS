@@ -23,6 +23,9 @@ import CadastrarCurso from "./pages/CadastrarCurso";
 import CadastrarCategoria from "./pages/CadastrarCategoria";
 import CadastrarFormacao from "./pages/CadastrarFormacao";
 import CadastrarAula from "./pages/CadastrarAulas";
+import CadastrarModulo from "./pages/CadastrarModulo";
+import ConfirmarEmail from "./pages/ConfirmarEmail";
+import RedefinirSenha from "./pages/RedefinirSenha";
 
 export default () => {
     return(
@@ -81,6 +84,9 @@ export default () => {
             <Route path="/cursos_por_categoria=:id">
                 <CursosPorCategoria/>
             </Route>
+            <Route path="/confirmar_email=:id">
+                <ConfirmarEmail/>
+            </Route>
             <Route path="/cadastrar_curso">
                 <CadastrarCurso/>
             </Route>
@@ -92,6 +98,12 @@ export default () => {
             </Route>
             <Route path="/cadastrar_aula">
                 <CadastrarAula/>
+            </Route>
+            <Route path="/cadastrar_modulo">
+                <CadastrarModulo/>
+            </Route>
+            <Route path="/resetPassword=:id&email=:email">
+                <RedefinirSenha/>
             </Route>
             <Route path="/">
                 <Principal/>

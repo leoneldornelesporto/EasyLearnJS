@@ -10,9 +10,11 @@ import {ModuloProvider} from "./context/ModuloContext";
 import {MatriculaProvider} from "./context/MatriculaContext";
 import {FormacaoProvider} from "./context/FormacaoProvider";
 import {AulaProvider} from "./context/AulaProvider";
+import {EmailProvider} from "./context/EmailProvider";
 
 function App() {
   return (
+      <EmailProvider>
       <AulaProvider>
       <FormacaoProvider>
       <MatriculaProvider>
@@ -34,6 +36,7 @@ function App() {
       </MatriculaProvider>
       </FormacaoProvider>
       </AulaProvider>
+      </EmailProvider>
   );
 }
 export default App;

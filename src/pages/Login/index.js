@@ -29,26 +29,28 @@ const Login = () => {
                 return (<div className="login-wrap">
                     <div className="login-html">
                         <input id="tab-1" type="radio" name="tab" className="sign-in" checked/>
-                        <label htmlFor="tab-1" className="tab">Sign In</label>
+                        <label htmlFor="tab-1" className="tab"><h5>Já estuda com a gente?</h5>
+                            <h6>Faça seu login e boa aula!</h6>
+                        </label>
                         <input id="tab-2" type="radio" name="tab" className="sign-up"/>
                         <label htmlFor="tab-2" className="tab"/>
                         <div className="login-form">
                             <form onSubmit={login}>
                                 <div className="sign-in-htm">
                                     <div className="group">
-                                        <label htmlFor="user" className="label">Username</label>
+                                        <label htmlFor="user" className="label">E-mail</label>
                                         <input id="user" type="text" className="input" onChange={e => setUser(e.target.value)}/>
                                     </div>
                                     <div className="group">
-                                        <label htmlFor="pass" className="label">Password</label>
+                                        <label htmlFor="pass" className="label">Senha</label>
                                         <input id="pass" type="password" className="input" data-type="password" onChange={e => setPass(e.target.value)}/>
                                     </div>
                                     <div className="group">
                                         <input id="check" type="checkbox" className="check" onClick={handleClick}/>
-                                        <label htmlFor="check"><span className="icon"></span> Keep me Signed in</label>
+                                        <label htmlFor="check" className="label"><span className="icon"></span> Mantenha-me logado?</label>
                                     </div>
                                     <div className="group">
-                                        <input type="submit" className="button" value="Sign In"/>
+                                        <input type="submit" className="button" value="Entrar"/>
                                     </div>
                                     <div className="hr"></div>
                                     <div className="foot-lnk">
