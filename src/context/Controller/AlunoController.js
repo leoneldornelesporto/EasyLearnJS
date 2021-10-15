@@ -6,8 +6,8 @@ const api = create({
     headers: { Accept: 'application/json' },
 })
 
-export async function postAluno(email, pass, username) {
-    return (await api.post('/v1/salvar/aluno',{nomeCompleto:username,senha:pass,email:email})).data;
+export async function postAluno(email, pass, username, cpf) {
+    return (await api.post('/v1/salvar/aluno',{nomeCompleto:username,senha:pass,email:email, cpf:cpf})).data;
 }
 
 export async function putAluno(id,authorization,avatar,nomeCompleto,nomeNosCertificados,usuarioNaUrl,cpf,biografia,dataDeNascimento,ocupacao,linkedin,twitter,github,linkPersonalizado,empresa,cargo,instituicao,curso,privacidadeDoPerfil) {

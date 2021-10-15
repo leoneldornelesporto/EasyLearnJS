@@ -35,12 +35,9 @@ export const AlunoProvider = ({children}) => {
     const [passwordRepeat, setPasswordRepeat] = useState('');
     const [email, setEmail] = useState('');
 
-    const salvarAluno = async (email,pass,username) => {
+    const salvarAluno = async (email,pass,username,cpf) => {
         try {
-            alert(email+" "+pass+" "+" "+username);
-
-            const response = await postAluno(email,pass,username);
-            console.log(response);
+            const response = await postAluno(email,pass,username,cpf);
             setResult(response);
         } catch (response) {
             setErrorMessage(response);

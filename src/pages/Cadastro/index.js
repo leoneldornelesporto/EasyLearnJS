@@ -4,15 +4,24 @@ import {AlunoContext} from "../../context/AlunoProvider";
 
 const Cadastro = () => {
 
-    const {username,setUsername,password,setPassword,passwordRepeat,setPasswordRepeat,email,setEmail,salvarAluno} = useContext(AlunoContext);
+    const {username,setUsername,cpf,setCpf,password,setPassword,passwordRepeat,setPasswordRepeat,email,setEmail,result,salvarAluno} = useContext(AlunoContext);
 
     async function cadastro(e){
         e.preventDefault();
 
         if (password === passwordRepeat){
-            alert("Cadastro realizado com sucesso, confirme seu e-mail para acessar a plataforma");
-            salvarAluno(email,password,username);
-            window.location.href = "/signin";
+            salvarAluno(email,password,username,cpf);
+
+            if(result.status===400){
+                alert("Usuário já Cadastrado =(");
+            }else{
+                if(result.id !== undefined) {
+                    alert("Cadastro realizado com sucesso =)");
+                    window.location.href = "/signin";
+                }else{
+                    alert("Erro Interno, favor entrar em contato com a EasyLearn");
+                }
+            }
         }else{
             alert("Senha Incorreta");
         }
@@ -30,6 +39,10 @@ const Cadastro = () => {
                             <div className="group">
                                 <label htmlFor="user" className="label">Nome</label>
                                 <input  type="text" className="input" onChange={e=>setUsername(e.target.value)}/>
+                            </div>
+                            <div className="group">
+                                <label htmlFor="pass" className="label">Cpf</label>
+                                <input  type="text" className="input" onChange={e=>setCpf(e.target.value)}/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Senha</label>
