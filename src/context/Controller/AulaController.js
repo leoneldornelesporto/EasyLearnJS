@@ -7,7 +7,7 @@ const api = create({
 })
 
 export async function getAulaByUuidCursoAndIdAula(uuid,id,authorization) {
-    return (await api.get('v1/protectedX/modulo/curso/'+uuid+'/aula/'+id,null,{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo/curso/'+uuid+'/aula/'+id,null,{headers:{Authorization:authorization}})).data;
 }
 
 export async function returnAllAulas(authorization) {

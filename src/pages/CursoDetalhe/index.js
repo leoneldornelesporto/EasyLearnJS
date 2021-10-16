@@ -15,6 +15,8 @@ const CursoDetalhe = () => {
     const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
 
 
+    Cookies.set("UuidCurso",id);
+
     try {
         if(aluno==='' && cursos===null && matriculas===null){
             signInV1(Cookies.get("email"),Cookies.get("pass"));
@@ -33,8 +35,6 @@ const CursoDetalhe = () => {
     catch (e) {
         console.log("aqui")
     }
-
-    console.log(matriculas===null)
 
     let cont =0;
 

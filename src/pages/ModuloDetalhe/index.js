@@ -24,7 +24,9 @@ const ModuloDetalhe = () => {
         retornarModuloPeloId(id,getAuthorization());
     }
 
-    console.log(Cookies.get('idUser'))
+
+    console.log(Cookies.get('UuidCurso'))
+    console.log(modulo)
 
     function verificarSeEstouMatriculado(){
         if(Cookies.get('matricula')==='true'){

@@ -7,11 +7,11 @@ const api = create({
 })
 
 export async function findModuloById(idModulo,authorization) {
-    return (await api.get('v1/protectedX/modulo/'+idModulo,'authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo/'+idModulo,'authorization',{headers:{Authorization:authorization}})).data;
 }
 
 export async function findAllModulos(authorization) {
-    return (await api.get('v1/protectedX/modulo','authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo','authorization',{headers:{Authorization:authorization}})).data;
 }
 
 export async function saveModulo(indice,titulo,idCurso,idAula,subtitulo,authorization) {
