@@ -11,9 +11,11 @@ const CursosMatriculados = () => {
     const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
 
     if(matriculas===null){
-        signInV1(Cookies.get("email"), Cookies.get("senha"));
+        signInV1(Cookies.get("email"), Cookies.get("pass"));
         verificarSeEstouMatriculadoEmAlgumCursoById(aluno.id, getAuthorization());
     }
+
+    console.log(matriculas)
 
     function cursosMatriculados(){
         try{
@@ -56,7 +58,7 @@ const CursosMatriculados = () => {
     }
 
     if(matriculas===null){
-        signInV1(Cookies.get("email"), Cookies.get("senha"));
+        signInV1(Cookies.get("email"), Cookies.get("pass"));
         verificarSePauseiAlgumCursoMatricula(aluno.id, getAuthorization());
     }
 
