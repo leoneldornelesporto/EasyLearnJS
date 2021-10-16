@@ -28,8 +28,6 @@ export const AuthUserProvider = ({children}) => {
     };
 
     const signIn = async (email, pass, checked) => {
-        alert(email);
-        alert(pass);
         try {
             const response = await login(email,pass);
             console.log(response)

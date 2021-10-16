@@ -42,7 +42,7 @@ const Cadastro = () => {
                             </div>
                             <div className="group">
                                 <label htmlFor="pass" className="label">Cpf</label>
-                                <input  type="text" className="input" onChange={e=>setCpf(e.target.value)}/>
+                                <input  type="number" placeholder="000111222333" className="input" onChange={e=>setCpf(e.target.value)}/>
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Senha</label>

@@ -17,7 +17,7 @@ const CursoDetalhe = () => {
 
     try {
         if(aluno==='' && cursos===null && matriculas===null){
-            signInV1(Cookies.get("email"),Cookies.get("senha"));
+            signInV1(Cookies.get("email"),Cookies.get("pass"));
             retornarCursosPorUuid(id);
             verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization());
         }
