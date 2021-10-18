@@ -8,14 +8,12 @@ import {MatriculaContext} from "../../context/MatriculaContext";
 const AulaDetalhe = () => {
 
     const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
-    const {retornaAulasAssistida,registraAulaAssistida,resposta} = useContext(MatriculaContext);
-    const [resp,setResp] = useState(null);
+    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado} = useContext(MatriculaContext);
 
     const { id } = useParams();
 
     //retornaAulasAssistida(Cookies.get('idUser'),id);
-    //registraAulaAssistida(Cookies.get('idUser'),id);
-
+    //console.log(registraAulaAssistida(Cookies.get('idUser'),id));
 
     useEffect(()=>{
         retornarModuloPorUuidCursoEIdDaAula(Cookies.get('UuidCurso'),id,getAuthorization());
@@ -30,6 +28,35 @@ const AulaDetalhe = () => {
     },[])
 
     verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
+
+    try {
+        retornaDadosDoCursoMatriculado(Cookies.get('idUser'), cursos.uuid);
+    }
+    catch (e) {
+
+    }
+    
+    function verificarSeVisualizouIcon(id) {
+        retornaAulasAssistida(Cookies.get('idUser'),id);
+
+        if (resposta===false){
+            return(
+                <svg className="task-menu-nav-item-svg"
+                     aria-label="Atividade de Vídeo concluída">
+                    <path d="M0 1v22h24v-22h-24zm4 20h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm14 12h-12v-10h12v10zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm-12 10v-6l5 3-5 3z"/>
+                </svg>
+            )
+        }
+
+        if (resposta===true){
+            return(
+                <svg className="task-menu-nav-item-svg task-menu-nav-item-svg--done"
+                     aria-label="Atividade de Vídeo concluída">
+                    <path d="M0 1v22h24v-22h-24zm4 20h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm14 12h-12v-10h12v10zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm-12 10v-6l5 3-5 3z"/>
+                </svg>
+            )
+        }
+    }
 
     function clicouProximo() {
         //alert("clicou");
@@ -85,7 +112,14 @@ const AulaDetalhe = () => {
                                         </form>
                                     </div>
                                     :
-                                    <div></div>
+                                    cursoMatriculado.cursoConcluido === true?
+                                        <div className="task-body-header-actions">
+                                            <a href={"/certificado=" + cursos.uuid} aria-hidden="true"
+                                               className="task-actions-button task-body-actions-button task-actions-button-next bootcamp-next-button bootcamp-primary-button-theme"
+                                            >Concluir Curso</a>
+                                        </div>
+                                        :
+                                        <></>
                             }
                             <div className="theater-video settings">
                                 <button type="button" className="settings-button" aria-label="Configurações">
@@ -175,10 +209,7 @@ const AulaDetalhe = () => {
                                             <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
                                                 <a href={"/aula_detalhe=" + value.id}
                                                    className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
-                                                    <svg className={index===0 || index===2?"task-menu-nav-item-svg task-menu-nav-item-svg--done":"task-menu-nav-item-svg"}
-                                                         aria-label="Atividade de Vídeo concluída">
-                                                            <path d="M0 1v22h24v-22h-24zm4 20h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm14 12h-12v-10h12v10zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2zm-12 10v-6l5 3-5 3z"/>
-                                                    </svg>
+                                                    {verificarSeVisualizouIcon(modulo.aulaDto[index].id)}
                                                     <span className="task-menu-nav-item-number">0{++index}</span>
                                                     <span className="task-menu-nav-item-text">
                                                   <span className="task-menu-nav-item-title" title="Introdução">

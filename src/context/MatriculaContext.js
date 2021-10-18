@@ -3,7 +3,7 @@ import {
     assistirAulaSave,
     assistiuAula,
     findAllMatriculas,
-    saveMatricula,
+    saveMatricula, verificaPorcentagemDoCurso,
     verificarSeEstouMatriculadoEmAlgumCursoPorId,
     verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos,
     verificarSeEstouMatriculadoEmAlgumCursoPorUuid,
@@ -18,6 +18,7 @@ export const MatriculaProvider = ({children}) => {
     const [matriculas, setMatriculas] = useState(null);
     const [cursosPausados,setCursosPausados] = useState(null);
     const [resposta,setResposta] = useState(false);
+    const [cursoMatriculado,setCursoMatriculado] = useState(false);
     const [errorMessage, setErrorMessage] = useState({});
 
     const retornarTodasMatriculas = async (authorization) => {
@@ -108,6 +109,17 @@ export const MatriculaProvider = ({children}) => {
         }
     };
 
+    const retornaDadosDoCursoMatriculado = async (idAluno,uuid) => {
+        try {
+            const response = await verificaPorcentagemDoCurso(idAluno,uuid,getAuthorization());
+            setCursoMatriculado(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     return (
         <MatriculaContext.Provider
             value={{
@@ -117,6 +129,7 @@ export const MatriculaProvider = ({children}) => {
                 setCursosPausados,
                 resposta,
                 setResposta,
+                cursoMatriculado,
                 errorMessage,
                 setErrorMessage,
                 retornarTodasMatriculas,
@@ -127,6 +140,7 @@ export const MatriculaProvider = ({children}) => {
                 verificarSePauseiAlgumCursoMatricula,
                 retornaAulasAssistida,
                 registraAulaAssistida,
+                retornaDadosDoCursoMatriculado,
             }}>
             {children}
         </MatriculaContext.Provider>

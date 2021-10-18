@@ -22,6 +22,10 @@ export async function verificarSeEstouMatriculadoEmAlgumCursoPorUuid(idAluno,uui
     return (await api.get('v1/protectedA/matricula/verificaByUuid/'+idAluno+'/'+uuid,'',{headers:{Authorization:authorization}})).data;
 }
 
+export async function verificaPorcentagemDoCurso(idAluno,uuid,authorization) {
+    return (await api.get('v1/protectedA/matricula/verificaById/porcentagem/aluno/'+idAluno+'/curso/'+uuid,'',{headers:{Authorization:authorization}})).data;
+}
+
 export async function verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos(idAluno,authorization) {
     return (await api.get('v1/protectedA/matricula/verificaById/cursosConcluidos/'+idAluno,'',{headers:{Authorization:authorization}})).data;
 }
