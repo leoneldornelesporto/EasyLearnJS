@@ -26,6 +26,7 @@ import CadastrarAula from "./pages/CadastrarAulas";
 import CadastrarModulo from "./pages/CadastrarModulo";
 import ConfirmarEmail from "./pages/ConfirmarEmail";
 import RedefinirSenha from "./pages/RedefinirSenha";
+import GeraCertificado from "./pages/GeraCertificado";
 
 export default () => {
     return(
@@ -104,6 +105,9 @@ export default () => {
             </Route>
             <Route path="/resetPassword=:id&email=:email">
                 <RedefinirSenha/>
+            </Route>
+            <Route path="/certificado=:uuid">
+                <GeraCertificado/>
             </Route>
             <Route path="/">
                 <Principal/>

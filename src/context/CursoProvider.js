@@ -19,7 +19,7 @@ export const CursoProvider = ({children}) => {
     const [errorMessage, setErrorMessage] = useState({});
     const [modulo, setModulo] = useState('');
     const [aula, setAula] = useState([]);
-    const [verifica, setVerifica] = useState('');
+    const [verifica, setVerifica] = useState(null);
 
     const retornarTodosOsCursos = async () => {
         try {

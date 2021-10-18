@@ -26,6 +26,11 @@ export async function verificaPorcentagemDoCurso(idAluno,uuid,authorization) {
     return (await api.get('v1/protectedA/matricula/verificaById/porcentagem/aluno/'+idAluno+'/curso/'+uuid,'',{headers:{Authorization:authorization}})).data;
 }
 
+export async function verifcaSeConcluiCurso(idAluno,uuid,authorization) {
+    return (await api.get('v1/protectedA/matricula/verificaById/cursoConcluido/'+idAluno+'/'+uuid,'',{headers:{Authorization:authorization}})).data;
+}
+
+
 export async function verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos(idAluno,authorization) {
     return (await api.get('v1/protectedA/matricula/verificaById/cursosConcluidos/'+idAluno,'',{headers:{Authorization:authorization}})).data;
 }
@@ -38,6 +43,6 @@ export async function assistiuAula(idAluno,idAula,authorization) {
     return (await api.get('v1/protectedA/matricula/assistirAula/'+idAluno+'/'+idAula,'',{headers:{Authorization:authorization}})).data;
 }
 
-export async function assistirAulaSave(idAluno,idAula,authorization) {
-    return (await api.post('v1/protectedA/matricula/assistirAulaSave/'+idAluno+'/'+idAula,'',{headers:{Authorization:authorization}})).data;
+export async function assistirAulaSave(idAluno,uuidCurso,idAula,authorization) {
+    return (await api.post('v1/protectedA/matricula/assistirAulaSave/'+idAluno+'/'+uuidCurso+'/'+idAula,'',{headers:{Authorization:authorization}})).data;
 }

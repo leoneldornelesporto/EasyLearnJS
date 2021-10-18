@@ -25,3 +25,11 @@ export async function editarAula(id,indice,titulo,urlVideo,transcricao,authoriza
 export async function deletarAula(id,authorization) {
     return (await api.delete('v1/protectedP/aulas/'+id,null,{headers:{Authorization:authorization}})).data;
 }
+
+export async function assistirAula(idAluno,idAlua,authorization) {
+    return (await api.get('v1/protectedA/matricula/assistirAula/'+idAluno+'/'+idAlua,null,{headers:{Authorization:authorization}})).data;
+}
+
+export async function registrarAssistiAula(idAluno,idAlua,authorization) {
+    return (await api.post('v1/protectedA/matricula/assistirAulaSave/'+idAluno+'/'+idAlua,null,{headers:{Authorization:authorization}})).data;
+}

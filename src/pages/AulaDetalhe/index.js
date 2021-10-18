@@ -8,7 +8,7 @@ import {MatriculaContext} from "../../context/MatriculaContext";
 const AulaDetalhe = () => {
 
     const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
-    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado} = useContext(MatriculaContext);
+    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,setPorcentagemCurso} = useContext(MatriculaContext);
 
     const { id } = useParams();
 
@@ -27,14 +27,30 @@ const AulaDetalhe = () => {
         retornarAulaPorUuidCursoEIdAula(Cookies.get('UuidCurso'),id,getAuthorization());
     },[])
 
-    verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
-
-    try {
-        retornaDadosDoCursoMatriculado(Cookies.get('idUser'), cursos.uuid);
+    try{
+        if (verifica===null){
+            verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
+            verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
+        }
     }
     catch (e) {
-
+        console.log(e)
     }
+
+    try {
+        if(porcentagemCurso===null){
+            retornaDadosDoCursoMatriculado(Cookies.get('idUser'),Cookies.get('UuidCurso'));
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+
+    console.log(porcentagemCurso)
+
+    const divStyle = {
+        backgroundImage: porcentagemCurso===null?'linear-gradient(to right, #9de482, #9de482 0%, transparent 0%)':'linear-gradient(to right, #9de482, #9de482 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
+    };
     
     function verificarSeVisualizouIcon(id) {
         retornaAulasAssistida(Cookies.get('idUser'),id);
@@ -112,9 +128,9 @@ const AulaDetalhe = () => {
                                         </form>
                                     </div>
                                     :
-                                    cursoMatriculado.cursoConcluido === true?
+                                    cursoMatriculado === true?
                                         <div className="task-body-header-actions">
-                                            <a href={"/certificado=" + cursos.uuid} aria-hidden="true"
+                                            <a href={"/certificado=" + cursos.uuid} target="_blank" aria-hidden="true"
                                                className="task-actions-button task-body-actions-button task-actions-button-next bootcamp-next-button bootcamp-primary-button-theme"
                                             >Concluir Curso</a>
                                         </div>
@@ -163,10 +179,11 @@ const AulaDetalhe = () => {
                                     <h2 className="task-menu-header-info-title-text">{cursos.nome}
                                     </h2>
                                 </a>
-                                <div className="task-menu-header-info-progress">
-                                    <span className="task-menu-header-info-progress-percentage ">50%</span>
-                                    <span className="task-menu-header-info-progress-bar porcentagem-curso"></span>
-                                </div>
+
+                                <span className="task-menu-header-info-progress-percentage ">{porcentagemCurso===null?0:porcentagemCurso}%</span>
+                                <span className="task-menu-header-info-progress-bar"
+                                      style={divStyle}></span>
+
                             </div>
                         </section>
                         <section className="task-menu-section sr-only">

@@ -133,6 +133,18 @@ export const AulaProvider = ({children}) => {
         }
     };
 
+    const visualizarAula = async (id) => {
+        try {
+            const response = await deletarAula(id,getAuthorization());
+            setAula(response);
+            console.log(aula)
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     return (
         <AulaContext.Provider
             value={{
