@@ -295,7 +295,7 @@ const CursoDetalhe = () => {
                                                 return (
                                                     <li className="courseSection-listItem">
                                                         <div className="courseSection-listItem__wrapper">
-                                                            <a href={"/modulo_detalhe="+value.id}
+                                                            <a href={"/aula_detalhe="+value.aulaDto[0].id}
                                                                className="courseSectionList-section">
                                                                 <div className="courseSectionList-sectionTitle bootcamp-text-color">
                                                                     {value.titulo}
