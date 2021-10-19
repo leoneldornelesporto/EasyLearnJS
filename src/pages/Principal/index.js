@@ -22,7 +22,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-programacao">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts" >
                                                     <span className="categories__link__text">Escola</span><h4
@@ -30,37 +30,37 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/logica"
+                                            <a href="#"
                                                className="categories__calls__description--home">Lógica</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/python"
+                                            <a href="#"
                                                className="categories__calls__description--home">Python</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/php"
+                                            <a href="#"
                                                className="categories__calls__description--home">PHP</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/java"
+                                            <a href="#"
                                                className="categories__calls__description--home">Java</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/dotnet"
+                                            <a href="#"
                                                className="categories__calls__description--home">.NET</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/node-js"
+                                            <a href="#"
                                                className="categories__calls__description--home">Node JS</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/linguagem-c"
+                                            <a href="#"
                                                className="categories__calls__description--home">C</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/computacao"
+                                            <a href="#"
                                                className="categories__calls__description--home">Computação</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/jogos"
+                                            <a href="#"
                                                className="categories__calls__description--home">Jogos</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao/internet-das-coisas"
+                                            <a href="#"
                                                className="categories__calls__description--home">IoT</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-programacao"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                     <div className="categories__wrapper__links--home --front-end">
@@ -75,7 +75,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-front-end">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts" >
                                                     <span className="categories__link__text">Escola</span><h4
@@ -83,22 +83,22 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-front-end/front-end"
+                                            <a href="#"
                                                className="categories__calls__description--home">HTML, CSS</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-front-end/reactjs"
+                                            <a href="#"
                                                className="categories__calls__description--home">React</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-front-end/angular"
+                                            <a href="#"
                                                className="categories__calls__description--home">Angular</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-front-end/javascript"
+                                            <a href="#"
                                                className="categories__calls__description--home">JavaScript</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-front-end/jquery"
+                                            <a href="#"
                                                className="categories__calls__description--home">jQuery</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-front-end"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                     <div className="categories__wrapper__links--home --data-science"
@@ -114,7 +114,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-data-science">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts" >
                                                     <span className="categories__link__text">Escola</span><h4
@@ -122,30 +122,30 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/data-science"
+                                            <a href="#"
                                                className="categories__calls__description--home">Ciência de
                                                 dados</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/business-intelligence"
+                                            <a href="#"
                                                className="categories__calls__description--home">BI</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/sql"
+                                            <a href="#"
                                                className="categories__calls__description--home">SQL e Banco de Dados</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/excel"
+                                            <a href="#"
                                                className="categories__calls__description--home">Excel</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/machine-learning"
+                                            <a href="#"
                                                className="categories__calls__description--home">Machine
                                                 Learning</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/nosql"
+                                            <a href="#"
                                                className="categories__calls__description--home">NoSQL</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science/estatistica"
+                                            <a href="#"
                                                className="categories__calls__description--home">Estatística</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-data-science"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                     <div className="categories__wrapper__links--home --devops"
@@ -161,7 +161,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-devops">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts">
                                                     <span className="categories__link__text">Escola</span><h4
@@ -169,25 +169,25 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-devops/aws"
+                                            <a href="#"
                                                className="categories__calls__description--home">AWS</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-devops/azure"
+                                            <a href="#"
                                                className="categories__calls__description--home">Azure</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-devops/containers"
+                                            <a href="#"
                                                className="categories__calls__description--home">Docker</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-devops/seguranca"
+                                            <a href="#"
                                                className="categories__calls__description--home">Segurança</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-devops/infraestrutura-como-codigo"
+                                            <a href="#"
                                                className="categories__calls__description--home">IaC</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-devops/linux-comandos-e-processos"
+                                            <a href="#"
                                                className="categories__calls__description--home">Linux</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-devops"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                     <div className="categories__wrapper__links--home --design-ux"
@@ -203,7 +203,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-design-ux">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts" >
                                                     <span className="categories__link__text">Escola</span><h4
@@ -212,21 +212,21 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-design-ux/wwww"
+                                            <a href="#"
                                                className="categories__calls__description--home">Photoshop e
                                                 Illustrator</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-design-ux/ux"
+                                            <a href="#"
                                                className="categories__calls__description--home">Usabilidade e
                                                 UX</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-design-ux/video"
+                                            <a href="#"
                                                className="categories__calls__description--home">Vídeo e Motion</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-design-ux/3d"
+                                            <a href="#"
                                                className="categories__calls__description--home">3D</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-design-ux"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                     <div className="categories__wrapper__links--home --mobile"
@@ -242,7 +242,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-mobile">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts">
                                                     <span className="categories__link__text">Escola</span><h4
@@ -250,22 +250,22 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-mobile/react-native"
+                                            <a href="#"
                                                className="categories__calls__description--home">React Native</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-mobile/flutter"
+                                            <a href="#"
                                                className="categories__calls__description--home">Flutter</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-mobile/ios"
+                                            <a href="#"
                                                className="categories__calls__description--home">iOS e Swift</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-mobile/android"
+                                            <a href="#"
                                                className="categories__calls__description--home">Android, Kotlin</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-mobile/jogos"
+                                            <a href="#"
                                                className="categories__calls__description--home">Jogos</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-mobile"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                     <div className="categories__wrapper__links--home --inovacao-gestao"
@@ -281,7 +281,7 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <a className="categories__link--home"
-                                           href="https://www.alura.com.br/cursos-online-inovacao-gestao">
+                                           href="#">
                                             <div className="categories__link-wrapper--home">
                                                 <div className="categories__texts" >
                                                     <span className="categories__link__text">Escola</span><h4
@@ -290,23 +290,23 @@ const Principal = () => {
                                             </div>
                                         </a>
                                         <nav className="categories__calls--home">
-                                            <a href="https://www.alura.com.br/cursos-online-inovacao-gestao/agilidade"
+                                            <a href="#"
                                                className="categories__calls__description--home">Métodos Ágeis</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-inovacao-gestao/softskills-carreira"
+                                            <a href="#"
                                                className="categories__calls__description--home">Softskills</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-inovacao-gestao/gestao-corporativa"
+                                            <a href="#"
                                                className="categories__calls__description--home">Liderança e
                                                 Gestão</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-inovacao-gestao/startup-empreendedorismo"
+                                            <a href="#"
                                                className="categories__calls__description--home">Startups</a><span
                                             className="categories__calls__description-separator">, </span>
-                                            <a href="https://www.alura.com.br/cursos-online-inovacao-gestao/vendas"
+                                            <a href="#"
                                                className="categories__calls__description--home">Vendas</a><span
                                             className="categories__calls__description-separator"></span>
-                                            <a href="https://www.alura.com.br/cursos-online-inovacao-gestao"
+                                            <a href="#"
                                                className="categories__calls__link-see-more--home">e mais...</a></nav>
                                     </div>
                                 </div>
@@ -319,7 +319,7 @@ const Principal = () => {
                         <div className="features__video-wrapper">
                             <div className="home-diferenciais-video">
                                 <div className="home-diferenciais-video-wrapper">
-                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/oTrG2XnG5yk"
+                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/Dw4wpiyPCUM"
                                             title="YouTube video player" frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowFullScreen=""></iframe>
