@@ -31,11 +31,11 @@ const Header = () => {
     }
 
     function imagemAvatar() {
-            if(aluno.avatar!=='null') {
+            if(aluno.avatar!==null) {
                 return (
                         <img
                             src={aluno.avatar}
-                            alt="Foto de Leonel Dorneles Porto"
+                            alt={"Foto de "+aluno.nomeCompleto}
                             className="headline-profile-avatar headline-profile-avatar"/>
                 )
             }

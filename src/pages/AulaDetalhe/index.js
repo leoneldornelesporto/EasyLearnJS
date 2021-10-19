@@ -9,7 +9,7 @@ const AulaDetalhe = () => {
 
     const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
     const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,setPorcentagemCurso,assistiu} = useContext(MatriculaContext);
-
+    const [clicou, setClicou] = useState(true);
     const { id } = useParams();
 
     //retornaAulasAssistida(Cookies.get('idUser'),id);
@@ -38,19 +38,25 @@ const AulaDetalhe = () => {
         console.log(e)
     }
 
-    try {
-        if(porcentagemCurso===null){
-            retornaDadosDoCursoMatriculado(Cookies.get('idUser'),Cookies.get('UuidCurso'));
+    useEffect(()=>{
+        try {
+            if(porcentagemCurso===null){
+                if(Cookies.get('matricula')==='true') {
+                    retornaDadosDoCursoMatriculado(Cookies.get('idUser'),Cookies.get('UuidCurso'));
+                }
+            }
         }
-    }
-    catch (e) {
-        console.log(e)
-    }
+        catch (e) {
+            console.log(e)
+        }
+    },[])
+
+
 
     const divStyle = {
         backgroundImage: porcentagemCurso===null?'linear-gradient(to right, #9de482, #9de482 0%, transparent 0%)':'linear-gradient(to right, #9de482, #9de482 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
     };
-    
+
     function verificarSeVisualizouIcon(id) {
         retornaAulasAssistida(Cookies.get('idUser'),id);
 
@@ -73,13 +79,26 @@ const AulaDetalhe = () => {
         }
     }
 
-    function clicouProximo() {
-        if(Cookies.get('matricula')==='true') {
-            if(porcentagemCurso<=100){
-                registraAulaAssistida(Cookies.get('idUser'), Cookies.get('UuidCurso'), id);
+    useEffect(()=>{
+        try {
+            if(porcentagemCurso===null){
+                if(Cookies.get('matricula')==='true') {
+                    retornaDadosDoCursoMatriculado(Cookies.get('idUser'),Cookies.get('UuidCurso'));
+                }
             }
         }
-    }
+        catch (e) {
+            console.log(e)
+        }
+    },[])
+
+    useEffect(()=>{
+            if (Cookies.get('matricula') === 'true') {
+                if (porcentagemCurso <= 100) {
+                    registraAulaAssistida(Cookies.get('idUser'), Cookies.get('UuidCurso'), id);
+                }
+            }
+    },[])
 
     function verificarSeEstouMatriculado(){
         if(Cookies.get('matricula')==='true'){
@@ -124,11 +143,10 @@ const AulaDetalhe = () => {
                             {
                                 verifica !== false ?
                                     <div className="task-body-header-actions">
-                                        <form onChange={clicouProximo()}>
+
                                         <a href={"/aula_detalhe=" + verifica} aria-hidden="true"
                                            className="task-actions-button task-actions-button-next task-submit bootcamp-primary-button-theme"
                                         >Próxima Atividade</a>
-                                        </form>
                                     </div>
                                     :
                                     cursoMatriculado === true?

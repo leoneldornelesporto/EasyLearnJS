@@ -79,6 +79,7 @@ export const CursoProvider = ({children}) => {
     const retornarModuloPorUuidCursoEIdDaAula = async (uuid,id,authorization) => {
         try {
             const response = await findModuloByUuidCursoAndIdAula(uuid,id,authorization);
+            console.log(modulo)
             setModulo(response);
         } catch (response) {
             setErrorMessage(response);
