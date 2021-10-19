@@ -8,12 +8,13 @@ import {MatriculaContext} from "../../context/MatriculaContext";
 const AulaDetalhe = () => {
 
     const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
-    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,setPorcentagemCurso} = useContext(MatriculaContext);
+    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,setPorcentagemCurso,assistiu} = useContext(MatriculaContext);
 
     const { id } = useParams();
 
     //retornaAulasAssistida(Cookies.get('idUser'),id);
     //console.log(registraAulaAssistida(Cookies.get('idUser'),id));
+    //registraAulaAssistida(idAluno,uuidCurso,idAula)
 
     useEffect(()=>{
         retornarModuloPorUuidCursoEIdDaAula(Cookies.get('UuidCurso'),id,getAuthorization());
@@ -46,8 +47,6 @@ const AulaDetalhe = () => {
         console.log(e)
     }
 
-    console.log(porcentagemCurso)
-
     const divStyle = {
         backgroundImage: porcentagemCurso===null?'linear-gradient(to right, #9de482, #9de482 0%, transparent 0%)':'linear-gradient(to right, #9de482, #9de482 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
     };
@@ -75,7 +74,11 @@ const AulaDetalhe = () => {
     }
 
     function clicouProximo() {
-        //alert("clicou");
+        if(Cookies.get('matricula')==='true') {
+            if(porcentagemCurso<=100){
+                registraAulaAssistida(Cookies.get('idUser'), Cookies.get('UuidCurso'), id);
+            }
+        }
     }
 
     function verificarSeEstouMatriculado(){

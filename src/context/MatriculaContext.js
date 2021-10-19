@@ -18,6 +18,7 @@ export const MatriculaProvider = ({children}) => {
     const [matriculas, setMatriculas] = useState(null);
     const [cursosPausados,setCursosPausados] = useState(null);
     const [resposta,setResposta] = useState(false);
+    const [assistiu,setAssistiu] = useState(null);
     const [porcentagemCurso,setPorcentagemCurso] = useState(null);
     const [cursoMatriculado,setCursoMatriculado] = useState(false);
     const [errorMessage, setErrorMessage] = useState({});
@@ -91,7 +92,7 @@ export const MatriculaProvider = ({children}) => {
     const retornaAulasAssistida = async (idAluno,idAula) => {
         try {
             const response = await assistiuAula(idAluno,idAula,getAuthorization());
-            setResposta(response);
+            setAssistiu(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -99,9 +100,9 @@ export const MatriculaProvider = ({children}) => {
         }
     };
 
-    const registraAulaAssistida = async (idAluno,idAula) => {
+    const registraAulaAssistida = async (idAluno,uuidCurso,idAula) => {
         try {
-            const response = await assistirAulaSave(idAluno,idAula,getAuthorization());
+            const response = await assistirAulaSave(idAluno,uuidCurso,idAula,getAuthorization());
             setResposta(response);
         } catch (response) {
             setErrorMessage(response);
@@ -144,6 +145,7 @@ export const MatriculaProvider = ({children}) => {
                 cursoMatriculado,
                 setPorcentagemCurso,
                 porcentagemCurso,
+                assistiu,
                 errorMessage,
                 setErrorMessage,
                 retornarTodasMatriculas,
