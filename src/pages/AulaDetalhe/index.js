@@ -8,8 +8,7 @@ import {MatriculaContext} from "../../context/MatriculaContext";
 const AulaDetalhe = () => {
 
     const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
-    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,setPorcentagemCurso,assistiu} = useContext(MatriculaContext);
-    const [clicou, setClicou] = useState(true);
+    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso} = useContext(MatriculaContext);
     const { id } = useParams();
 
     //retornaAulasAssistida(Cookies.get('idUser'),id);
@@ -29,6 +28,7 @@ const AulaDetalhe = () => {
     },[])
 
     try{
+        verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
         if (verifica===null){
             verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
             verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
@@ -37,6 +37,8 @@ const AulaDetalhe = () => {
     catch (e) {
         console.log(e)
     }
+
+    console.log(cursoMatriculado)
 
     useEffect(()=>{
         try {
@@ -50,8 +52,6 @@ const AulaDetalhe = () => {
             console.log(e)
         }
     },[])
-
-
 
     const divStyle = {
         backgroundImage: porcentagemCurso===null?'linear-gradient(to right, #9de482, #9de482 0%, transparent 0%)':'linear-gradient(to right, #9de482, #9de482 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
@@ -96,6 +96,7 @@ const AulaDetalhe = () => {
             if (Cookies.get('matricula') === 'true') {
                 if (porcentagemCurso <= 100) {
                     registraAulaAssistida(Cookies.get('idUser'), Cookies.get('UuidCurso'), id);
+                    concluirCurso(Cookies.get('idUser'), Cookies.get('UuidCurso'));
                 }
             }
     },[])

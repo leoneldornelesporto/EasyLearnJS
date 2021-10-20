@@ -46,3 +46,7 @@ export async function assistiuAula(idAluno,idAula,authorization) {
 export async function assistirAulaSave(idAluno,uuidCurso,idAula,authorization) {
     return (await api.post('v1/protectedA/matricula/assistirAulaSave/'+idAluno+'/'+uuidCurso+'/'+idAula,'',{headers:{Authorization:authorization}})).data;
 }
+
+export async function concluirCursoByUuid(idAluno,uuidCurso,authorization) {
+    return (await api.put('v1/protectedA/matricula/concluirCursoByUuid/'+idAluno+'/'+uuidCurso,'',{headers:{Authorization:authorization}})).data;
+}

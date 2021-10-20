@@ -82,9 +82,9 @@ export const CursoProvider = ({children}) => {
             console.log(modulo)
             setModulo(response);
         } catch (response) {
+            setModulo({})
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
-            console.log(response);
         }
     };
 

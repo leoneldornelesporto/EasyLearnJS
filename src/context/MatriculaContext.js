@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {
     assistirAulaSave,
-    assistiuAula,
+    assistiuAula, concluirCursoByUuid,
     findAllMatriculas,
     saveMatricula, verifcaSeConcluiCurso, verificaPorcentagemDoCurso,
     verificarSeEstouMatriculadoEmAlgumCursoPorId,
@@ -20,6 +20,7 @@ export const MatriculaProvider = ({children}) => {
     const [resposta,setResposta] = useState(false);
     const [assistiu,setAssistiu] = useState(null);
     const [porcentagemCurso,setPorcentagemCurso] = useState(null);
+    const [concluiuCurso,setConcluiuCurso] = useState(null);
     const [cursoMatriculado,setCursoMatriculado] = useState(false);
     const [errorMessage, setErrorMessage] = useState({});
 
@@ -114,7 +115,9 @@ export const MatriculaProvider = ({children}) => {
     const retornaDadosDoCursoMatriculado = async (idAluno,uuid) => {
         try {
             const response = await verificaPorcentagemDoCurso(idAluno,uuid,getAuthorization());
-            setPorcentagemCurso(response);
+            if(response.status!==500){
+                setPorcentagemCurso(response);
+            }
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -126,6 +129,19 @@ export const MatriculaProvider = ({children}) => {
         try {
             const response = await verifcaSeConcluiCurso(idAluno,uuid,getAuthorization());
             setCursoMatriculado(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const concluirCurso = async (idAluno,uuid) => {
+        try {
+            const response = await concluirCursoByUuid(idAluno,uuid,getAuthorization());
+            setConcluiuCurso(response);
+            console.log(idAluno);
+            console.log(uuid);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -146,6 +162,7 @@ export const MatriculaProvider = ({children}) => {
                 setPorcentagemCurso,
                 porcentagemCurso,
                 assistiu,
+                concluiuCurso,
                 errorMessage,
                 setErrorMessage,
                 retornarTodasMatriculas,
@@ -158,6 +175,7 @@ export const MatriculaProvider = ({children}) => {
                 registraAulaAssistida,
                 retornaDadosDoCursoMatriculado,
                 verificaConcluiAlgumCurso,
+                concluirCurso,
             }}>
             {children}
         </MatriculaContext.Provider>
