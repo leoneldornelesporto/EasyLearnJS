@@ -71,6 +71,24 @@ const CursoDetalhe = () => {
         }
     }
 
+    function imagemAvatar() {
+        if(cursos.avatar!==null) {
+            return (
+                <img className="instructors-item-img"
+                     src={cursos.avatar}
+                     alt={cursos.nomeProfessor}/>
+            )
+        }
+        else{
+            return (
+                <img
+                    src="https://suap.ifsul.edu.br/static/comum/img/default.jpg"
+                    alt={cursos.nomeProfessor}
+                    className="headline-profile-avatar headline-profile-avatar"/>
+            )
+        }
+    }
+
     function body(){
 
         if(isLogged()){
@@ -229,9 +247,7 @@ const CursoDetalhe = () => {
                                             <li className="instructors-list-item">
                                                 <div className="instructors-item-photo">
                                                     <a href="/user/RicardoBugan" className="instructor-item-link">
-                                                        <img className="instructors-item-img"
-                                                             src={cursos.avatar}
-                                                             alt="instructor Ricardo Bugan Debs"/>
+                                                        {imagemAvatar()}
                                                     </a>
                                                 </div>
                                                 <div className="instructor-details">

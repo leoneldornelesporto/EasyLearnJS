@@ -7,7 +7,7 @@ const api = create({
 })
 
 export async function postAluno(email, pass, username, cpf) {
-    return (await api.post('/v1/salvar/aluno',{nomeCompleto:username,senha:pass,email:email, cpf:cpf})).data;
+    return (await api.post('/v1/salvar/aluno',{nomeCompleto:username,nomeNosCertificados:username, senha:pass,email:email, cpf:cpf})).data;
 }
 
 export async function putAluno(id,authorization,avatar,nomeCompleto,nomeNosCertificados,usuarioNaUrl,cpf,biografia,dataDeNascimento,ocupacao,linkedin,twitter,github,linkPersonalizado,empresa,cargo,instituicao,curso,privacidadeDoPerfil) {
