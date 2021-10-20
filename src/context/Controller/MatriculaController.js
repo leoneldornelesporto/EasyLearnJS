@@ -50,3 +50,7 @@ export async function assistirAulaSave(idAluno,uuidCurso,idAula,authorization) {
 export async function concluirCursoByUuid(idAluno,uuidCurso,authorization) {
     return (await api.put('v1/protectedA/matricula/concluirCursoByUuid/'+idAluno+'/'+uuidCurso,'',{headers:{Authorization:authorization}})).data;
 }
+
+export async function findAllAlunosMatriculadosEmUmCurso(uuidCurso,authorization) {
+    return (await api.get('v1/protectedA/matricula/quantidadeDePessoasMatriculasEmUmCurso/'+uuidCurso,'',{headers:{Authorization:authorization}})).data;
+}

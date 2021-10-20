@@ -10,12 +10,13 @@ import {MatriculaContext} from "../../context/MatriculaContext";
 const CursoDetalhe = () => {
 
     const { id } = useParams();
-    const {aluno,signIn,signInV1} = useContext(AuthUserContext);
+    const {aluno,signInV1} = useContext(AuthUserContext);
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
-    const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
+    const {matriculas,salvarMatricula,verificarMatriculaPorId,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
 
 
     Cookies.set("UuidCurso",id);
+    console.log(qtdAlunosMatriculados)
 
     try {
         if(aluno==='' && cursos===null && matriculas===null){
@@ -48,6 +49,7 @@ const CursoDetalhe = () => {
 
     useEffect(()=>{
         retornarCursosPorUuid(id);
+        findAllAlunosMatriculadosEmalgumCurso(id)
     },[])
 
     function verificarSeEstaMatriculado(){
@@ -148,8 +150,8 @@ const CursoDetalhe = () => {
                                                 <div className="course-header-summary__info summary-student">
                                                     <div className="course-header-summary__info__wrapper">
                                                         <p className="course-header-summary__text">alunos(as)</p>
-                                                        <p className="course-header-summary__title" aria-label="3.322alunos(as)">
-                                                            3.322
+                                                        <p className="course-header-summary__title" aria-label={qtdAlunosMatriculados+"alunos(as)"}>
+                                                            {qtdAlunosMatriculados}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -246,13 +248,13 @@ const CursoDetalhe = () => {
                                         <ul className="course-content-instructors-list">
                                             <li className="instructors-list-item">
                                                 <div className="instructors-item-photo">
-                                                    <a href="/user/RicardoBugan" className="instructor-item-link">
+                                                    <a href={"/user="+cursos.nomeProfessor} className="instructor-item-link">
                                                         {imagemAvatar()}
                                                     </a>
                                                 </div>
                                                 <div className="instructor-details">
                                                     <div className="instructor-item-header">
-                                                        <a href="/user/RicardoBugan"
+                                                        <a href={"/user="+cursos.nomeProfessor}
                                                            className="instructor-item-link bootcamp-text-color">
                                                             <h3 className="instructor-item-name bootcamp-text-color">{cursos.nomeProfessor}
                                                             </h3>

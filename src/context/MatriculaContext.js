@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {
     assistirAulaSave,
-    assistiuAula, concluirCursoByUuid,
+    assistiuAula, concluirCursoByUuid, findAllAlunosMatriculadosEmUmCurso,
     findAllMatriculas,
     saveMatricula, verifcaSeConcluiCurso, verificaPorcentagemDoCurso,
     verificarSeEstouMatriculadoEmAlgumCursoPorId,
@@ -21,6 +21,7 @@ export const MatriculaProvider = ({children}) => {
     const [assistiu,setAssistiu] = useState(null);
     const [porcentagemCurso,setPorcentagemCurso] = useState(null);
     const [concluiuCurso,setConcluiuCurso] = useState(null);
+    const [qtdAlunosMatriculados,setQtdAlunosMatriculados] = useState(null);
     const [cursoMatriculado,setCursoMatriculado] = useState(false);
     const [errorMessage, setErrorMessage] = useState({});
 
@@ -140,8 +141,17 @@ export const MatriculaProvider = ({children}) => {
         try {
             const response = await concluirCursoByUuid(idAluno,uuid,getAuthorization());
             setConcluiuCurso(response);
-            console.log(idAluno);
-            console.log(uuid);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const findAllAlunosMatriculadosEmalgumCurso = async (uuid) => {
+        try {
+            const response = await findAllAlunosMatriculadosEmUmCurso(uuid,getAuthorization());
+            setQtdAlunosMatriculados(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -163,6 +173,7 @@ export const MatriculaProvider = ({children}) => {
                 porcentagemCurso,
                 assistiu,
                 concluiuCurso,
+                qtdAlunosMatriculados,
                 errorMessage,
                 setErrorMessage,
                 retornarTodasMatriculas,
@@ -176,6 +187,7 @@ export const MatriculaProvider = ({children}) => {
                 retornaDadosDoCursoMatriculado,
                 verificaConcluiAlgumCurso,
                 concluirCurso,
+                findAllAlunosMatriculadosEmalgumCurso,
             }}>
             {children}
         </MatriculaContext.Provider>
