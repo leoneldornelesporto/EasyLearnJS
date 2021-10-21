@@ -112,7 +112,7 @@ const AulaDetalhe = () => {
                         <div className="task-body-alert__alert">
                             <div className="task-body-alert__wrapper">
                                 <p>Você ainda não se matriculou neste curso!</p> <p>Para registrar seu progresso no
-                                curso, <a className="task-alert-link" href="/courses/rebranding/tryToEnroll">matricule-se
+                                curso, <a className="task-alert-link" href={"/payment="+cursos.uuid}>matricule-se
                                     agora</a>!</p>
                             </div>
                         </div>
