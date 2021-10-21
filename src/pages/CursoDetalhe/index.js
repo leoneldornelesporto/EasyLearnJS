@@ -6,6 +6,7 @@ import {getAuthorization, isLogged} from "../../context/AuthHandler";
 import {CursoContext} from "../../context/CursoProvider";
 import {AuthUserContext} from "../../context/AuthUserProvider";
 import {MatriculaContext} from "../../context/MatriculaContext";
+import {PaymentContext} from "../../context/PaymentProvider";
 
 const CursoDetalhe = () => {
 
@@ -13,10 +14,9 @@ const CursoDetalhe = () => {
     const {aluno,signInV1} = useContext(AuthUserContext);
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {matriculas,salvarMatricula,verificarMatriculaPorId,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
-
+    const {resposta, pagamentos, salvarPagamento, retornaPagamentoPeloUuidCursoEIdAluno} = useContext(PaymentContext);
 
     Cookies.set("UuidCurso",id);
-    console.log(qtdAlunosMatriculados)
 
     try {
         if(aluno==='' && cursos===null && matriculas===null){
@@ -37,6 +37,10 @@ const CursoDetalhe = () => {
         console.log("aqui")
     }
 
+    if(pagamentos === null){
+        retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get('idUser'));
+    }
+
     let cont =0;
 
     function matricular() {
@@ -53,24 +57,29 @@ const CursoDetalhe = () => {
     },[])
 
     function verificarSeEstaMatriculado(){
-        Cookies.set('matricula', false);
-        if(matriculas!==null){
-            Cookies.set('matricula', true);
-            return (
-                <a href={'/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id}
-                         className="course-header-button startContinue-button bootcamp-primary-button-theme"
-                         aria-label="Iniciar Curso">
-                Acessar Curso
-            </a>);
-        }else{
-            return (
-                <a onClick={matricular}
+        try{
+            Cookies.set('matricula', false);
+            if(matriculas!==null){
+                Cookies.set('matricula', true);
+                if(pagamentos.status === "PAID") {
+                    return (
+                        <a href={'/aula_detalhe=' + cursos.moduloDtoList[0].aulaDto[0].id}
                            className="course-header-button startContinue-button bootcamp-primary-button-theme"
                            aria-label="Iniciar Curso">
-                Iniciar Curso
-            </a>
-            );
+                            Acessar Curso
+                        </a>);
+                }
+            }
         }
+        catch (e) {
+                return (
+                    <a href={"/payment="+cursos.uuid}
+                       className="course-header-button startContinue-button bootcamp-primary-button-theme"
+                       aria-label="Iniciar Curso">
+                        Comprar Curso
+                    </a>
+                );
+            }
     }
 
     function imagemAvatar() {

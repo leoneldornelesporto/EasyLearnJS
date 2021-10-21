@@ -1,0 +1,1 @@
+"use strict";$(function(){var t=$("#name"),n=$("#blackfriday__show-name");t.on("input",function(){""===$(this).val()?n.html("Você!"):n.html($(this).val())})});

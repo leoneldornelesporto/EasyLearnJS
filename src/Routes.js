@@ -27,6 +27,7 @@ import CadastrarModulo from "./pages/CadastrarModulo";
 import ConfirmarEmail from "./pages/ConfirmarEmail";
 import RedefinirSenha from "./pages/RedefinirSenha";
 import GeraCertificado from "./pages/GeraCertificado";
+import Payment from "./pages/Payment";
 
 export default () => {
     return(
@@ -108,6 +109,9 @@ export default () => {
             </Route>
             <Route path="/certificado=:uuid">
                 <GeraCertificado/>
+            </Route>
+            <Route path="/payment=:uuidCurso">
+                <Payment/>
             </Route>
             <Route path="/">
                 <Principal/>
