@@ -5,9 +5,11 @@ import {PaymentContext} from "../../context/PaymentProvider";
 import Cookies from "js-cookie";
 import {getAuthorization} from "../../context/AuthHandler";
 import {MatriculaContext} from "../../context/MatriculaContext";
+import {AuthUserContext} from "../../context/AuthUserProvider";
 
 const Payment = () => {
 
+    const {aluno,signInV1} = useContext(AuthUserContext);
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {resposta,pagamentos,salvarPagamento,respostaPagSeguro,retornaPagamentoPeloUuidCursoEIdAluno,salvarPagamentoPagSeguro} = useContext(PaymentContext);
     const {matriculas,salvarMatricula,verificarMatriculaPorId,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
@@ -21,6 +23,8 @@ const Payment = () => {
     const [ano,setAno] = useState(null);
 
     const { uuidCurso } = useParams();
+
+    signInV1(Cookies.get("email"),Cookies.get("pass"));
 
     function enviarDadosPaymento(e){
         e.preventDefault();
@@ -46,7 +50,7 @@ const Payment = () => {
         window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
     }
 
-    retornarCursosPorUuid(uuidCurso)
+    retornarCursosPorUuid(uuidCurso);
 
     return(
         <main className="payment">
@@ -68,7 +72,7 @@ const Payment = () => {
                                 Informações
                             </li>
                             <li className="form-progress-step progress-step-two">Informações de pagamento</li>
-                            <li className="form-progress-step progress-step-three">Acesse o curso de blablabla</li>
+                            <li className="form-progress-step progress-step-three">Acesse ao curso</li>
                         </ul>
                         <div className="info-form-steps">
 
@@ -104,6 +108,7 @@ const Payment = () => {
                                                     <div className="step-input-group --large-min-height">
                                                         <label className="form-step-label" htmlFor="cpf">CPF</label>
                                                         <input onChange={e => setCpf(e.target.value)}
+                                                               value={aluno.cpf}
                                                                className="form-step-input bootcamp-input-background-dark"
                                                                min="11" required=""/>
                                                             <span

@@ -43,14 +43,6 @@ const CursoDetalhe = () => {
 
     let cont =0;
 
-    function matricular() {
-        verificarMatriculaPorId(aluno.id,cursos.id,getAuthorization())
-        console.log(matriculas)
-        salvarMatricula(getAuthorization(),aluno.id,cursos.id,0,0);
-        Cookies.set('matricula', true);
-        window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
-    }
-
     useEffect(()=>{
         retornarCursosPorUuid(id);
         findAllAlunosMatriculadosEmalgumCurso(id)
