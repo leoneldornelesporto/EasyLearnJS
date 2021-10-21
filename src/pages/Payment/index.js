@@ -3,11 +3,14 @@ import {useParams} from "react-router-dom";
 import {CursoContext} from "../../context/CursoProvider";
 import {PaymentContext} from "../../context/PaymentProvider";
 import Cookies from "js-cookie";
+import {getAuthorization} from "../../context/AuthHandler";
+import {MatriculaContext} from "../../context/MatriculaContext";
 
 const Payment = () => {
 
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {resposta,pagamentos,salvarPagamento,respostaPagSeguro,retornaPagamentoPeloUuidCursoEIdAluno,salvarPagamentoPagSeguro} = useContext(PaymentContext);
+    const {matriculas,salvarMatricula,verificarMatriculaPorId,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
     const [nome,setNome] = useState(null);
     const [sobrenome,setSobrenome] = useState(null);
     const [cpf,setCpf] = useState(null);
@@ -26,13 +29,21 @@ const Payment = () => {
             salvarPagamento("CHAR_03FC4C8B-C127-43E6-89A6-D812D0401566","PAID",uuidCurso,Cookies.get('idUser'));
             if (resposta.status !== 500){
                 alert("Compra feita com sucesso");
-                window.location.href = '/curso_detalhe='+uuidCurso; //manda para a rota home
+                matricular();
             }
             console.log(resposta);
         }catch (e) {
             console.log(e);
         }
 
+    }
+
+    function matricular() {
+        verificarMatriculaPorId(Cookies.get('idUser'),cursos.id,getAuthorization())
+        console.log(matriculas)
+        salvarMatricula(getAuthorization(),Cookies.get('idUser'),cursos.id,0,0);
+        Cookies.set('matricula', true);
+        window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
     }
 
     retornarCursosPorUuid(uuidCurso)

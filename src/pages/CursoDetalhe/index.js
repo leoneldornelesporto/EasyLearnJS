@@ -59,16 +59,21 @@ const CursoDetalhe = () => {
     function verificarSeEstaMatriculado(){
         try{
             Cookies.set('matricula', false);
-            if(matriculas!==null){
+            if(matriculas!==null || pagamentos.status === "PAID"){
                 Cookies.set('matricula', true);
-                if(pagamentos.status === "PAID") {
                     return (
                         <a href={'/aula_detalhe=' + cursos.moduloDtoList[0].aulaDto[0].id}
                            className="course-header-button startContinue-button bootcamp-primary-button-theme"
                            aria-label="Iniciar Curso">
                             Acessar Curso
                         </a>);
-                }
+                }else{
+                return (
+                    <a href={'/aula_detalhe=' + cursos.moduloDtoList[0].aulaDto[0].id}
+                       className="course-header-button startContinue-button bootcamp-primary-button-theme"
+                       aria-label="Iniciar Curso">
+                        Acessar Curso
+                    </a>);
             }
         }
         catch (e) {
