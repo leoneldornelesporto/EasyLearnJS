@@ -24,7 +24,10 @@ const Payment = () => {
 
     const { uuidCurso } = useParams();
 
-    signInV1(Cookies.get("email"),Cookies.get("pass"));
+    if(aluno===''){
+        signInV1(Cookies.get("email"),Cookies.get("pass"));
+        retornarCursosPorUuid(uuidCurso);
+    }
 
     function enviarDadosPaymento(e){
         e.preventDefault();
@@ -50,13 +53,9 @@ const Payment = () => {
         window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
     }
 
-    retornarCursosPorUuid(uuidCurso);
-
     return(
         <main className="payment">
             <div className="container">
-                <section className="paymentAlerts">
-                </section>
                 <article className="payment-info" data-facebookpixel="1067810189950610" data-paypal-mode="production"
                          data-env-supports-gtm="true" data-iframeleademailuri="https://alura-cursos.com"
                          data-product="Plus" data-productid="111" data-productcode="plus"
@@ -165,7 +164,48 @@ const Payment = () => {
                                                 </button>
                                 </form>
                             </section>
+                        </div>
+                    </section>
+                    <section className="payment-info-security">
+                        <div className="info-security-wrapper">
+                            <h1 className="info-security-title bootcamp-background-dark-section">Informações da sua
+                                compra</h1>
+                            <div className="info-security-product bootcamp-background-dark-section">
+                                <strong className="security-product-type">{cursos.nome}</strong>
+                                <span className="security-product-price">Até <strong className="product-price-portion">  12x R$ {Math.round(cursos.valorCurso/12)}</strong>  (ou R$ {cursos.valorCurso} à vista)</span>
+                                <div className="planoInfo">
+                                    <ul className="planoInfo">
+                                        <li className="planoInfo-item planoInfo-item--checked">
+                                            Acesso Vitalício
+                                        </li>
+                                        <li className="planoInfo-item planoInfo-item--checked">
+                                            <div className="planoInfo-item__advantage">Mais de 1200 cursos
+                                                completamente atualizados, com novos lançamentos todas as semanas, em
+                                                Programação, Front-end, UX &amp; Design, Data Science, Mobile, DevOps e
+                                                Inovação &amp; Gestão.
+                                            </div>
+                                        </li>
+                                        <li className="planoInfo-item planoInfo-item--checked">
+                                            <div className="planoInfo-item__advantage">Desafios temáticos para
+                                                você turbinar seu portfólio. Você aprende na prática, com exercícios e
+                                                projetos que simulam o dia a dia profissional.</div>
+                                        </li>
+                                        <li className="planoInfo-item planoInfo-item--checked">
+                                            <div className="planoInfo-item__advantage">Webséries exclusivas com
+                                                discussões avançadas sobre arquitetura de sistemas com profissionais de
+                                                grandes corporações e startups.</div>
+                                        </li>
+                                        <li className="planoInfo-item planoInfo-item--checked">
+                                            <div className="planoInfo-item__advantage">Certificado</div>
 
+                                            <div className="planoInfo-item__description">
+                                                <p className="planoInfo-item__description-label">Emitimos certificados para
+                                                    atestar que você finalizou nossos cursos e formações.</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </article>

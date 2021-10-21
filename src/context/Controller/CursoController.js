@@ -2,7 +2,6 @@ import {create} from 'apisauce';
 
 const api = create({
     baseURL: 'https://easylearn-app.herokuapp.com',
-    //baseURL: 'http://localhost:8080',
     headers: { Accept: 'application/json' },
 })
 
@@ -11,7 +10,8 @@ export async function getAllCursos() {
 }
 
 export async function getCursoByUuid(uuid) {
-    return (await api.get('/v1/curso/uuid/'+uuid)).data;
+    console.log(uuid)
+    return (await api.get('v1/curso/uuid/'+uuid)).data;
 }
 
 export async function getCursoByNome(nome) {
