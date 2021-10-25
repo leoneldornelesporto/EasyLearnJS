@@ -45,8 +45,11 @@ const CursoDetalhe = () => {
 
     useEffect(()=>{
         retornarCursosPorUuid(id);
-        findAllAlunosMatriculadosEmalgumCurso(id)
     },[])
+
+    if(qtdAlunosMatriculados===null){
+        findAllAlunosMatriculadosEmalgumCurso(id);
+    }
 
     function verificarSeEstaMatriculado(){
         try{
