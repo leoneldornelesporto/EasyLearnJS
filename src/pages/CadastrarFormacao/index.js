@@ -98,7 +98,7 @@ const CadastrarFormacao = () => {
 
         return(
             <div>
-                <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#Salvar">Criar Novo Curso</button>
+                <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#Salvar">Criar Nova Formação</button>
 
                 <div className="modal fade" id="Salvar" tabIndex="-1" role="dialog"
                      aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
