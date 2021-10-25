@@ -10,7 +10,6 @@ export async function getAllCursos() {
 }
 
 export async function getCursoByUuid(uuid) {
-    console.log(uuid)
     return (await api.get('v1/curso/uuid/'+uuid)).data;
 }
 
@@ -38,8 +37,8 @@ export async function protectedPmodulo(id,authorization) {
     return (await api.get('/v1/protectedA/modulo/'+id,null,{headers:{Authorization:authorization}})).data;
 }
 
-export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,authorization) {
-    return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo},{headers:{Authorization:authorization}})).data;
+export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,idFormacao,authorization) {
+    return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo, idFormacao:idFormacao},{headers:{Authorization:authorization}})).data;
 }
 
 export async function atualizarCurso(id,nome,descricao,cargahoraria,idCategoria,imagemIcon,authorization) {

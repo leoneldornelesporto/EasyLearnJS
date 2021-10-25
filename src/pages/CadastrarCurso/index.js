@@ -1,13 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {CategoriaContext} from "../../context/CategoriaProvider";
 import {CursoContext} from "../../context/CursoProvider";
 import {AuthUserContext} from "../../context/AuthUserProvider";
 import Cookies from "js-cookie";
+import {FormacaoContext} from "../../context/FormacaoProvider";
 
 const CadastrarCurso = () => {
 
     const {aluno,signInV1} = useContext(AuthUserContext);
     const {categoria,retornaTodasCategorias} = useContext(CategoriaContext);
+    const {formacao,retornaTodasFormacoesPorCategoriaId} = useContext(FormacaoContext);
     const {cursos,retornarTodosOsCursos,saveCurso,alterarCurso,deletarCurso} = useContext(CursoContext);
     const [nomeCurso,setNomeCurso] = useState(null);
     const [descricao,setDescricao] = useState(null);
@@ -16,6 +18,8 @@ const CadastrarCurso = () => {
     const [ativo,setAtivo] = useState(false);
     const [categoriaId,setCategoriaId] = useState(null);
     const [categoriaSelected,setCategoriaSelected] = useState(null);
+    const [formacaoId,setFormacaoId] = useState(null);
+    const [formacaoSelected,setFormacaoSelected] = useState(null);
 
     if (aluno===''){
         signInV1(Cookies.get('email'),Cookies.get('pass'))
@@ -34,6 +38,16 @@ const CadastrarCurso = () => {
     console.log(descricao)
     console.log(cargaHoraria)
     console.log(imagemIcon)
+    console.log(categoriaId)
+    console.log(formacaoId)
+    console.log(formacaoSelected)
+
+    if(formacao===null){
+        retornaTodasFormacoesPorCategoriaId(categoriaId===null?0:categoriaId);
+    }
+
+
+    console.log(formacao)
 
     function retornaCategoria(){
         try{
@@ -89,10 +103,38 @@ const CadastrarCurso = () => {
         }
     }
 
+    function retornaTodasFormacoes() {
+        try{
+            return(
+                <div className="dropdown">
+                    <button className="btn btn-secondary dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        {formacaoSelected===null?"Escolha a Formação":formacaoSelected}
+                    </button>
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {
+                            formacao.map((value, index)=>{
+                                return (
+                                    <a onClick={e => setFormacaoId(value.id)}>
+                                        <a className="dropdown-item"  onClick={e => setFormacaoSelected(value.titulo)}>{value.titulo}</a>
+                                    </a>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            );
+        }
+        catch (e) {
+            return(<></>);
+        }
+    }
+
     function criarNovoCurso(){
 
         function salvar(){
-            saveCurso(aluno.id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon,ativo);
+            saveCurso(aluno.id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon,ativo,formacaoId);
 
             if (cursos!==null){
                 alert("Salvo com Sucesso");
@@ -118,6 +160,8 @@ const CadastrarCurso = () => {
                                 <div className="form-group">
                                     <h5>Escolha a categoria</h5>
                                     {retornaCategoria()}
+                                    <h5>Escolha a formacao</h5>
+                                    {retornaTodasFormacoes()}
                                     <h5>Nome do Curso</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setNomeCurso(e.target.value)}/>

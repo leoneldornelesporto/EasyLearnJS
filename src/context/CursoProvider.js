@@ -119,9 +119,9 @@ export const CursoProvider = ({children}) => {
         }
     };
 
-    const saveCurso = async (idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo) => {
+    const saveCurso = async (idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,idFormacao) => {
         try {
-            const response = await salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,getAuthorization());
+            const response = await salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,idFormacao,getAuthorization());
             setAllCursos(response);
         } catch (response) {
             setErrorMessage(response);

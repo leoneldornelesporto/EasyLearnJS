@@ -1,5 +1,11 @@
 import React, {createContext, useState} from 'react';
-import {findAllFormacoesByIdCategoria, findFormacoesById} from "./Controller/FormacaoController";
+import {
+    alterarFormacao,
+    findAllFormacoes,
+    findAllFormacoesByIdCategoria,
+    findFormacoesById, removerFormacao,
+    salvarFormacao
+} from "./Controller/FormacaoController";
 import {getAuthorization} from "./AuthHandler";
 
 export const FormacaoContext = createContext({});
@@ -7,6 +13,7 @@ export const FormacaoContext = createContext({});
 export const FormacaoProvider = ({children}) => {
 
     const [formacao, setFormacao] = useState(null);
+    const [allFormacoes, setAllFormacoes] = useState(null);
     const [programacao, setProgramacao] = useState(null);
     const [frontend, setFrontend] = useState(null);
     const [datascience, setDatascience] = useState(null);
@@ -19,7 +26,7 @@ export const FormacaoProvider = ({children}) => {
     const retornarTodasFormacoesPorIdCategoria = async (authorization,idCategoria) => {
         try {
             const response = await findAllFormacoesByIdCategoria(authorization,idCategoria);
-            setProgramacao(response);
+            setFormacao(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -104,9 +111,65 @@ export const FormacaoProvider = ({children}) => {
         }
     };
 
+    const retornaTodasFormacoesPorCategoriaId = async (idCategoria) => {
+        try {
+            const response = await findAllFormacoesByIdCategoria(getAuthorization(),idCategoria);
+            setFormacao(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     const retornarFormacaoPorId = async (idFormacao) => {
         try {
             const response = await findFormacoesById(getAuthorization(),idFormacao);
+            setFormacao(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const retornaTodasAsFormacoes = async () => {
+        try {
+            const response = await findAllFormacoes();
+            setAllFormacoes(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const saveFormacao = async (titulo,descricao,idCategoria) => {
+        try {
+            const response = await salvarFormacao(titulo,descricao,idCategoria,getAuthorization());
+            setFormacao(response);
+            console.log(formacao)
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const updateFormacao = async (idFormacao,titulo,descricao,idCategoria) => {
+        try {
+            const response = await alterarFormacao(idFormacao,titulo,descricao,idCategoria,getAuthorization());
+            setFormacao(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const deleteFormacao = async (idFormacao) => {
+        try {
+            const response = await removerFormacao(idFormacao,getAuthorization());
             setFormacao(response);
         } catch (response) {
             setErrorMessage(response);
@@ -134,6 +197,8 @@ export const FormacaoProvider = ({children}) => {
                 setMobile,
                 inovacaoGestao,
                 setInovacaoGestao,
+                allFormacoes,
+                setAllFormacoes,
                 errorMessage,
                 setErrorMessage,
                 retornarTodasFormacoesPorIdCategoria,
@@ -145,6 +210,11 @@ export const FormacaoProvider = ({children}) => {
                 retornarTodasFormacoesMobile,
                 retornarTodasFormacoesInovacaoGestao,
                 retornarFormacaoPorId,
+                retornaTodasFormacoesPorCategoriaId,
+                saveFormacao,
+                retornaTodasAsFormacoes,
+                updateFormacao,
+                deleteFormacao
             }}>
             {children}
         </FormacaoContext.Provider>
