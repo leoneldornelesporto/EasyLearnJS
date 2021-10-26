@@ -193,73 +193,87 @@
         transform:scale(.6)
     }
 }
-@media (min-width:731px){
-    .learning-content__link{
-        position:relative;
-        padding:8px 12px 8px 18px
+@media (min-width:731px) {
+    .learning-content__link {
+        position: relative;
+        padding: 8px 12px 8px 18px
     }
-    .learning-content__item--kind-career .learning-content__link,.learning-content__item--kind-course .learning-content__link,.learning-content__item--kind-degree .learning-content__link{
-        padding:15px 0 15px 14px
+
+    .learning-content__item--kind-career .learning-content__link, .learning-content__item--kind-course .learning-content__link, .learning-content__item--kind-degree .learning-content__link {
+        padding: 15px 0 15px 14px
     }
-    .learning-content__icon{
-        min-height:40px;
-        min-width:40px;
-        max-height:40px;
-        max-width:40px
+
+    .learning-content__icon {
+        min-height: 40px;
+        min-width: 40px;
+        max-height: 40px;
+        max-width: 40px
     }
-    .learning-content__item--kind-career .learning-content__icon,.learning-content__item--kind-course .learning-content__icon,.learning-content__item--kind-degree .learning-content__icon{
-        margin-top:0
+
+    .learning-content__item--kind-career .learning-content__icon, .learning-content__item--kind-course .learning-content__icon, .learning-content__item--kind-degree .learning-content__icon {
+        margin-top: 0
     }
-    .learning-content__info{
-        width:calc(100% - 220px)
+
+    .learning-content__info {
+        width: calc(100% - 220px)
     }
-    .learning-content__progress{
-        position:absolute;
-        top:50%;
-        right:18px;
-        transform:translateY(-50%);
-        justify-content:flex-end;
-        max-width:123px
+
+    .learning-content__progress {
+        position: absolute;
+        top: 50%;
+        right: 18px;
+        transform: translateY(-50%);
+        justify-content: flex-end;
+        max-width: 123px
     }
-    .learning-content__extraContent--viewed:after,.learning-content__link--clicked:after,.learning-content__progress--finished:after{
-        top:50%;
-        right:0;
-        transform:translateY(-50%);
-        height:21px;
-        width:12px
+
+    .learning-content__extraContent--viewed:after, .learning-content__link--clicked:after, .learning-content__progress--finished:after {
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        height: 21px;
+        width: 12px
     }
-    .learning-content__bar{
-        height:7px
+
+    .learning-content__bar {
+        height: 7px
     }
-    .learning-content__item--kind-career .learning-content__bar,.learning-content__item--kind-degree .learning-content__bar{
-        height:auto;
-        flex-wrap:wrap;
-        justify-content:flex-start;
-        margin-top:3px;
-        width:auto
+
+    .learning-content__item--kind-career .learning-content__bar, .learning-content__item--kind-degree .learning-content__bar {
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-top: 3px;
+        width: auto
     }
-    .learning-content__square{
-        height:7px;
-        width:7px;
-        margin:0 2px 2px 0;
-        flex-grow:0
+
+    .learning-content__square {
+        height: 7px;
+        width: 7px;
+        margin: 0 2px 2px 0;
+        flex-grow: 0
     }
-    .learning-content__square:nth-child(10n){
-        margin-right:0
+
+    .learning-content__square:nth-child(10n) {
+        margin-right: 0
     }
-    .learning-content__fraction,.learning-content__percentage{
-        line-height:1;
-        min-width:30px;
-        margin-left:5px
+
+    .learning-content__fraction, .learning-content__percentage {
+        line-height: 1;
+        min-width: 30px;
+        margin-left: 5px
     }
-    .learning-content__fraction,.learning-content__percentage{
-        font-size:11px;
-        margin-bottom:2px
+
+    .learning-content__fraction, .learning-content__percentage {
+        font-size: 11px;
+        margin-bottom: 2px
     }
-    .learning-content__item--kind-career .learning-content__kind,.learning-content__item--kind-course .learning-content__kind,.learning-content__item--kind-degree .learning-content__kind{
-        margin-top:2px
+
+    .learning-content__item--kind-career .learning-content__kind, .learning-content__item--kind-course .learning-content__kind, .learning-content__item--kind-degree .learning-content__kind {
+        margin-top: 2px
     }
-    .learning-content__name{
-        margin-top:0
+
+    .learning-content__name {
+        margin-top: 0
     }
 }

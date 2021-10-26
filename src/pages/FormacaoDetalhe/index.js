@@ -1,17 +1,25 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {FormacaoContext} from "../../context/FormacaoProvider";
+import {MatriculaContext} from "../../context/MatriculaContext";
+import Cookies from "js-cookie";
 
 const FormacaoDetalhe = () => {
 
     const { id } = useParams();
-    const {formacao,retornarFormacaoPorId} = useContext(FormacaoContext);
+    const {cursosDetalhe,formacao,retornaFormacaoById,retornarFormacaoPorId} = useContext(FormacaoContext);
+    const {retornaDadosDoCursoMatriculado,porcentagemCurso} = useContext(MatriculaContext);
+
+    if(cursosDetalhe===null){
+        retornaFormacaoById(id);
+    }
 
     if(formacao===null){
         retornarFormacaoPorId(id);
     }
 
-    console.log(formacao)
+    console.log(formacao);
+    console.log(cursosDetalhe);
 
     function headerFormacao(){
         try{
@@ -24,26 +32,6 @@ const FormacaoDetalhe = () => {
                             <div className="formacao-header-headline">
                                 <h1 className="formacao-headline-titulo">{formacao[0].titulo}</h1>
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
-                            </div>
-                        </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </section>
@@ -61,26 +49,6 @@ const FormacaoDetalhe = () => {
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
                             </div>
                         </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                 )
             }
@@ -94,26 +62,6 @@ const FormacaoDetalhe = () => {
                             <div className="formacao-header-headline">
                                 <h1 className="formacao-headline-titulo">{formacao[0].titulo}</h1>
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
-                            </div>
-                        </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </section>
@@ -131,26 +79,6 @@ const FormacaoDetalhe = () => {
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
                             </div>
                         </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                 )
             }
@@ -164,26 +92,6 @@ const FormacaoDetalhe = () => {
                             <div className="formacao-header-headline">
                                 <h1 className="formacao-headline-titulo">{formacao[0].titulo}</h1>
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
-                            </div>
-                        </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </section>
@@ -201,26 +109,6 @@ const FormacaoDetalhe = () => {
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
                             </div>
                         </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                 )
             }
@@ -236,26 +124,6 @@ const FormacaoDetalhe = () => {
                                 <h2 className="formacao-headline-subtitulo">{formacao[0].descricao}</h2>
                             </div>
                         </div>
-                        <div className="formacao-dados container">
-                            <div className="formacao-header-dados">
-                                <div
-                                    className="formacao-dados-finalizado formacao__text-color--programacao formacao__after-aux-border-color--programacao">
-                                    <div className="formacao-finalizado-cursos">
-                                        <div className="guide-card__progress-bar guide-card__progress-bar__formacao">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146 146"
-                                                 className="guide-card__progress-bar__svg" fill="none">
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="formacao-finalizado-texto">
-               <span className="formacao-finalizado-fracao">
-               <span className="formacao-finalizado-fracao__completed">0</span>/{formacao[0].cursoDtoList.length}
-               </span>
-                                        <span className="formacao-finalizado-label">Cursos finalizados</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                 )
             }
@@ -268,14 +136,10 @@ const FormacaoDetalhe = () => {
 
     function professor(){
         try{
-            for(let i=0;i<formacao[0].cursoDtoList.length;i++) {
+            for(let i=0; i<cursosDetalhe.length; i++) {
                 return (
                     <li className="formacao-instrutores-instrutor">
-                        <a href={"/user="+formacao[0].cursoDtoList[i].nomeProfessor} className="formacao-instrutor-link">
-                            <img className="formacao-instrutor-avatar"
-                                 src={formacao[0].cursoDtoList[i].avatar}/>
-                            <p className="formacao-instrutor-nome">{formacao[0].cursoDtoList[i].nomeProfessor}</p>
-                        </a>
+                        {imagemAvatar(cursosDetalhe,i)}
                     </li>
                 )
             }
@@ -285,25 +149,38 @@ const FormacaoDetalhe = () => {
         }
     }
 
+    function percentagemCurso(cursosDetalhe, i) {
+        retornaDadosDoCursoMatriculado(Cookies.get('idUser'),cursosDetalhe[i].uuid);
+        const divStyle = {
+            backgroundImage: 'linear-gradient(to right, #7ee195, #7ee195 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
+        };
+        return (
+            <>
+            <div className="learning-content__bar"
+                    style={divStyle}></div>
+                <span className="learning-content__percentage">{porcentagemCurso}%</span>
+            </>
+        )
+    }
+
     function cursos(){
         try{
-            for(let i=0;i<formacao[0].cursoDtoList.length;i++){
+            for(let i=0; i<cursosDetalhe.length; i++){
+
                 return(
                     <li className="learning-content__item learning-content__item--kind-course"
                     >
                         <a className="learning-content__link  "
-                           href={"curso_detalhe="+formacao[0].cursoDtoList[i].uuid} target="_blank">
+                           href={"curso_detalhe="+cursosDetalhe[i].uuid} target="_blank">
                             <img className="learning-content__icon"
-                                 src={formacao[0].cursoDtoList[i].imagemIcon}/>
+                                 src={cursosDetalhe[i].imagemIcon}/>
                             <div className="learning-content__info">
                                 <div className="learning-content__progress ">
-                                    <div className="learning-content__bar"
-                                    ></div>
-                                    <span className="learning-content__percentage">4%</span>
+                                    {percentagemCurso(cursosDetalhe,i)}
                                 </div>
                                 <span className="learning-content__kind" >Curso
                               </span>
-                                <span className="learning-content__name">{formacao[0].cursoDtoList[i].nome}</span>
+                                <span className="learning-content__name">{cursosDetalhe[i].nome}</span>
                             </div>
                         </a>
                     </li>
@@ -318,13 +195,40 @@ const FormacaoDetalhe = () => {
     function horasTotais(){
         try{
             var sum=0;
-            for(let i=0;i<formacao[0].cursoDtoList.length;i++) {
-                sum+=formacao[0].cursoDtoList[i].cargaHoraria;
+            for(let i=0; i<cursosDetalhe.length; i++) {
+                sum+=cursosDetalhe[i].cargaHoraria;
             }
             return sum;
         }
         catch (e) {
             return(<></>)
+        }
+    }
+
+    function quantidadeTotalCursos(){
+        return cursosDetalhe.length;
+    }
+
+    function imagemAvatar(cursosDetalhe,i) {
+        if(cursosDetalhe[i].avatar!==null) {
+            return (
+                <a href={"/user="+cursosDetalhe[i].nomeProfessor} className="formacao-instrutor-link">
+                    <img className="formacao-instrutor-avatar"
+                         src={cursosDetalhe[i].avatar}/>
+                    <p className="formacao-instrutor-nome">{cursosDetalhe[i].nomeProfessor}</p>
+                </a>
+            )
+        }
+        else{
+            return (
+                <a href={"/user="+cursosDetalhe[i].nomeProfessor} className="formacao-instrutor-link">
+                    <img
+                        src="https://suap.ifsul.edu.br/static/comum/img/default.jpg"
+                        alt={"Foto de "+cursosDetalhe[i].nomeProfessor}
+                        className="headline-profile-avatar headline-profile-avatar"/>
+                    <p className="formacao-instrutor-nome">{cursosDetalhe[i].nomeProfessor}</p>
+                </a>
+            )
         }
     }
 
@@ -336,7 +240,7 @@ const FormacaoDetalhe = () => {
                     <section className="formacao__info">
                         <div className="container">
                             <div className="formacao__info-categoria">
-                                Esta formação faz parte da categoria <a href="" className="formacao__info-categoria-link">{formacao[0].categoria}</a>
+                                Esta formação faz parte da categoria <a href="" className="formacao__info-categoria-link">{cursosDetalhe[0].categoria}</a>
                             </div>
                             <div className="formacao__info-conclusao">
                                 <div className="formacao__info-icon formacao__info-icon-conclusao"></div>
@@ -348,7 +252,7 @@ const FormacaoDetalhe = () => {
                             <div className="formacao__info-cursos">
                                 <div className="formacao__info-icon formacao__info-icon-cursos"></div>
                                 <div className="formacao__info-content">
-                                    <div className="formacao__info-destaque">{formacao[0].cursoDtoList.length}</div>
+                                    <div className="formacao__info-destaque">{quantidadeTotalCursos()}</div>
                                     <p>Cursos</p>
                                 </div>
                             </div>
@@ -357,7 +261,6 @@ const FormacaoDetalhe = () => {
 
                     <section className="formacao-sobre formacao-sobre--logado ">
                         <div className="container">
-
                             <div id="sobre" className="formacao-sobre-mercado container-author-summary-wrapper">
                                 <h4 className="formacao-mercado-titulo formacao__text-color--programacao">{formacao[0].subtitulo}</h4>
                                 <div className="formacao-prerequisitos-texto">

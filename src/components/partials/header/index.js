@@ -43,7 +43,7 @@ const Header = () => {
                 return (
                         <img
                             src="https://suap.ifsul.edu.br/static/comum/img/default.jpg"
-                            alt="Foto de Leonel Dorneles Porto"
+                            alt={"Foto de "+aluno.nomeCompleto}
                             className="headline-profile-avatar headline-profile-avatar"/>
                 )
             }

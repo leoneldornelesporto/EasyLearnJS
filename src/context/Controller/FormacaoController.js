@@ -5,14 +5,18 @@ const api = create({
     headers: { Accept: 'application/json' },
 })
 
-export async function findAllFormacoesByIdCategoria(authorization,idCategoria) {
+export async function findAllFormacoesByIdCategoria(idCategoria) {
     return (await api.get('/v1/formacao/categoria/'+idCategoria)).data;
+}
+
+export async function formacaoById(idCategoria) {
+    return (await api.get('/v1/formacao/byId/'+idCategoria)).data;
 }
 
 export async function findAllFormacoes() {
     return (await api.get('v1/formacao')).data;
 }
-export async function findFormacoesById(authorization,idFormacao) {
+export async function findFormacoesById(idFormacao) {
     return (await api.get('/v1/formacao/'+idFormacao)).data;
 }
 

@@ -3,7 +3,7 @@ import {
     alterarFormacao,
     findAllFormacoes,
     findAllFormacoesByIdCategoria,
-    findFormacoesById, removerFormacao,
+    findFormacoesById, formacaoById, removerFormacao,
     salvarFormacao
 } from "./Controller/FormacaoController";
 import {getAuthorization} from "./AuthHandler";
@@ -12,6 +12,7 @@ export const FormacaoContext = createContext({});
 
 export const FormacaoProvider = ({children}) => {
 
+    const [cursosDetalhe, setCursosDetalhe] = useState(null);
     const [formacao, setFormacao] = useState(null);
     const [allFormacoes, setAllFormacoes] = useState(null);
     const [programacao, setProgramacao] = useState(null);
@@ -27,6 +28,17 @@ export const FormacaoProvider = ({children}) => {
         try {
             const response = await findAllFormacoesByIdCategoria(authorization,idCategoria);
             setFormacao(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const retornaFormacaoById = async (idCategoria) => {
+        try {
+            const response = await formacaoById(idCategoria);
+            setCursosDetalhe(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -124,7 +136,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarFormacaoPorId = async (idFormacao) => {
         try {
-            const response = await findFormacoesById(getAuthorization(),idFormacao);
+            const response = await findFormacoesById(idFormacao);
             setFormacao(response);
         } catch (response) {
             setErrorMessage(response);
@@ -181,6 +193,7 @@ export const FormacaoProvider = ({children}) => {
     return (
         <FormacaoContext.Provider
             value={{
+                cursosDetalhe,
                 formacao,
                 setFormacao,
                 programacao,
@@ -214,7 +227,8 @@ export const FormacaoProvider = ({children}) => {
                 saveFormacao,
                 retornaTodasAsFormacoes,
                 updateFormacao,
-                deleteFormacao
+                deleteFormacao,
+                retornaFormacaoById
             }}>
             {children}
         </FormacaoContext.Provider>
