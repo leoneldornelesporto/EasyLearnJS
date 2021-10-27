@@ -11,7 +11,7 @@ export async function findModuloById(idModulo,authorization) {
 }
 
 export async function findAllModulos(authorization) {
-    return (await api.get('v1/protectedA/modulo','authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedP/modulo','',{headers:{Authorization:authorization}})).data;
 }
 
 export async function saveModulo(indice,titulo,idCurso,idAula,subtitulo,authorization) {

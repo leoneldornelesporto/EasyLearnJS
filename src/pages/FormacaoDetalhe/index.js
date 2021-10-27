@@ -150,17 +150,22 @@ const FormacaoDetalhe = () => {
     }
 
     function percentagemCurso(cursosDetalhe, i) {
-        retornaDadosDoCursoMatriculado(Cookies.get('idUser'),cursosDetalhe[i].uuid);
-        const divStyle = {
-            backgroundImage: 'linear-gradient(to right, #7ee195, #7ee195 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
-        };
-        return (
-            <>
-            <div className="learning-content__bar"
-                    style={divStyle}></div>
-                <span className="learning-content__percentage">{porcentagemCurso}%</span>
-            </>
-        )
+        try{
+            retornaDadosDoCursoMatriculado(Cookies.get('idUser'),cursosDetalhe[i].uuid);
+            const divStyle = {
+                backgroundImage: 'linear-gradient(to right, #7ee195, #7ee195 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
+            };
+            return (
+                <>
+                    <div className="learning-content__bar"
+                         style={divStyle}></div>
+                    <span className="learning-content__percentage">{porcentagemCurso}%</span>
+                </>
+            )
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 
     function cursos(){

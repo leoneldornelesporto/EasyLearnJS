@@ -13,6 +13,8 @@ const CadastrarFormacao = () => {
     const {formacao,allFormacoes,saveFormacao,retornaTodasAsFormacoes,updateFormacao,deleteFormacao} = useContext(FormacaoContext);
     const [titulo,setTitulo] = useState(null);
     const [descricao,setDescricao] = useState(null);
+    const [subtitulo,setSubtitulo] = useState(null);
+    const [descricaoSubtitulo,setDescricaoSubtitulo] = useState(null);
     const [idCurso,setIdCurso] = useState(null);
     const [idCategoria,setIdCategoria] = useState(null);
     const [ativo,setAtivo] = useState(false);
@@ -88,7 +90,7 @@ const CadastrarFormacao = () => {
     function criarNovaFormacao(){
 
         function salvar(){
-            saveFormacao(titulo,descricao,categoriaId);
+            saveFormacao(titulo,descricao,subtitulo,descricaoSubtitulo,categoriaId);
 
             if (formacao!==null){
                 alert("Salvo com Sucesso");
@@ -120,6 +122,12 @@ const CadastrarFormacao = () => {
                                     <h5>Descrição</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricao(e.target.value)}/>
+                                    <h5>Subtitulo</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setSubtitulo(e.target.value)}/>
+                                    <h5>Descrição Subtitulo</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricaoSubtitulo(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -136,7 +144,7 @@ const CadastrarFormacao = () => {
     function editar(id){
 
         function alterar(e){
-            updateFormacao(id,titulo,descricao,categoriaId);
+            updateFormacao(id,titulo,descricao,subtitulo,descricaoSubtitulo,categoriaId);
 
             if (cursos!==null){
                 alert("Alterado com Sucesso");
@@ -170,6 +178,12 @@ const CadastrarFormacao = () => {
                                     <h5>Descrição</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricao(e.target.value)}/>
+                                    <h5>Subtitulo</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setSubtitulo(e.target.value)}/>
+                                    <h5>Descrição Subtitulo</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricaoSubtitulo(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>

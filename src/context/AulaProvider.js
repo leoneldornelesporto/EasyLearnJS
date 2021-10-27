@@ -97,9 +97,9 @@ export const AulaProvider = ({children}) => {
         }
     };
 
-    const saveAula = async (indice,titulo,urlVideo,transcricao) => {
+    const saveAula = async (indice,titulo,urlVideo,transcricao,idCurso,idModulo) => {
         try {
-            const response = await salvarAula(indice,titulo,urlVideo,transcricao,getAuthorization());
+            const response = await salvarAula(indice,titulo,urlVideo,transcricao,idCurso,idModulo,getAuthorization());
             setAula(response);
             console.log(aula)
         } catch (response) {
@@ -109,9 +109,9 @@ export const AulaProvider = ({children}) => {
         }
     };
 
-    const updateAula = async (id,indice,titulo,urlVideo,transcricao) => {
+    const updateAula = async (id,indice,titulo,urlVideo,transcricao,idCurso,idModulo) => {
         try {
-            const response = await editarAula(id,indice,titulo,urlVideo,transcricao,getAuthorization());
+            const response = await editarAula(id,indice,titulo,urlVideo,transcricao,idCurso,idModulo,getAuthorization());
             setAula(response);
             console.log(aula)
         } catch (response) {

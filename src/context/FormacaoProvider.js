@@ -48,7 +48,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesProgramacao = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),1);
+            const response = await findAllFormacoesByIdCategoria(1);
             setProgramacao(response);
         } catch (response) {
             setErrorMessage(response);
@@ -59,7 +59,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesFrontend = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),2);
+            const response = await findAllFormacoesByIdCategoria(2);
             setFrontend(response);
         } catch (response) {
             setErrorMessage(response);
@@ -70,7 +70,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesDataScience = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),3);
+            const response = await findAllFormacoesByIdCategoria(3);
             setDatascience(response);
         } catch (response) {
             setErrorMessage(response);
@@ -81,7 +81,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesDevops = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),4);
+            const response = await findAllFormacoesByIdCategoria(4);
             setDevops(response);
         } catch (response) {
             setErrorMessage(response);
@@ -92,7 +92,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesUxDesign = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),5);
+            const response = await findAllFormacoesByIdCategoria(5);
             setUxDesign(response);
         } catch (response) {
             setErrorMessage(response);
@@ -103,7 +103,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesMobile = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),6);
+            const response = await findAllFormacoesByIdCategoria(6);
             setMobile(response);
         } catch (response) {
             setErrorMessage(response);
@@ -114,7 +114,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornarTodasFormacoesInovacaoGestao = async () => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),7);
+            const response = await findAllFormacoesByIdCategoria(7);
             setInovacaoGestao(response);
         } catch (response) {
             setErrorMessage(response);
@@ -125,7 +125,7 @@ export const FormacaoProvider = ({children}) => {
 
     const retornaTodasFormacoesPorCategoriaId = async (idCategoria) => {
         try {
-            const response = await findAllFormacoesByIdCategoria(getAuthorization(),idCategoria);
+            const response = await findAllFormacoesByIdCategoria(idCategoria);
             setFormacao(response);
         } catch (response) {
             setErrorMessage(response);
@@ -156,9 +156,9 @@ export const FormacaoProvider = ({children}) => {
         }
     };
 
-    const saveFormacao = async (titulo,descricao,idCategoria) => {
+    const saveFormacao = async (titulo,descricao,subtitulo,descricaoSubtitulo,categoriaId) => {
         try {
-            const response = await salvarFormacao(titulo,descricao,idCategoria,getAuthorization());
+            const response = await salvarFormacao(titulo,descricao,subtitulo,descricaoSubtitulo,categoriaId,getAuthorization());
             setFormacao(response);
             console.log(formacao)
         } catch (response) {
@@ -168,9 +168,9 @@ export const FormacaoProvider = ({children}) => {
         }
     };
 
-    const updateFormacao = async (idFormacao,titulo,descricao,idCategoria) => {
+    const updateFormacao = async (idFormacao,titulo,descricao,subtitulo,descricaoSubtitulo,categoriaId) => {
         try {
-            const response = await alterarFormacao(idFormacao,titulo,descricao,idCategoria,getAuthorization());
+            const response = await alterarFormacao(idFormacao,titulo,descricao,subtitulo,descricaoSubtitulo,categoriaId,getAuthorization());
             setFormacao(response);
         } catch (response) {
             setErrorMessage(response);

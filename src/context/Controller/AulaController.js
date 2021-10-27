@@ -14,12 +14,12 @@ export async function returnAllAulas(authorization) {
     return (await api.get('v1/protectedP/aulas',null,{headers:{Authorization:authorization}})).data;
 }
 
-export async function salvarAula(indice,titulo,urlVideo,transcricao,authorization) {
-    return (await api.post('v1/protectedP/aulas',{indice:indice,titulo:titulo,urlVideo:urlVideo,transcricao:transcricao},{headers:{Authorization:authorization}})).data;
+export async function salvarAula(indice,titulo,urlVideo,transcricao,idCurso,idModulo,authorization) {
+    return (await api.post('v1/protectedP/aulas',{indice:indice,titulo:titulo,urlVideo:urlVideo,transcricao:transcricao,idCurso:idCurso,idModulo:idModulo},{headers:{Authorization:authorization}})).data;
 }
 
-export async function editarAula(id,indice,titulo,urlVideo,transcricao,authorization) {
-    return (await api.put('v1/protectedP/aulas/'+id,{indice:indice,titulo:titulo,urlVideo:urlVideo,transcricao:transcricao},{headers:{Authorization:authorization}})).data;
+export async function editarAula(id,indice,titulo,urlVideo,transcricao,idCurso,idModulo,authorization) {
+    return (await api.put('v1/protectedP/aulas/'+id,{indice:indice,titulo:titulo,urlVideo:urlVideo,transcricao:transcricao,idCurso:idCurso,idModulo:idModulo},{headers:{Authorization:authorization}})).data;
 }
 
 export async function deletarAula(id,authorization) {
