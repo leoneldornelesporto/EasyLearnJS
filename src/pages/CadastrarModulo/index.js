@@ -1,48 +1,41 @@
 import React, {useContext, useState} from 'react';
-import {AulaContext} from "../../context/AulaProvider";
 import {ModuloContext} from "../../context/ModuloContext";
+import {CursoContext} from "../../context/CursoProvider";
 
 const CadastrarModulo = () => {
 
-    const {aula,retornarTodasAsAulas,saveAula,updateAula,deleteAula} = useContext(AulaContext);
-    const {modulo,retornaTodosOsModulos} = useContext(ModuloContext);
+    const {cursos,retornarTodosOsCursos} = useContext(CursoContext);
+    const {modulo,salvarModulo,alterarModulo,deletarModulo,retornaTodosOsModulos} = useContext(ModuloContext);
     const [indice,setIndice] = useState(null);
     const [titulo,setTitulo] = useState(null);
     const [tituloSecundario,setTituloSecundario] = useState(null);
-    const [idCurso,setIdCurso] = useState(null);
-    const [idAula,setIdAula] = useState([]);
-    const [aulaSelected,setAulaSelected] = useState(null);
-    const [subititulo,setSubititulo] = useState([]);
-    const [urlVideo,setUrlVideo] = useState(null);
-    const [transcricao,setTranscricao] = useState(null);
-    const arrayDeIds = [];
+    const [cursoId,setCursoId] = useState(null);
+    const [cursoSelected,setCategoriaSelected] = useState(null);
 
     if (modulo===null){
         retornaTodosOsModulos();
     }
 
-    if (aula===null){
-        retornarTodasAsAulas();
+    if (cursos===null){
+        retornarTodosOsCursos();
     }
 
-    function retornaAula(){
+    function retornaCursos(){
         try{
             return(
                 <div className="dropdown">
                     <button className="btn btn-secondary dropdown-toggle" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                        {aulaSelected===null?"Escolha a Aula":aulaSelected}
+                        {cursoSelected===null?"Escolha o Curso":cursoSelected}
                     </button>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         {
-                            aula.map((value, index)=>{
+                            cursos.map((value, index)=>{
                                 return (
-                                    <div>
-                                    <a onClick={e => setIdAula(value.id)}>
-                                        <a className="dropdown-item"  onClick={e => setAulaSelected(value.titulo)}>{value.titulo}</a>
+                                    <a onClick={e => setCursoId(value.id)}>
+                                        <a className="dropdown-item"  onClick={e => setCategoriaSelected(value.nome)}>{value.nome}</a>
                                     </a>
-                                    </div>
                                 );
                             })
                         }
@@ -55,7 +48,7 @@ const CadastrarModulo = () => {
         }
     }
 
-    function retornarAulas(){
+    function retornarModulos(){
         try{
             return(
                 <>
@@ -67,6 +60,7 @@ const CadastrarModulo = () => {
                                     <td>{value.indice}</td>
                                     <td>{value.titulo}</td>
                                     <td>{value.tituloSecundario}</td>
+                                    <td>{value.nomeCurso}</td>
                                     <td>
                                         <td>{editar(value.id)}</td>
                                         <td>{excluir(value.id)}</td>
@@ -83,42 +77,40 @@ const CadastrarModulo = () => {
         }
     }
 
-    function criarNovaAula(){
+    function criarNovoModulo(){
         function salvar(){
-            saveAula(indice,titulo,urlVideo,transcricao);
+            salvarModulo(indice,titulo,tituloSecundario,cursoId);
 
-            if (aula!==null){
+            if (modulo!==null){
                 alert("Salvo com Sucesso");
-                retornarAulas();
+                retornarModulos();
             }
         }
 
         return(
             <div>
-                <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#Salvar">Criar Nova Aula</button>
+                <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#Salvar">Criar Novo Modulo</button>
 
                 <div className="modal fade" id="Salvar" tabIndex="-1" role="dialog"
                      aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Criar Novo Modulo</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <form onSubmit={salvar}>
                                 <div className="form-group">
-                                    <h5>Escolha a Aula</h5>
-                                    {retornaAula()}
+                                    <h5>Escolha o Curso</h5>
+                                    {retornaCursos()}
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Indice" onChange={e => setIndice(e.target.value)}/>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Titulo" onChange={e => setTitulo(e.target.value)}/>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a url do video" onChange={e => setUrlVideo(e.target.value)}/>
-                                    <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Transcricao" onChange={e => setTranscricao(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Titulo Secundário" onChange={e => setTituloSecundario(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -135,11 +127,11 @@ const CadastrarModulo = () => {
     function editar(id){
 
         function alterar(){
-            updateAula(id,indice,titulo,urlVideo,transcricao);
+            alterarModulo(id,indice,titulo,tituloSecundario,cursoId);
 
-            if (aula!==null){
+            if (modulo!==null){
                 alert("Alterado com Sucesso");
-                retornarAulas();
+                retornarModulos();
             }
         }
 
@@ -161,14 +153,14 @@ const CadastrarModulo = () => {
                             </div>
                             <form onSubmit={alterar}>
                                 <div className="form-group">
+                                    <h5>Escolha o Curso</h5>
+                                    {retornaCursos()}
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Indice" onChange={e => setIndice(e.target.value)}/>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Titulo" onChange={e => setTitulo(e.target.value)}/>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a url do video" onChange={e => setUrlVideo(e.target.value)}/>
-                                    <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Transcricao" onChange={e => setTranscricao(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Titulo Secundário" onChange={e => setTituloSecundario(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -185,8 +177,8 @@ const CadastrarModulo = () => {
     function excluir(id){
 
         function deletar(){
-            deleteAula(id);
-            retornarAulas();
+            deletarModulo(id);
+            retornarModulos();
         }
 
         return(
@@ -226,15 +218,16 @@ const CadastrarModulo = () => {
                     <th scope="col">#</th>
                     <th scope="col">Indice</th>
                     <th scope="col">Titulo</th>
-                    <th scope="col">tituloSecundario</th>
+                    <th scope="col">Titulo Secundario</th>
+                    <th scope="col">Curso</th>
                     <th scope="col">Operações</th>
                 </tr>
                 </thead>
                 <tbody>
-                {retornarAulas()}
+                {retornarModulos()}
                 </tbody>
             </table>
-            {criarNovaAula()}
+            {criarNovoModulo()}
         </>
     );
 }

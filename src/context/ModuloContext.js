@@ -1,5 +1,5 @@
 import React, {createContext, useState} from 'react';
-import {findAllModulos, findModuloById, saveModulo} from "./Controller/ModuloController";
+import {deleteModulo, findAllModulos, findModuloById, saveModulo, updateModulo} from "./Controller/ModuloController";
 import {getAuthorization} from "./AuthHandler";
 
 export const ModuloContext = createContext({});
@@ -37,9 +37,31 @@ export const ModuloProvider = ({children}) => {
         }
     };
 
-    const salvarModulo = async (indice,titulo,idCurso,idAula,subtitulo) => {
+    const salvarModulo = async (indice,titulo,tituloSecundario,idCurso) => {
         try {
-            const response = await saveModulo(indice,titulo,idCurso,idAula,subtitulo,getAuthorization());
+            const response = await saveModulo(indice,titulo,tituloSecundario,idCurso,getAuthorization());
+            setModulo(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const alterarModulo = async (idModulo,indice,titulo,tituloSecundario,idCurso) => {
+        try {
+            const response = await updateModulo(idModulo,indice,titulo,tituloSecundario,idCurso,getAuthorization());
+            setModulo(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const deletarModulo = async (idModulo) => {
+        try {
+            const response = await deleteModulo(idModulo,getAuthorization());
             setModulo(response);
         } catch (response) {
             setErrorMessage(response);
@@ -62,6 +84,8 @@ export const ModuloProvider = ({children}) => {
                 retornarModuloPeloId,
                 retornaTodosOsModulos,
                 salvarModulo,
+                alterarModulo,
+                deletarModulo
             }}>
             {children}
         </ModuloContext.Provider>

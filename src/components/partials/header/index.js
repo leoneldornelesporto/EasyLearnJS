@@ -205,21 +205,21 @@ const Header = () => {
                                                    tabIndex="-1">
                                                     Cadastrar Categoria
                                                 </a>
+                                                <a href="/cadastrar_formacao" className="header-nav-link header-item-link--degrees"
+                                                   tabIndex="-1">
+                                                    Cadastrar Formações
+                                                </a>
                                                 <a href="/cadastrar_curso" className="header-nav-link header-item-link--degrees"
                                                    tabIndex="-1">
                                                     Cadastrar Cursos
-                                                </a>
-                                                <a href="/cadastrar_aula" className="header-nav-link header-item-link--degrees"
-                                                   tabIndex="-1">
-                                                    Cadastrar Aula
                                                 </a>
                                                 <a href="/cadastrar_modulo" className="header-nav-link header-item-link--degrees"
                                                    tabIndex="-1">
                                                     Cadastrar Modulo
                                                 </a>
-                                                <a href="/cadastrar_formacao" className="header-nav-link header-item-link--degrees"
+                                                <a href="/cadastrar_aula" className="header-nav-link header-item-link--degrees"
                                                    tabIndex="-1">
-                                                    Cadastrar Formações
+                                                    Cadastrar Aula
                                                 </a>
                                             </>
                                             :

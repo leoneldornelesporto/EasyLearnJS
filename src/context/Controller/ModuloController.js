@@ -13,6 +13,14 @@ export async function findAllModulos(authorization) {
     return (await api.get('v1/modulo','',{headers:{Authorization:authorization}})).data;
 }
 
-export async function saveModulo(indice,titulo,idCurso,idAula,subtitulo,authorization) {
-    return (await api.post('v1/protectedP/modulo',{indice:indice,titulo:titulo,idCurso:idCurso,idAula:idAula,subtitulo:subtitulo},{headers:{Authorization:authorization}})).data;
+export async function saveModulo(indice,titulo,tituloSecundario,idCurso,authorization) {
+    return (await api.post('v1/protectedP/modulo',{indice:indice,titulo:titulo,tituloSecundario:tituloSecundario,idCurso:idCurso},{headers:{Authorization:authorization}})).data;
+}
+
+export async function updateModulo(idModulo,indice,titulo,tituloSecundario,idCurso,authorization) {
+    return (await api.put('v1/protectedP/modulo/'+idModulo,{indice:indice,titulo:titulo,tituloSecundario:tituloSecundario,idCurso:idCurso},{headers:{Authorization:authorization}})).data;
+}
+
+export async function deleteModulo(idModulo,authorization) {
+    return (await api.delete('/v1/protectedP/modulo/'+idModulo,'',{headers:{Authorization:authorization}})).data;
 }

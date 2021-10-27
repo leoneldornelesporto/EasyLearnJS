@@ -57,7 +57,7 @@ const CadastrarCategoria = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Criar Nova Categoria</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -102,7 +102,7 @@ const CadastrarCategoria = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Alterar Categoria</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
