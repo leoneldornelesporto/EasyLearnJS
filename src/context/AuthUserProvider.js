@@ -1,5 +1,5 @@
 import React, {createContext, useState} from 'react';
-import {doLogin, doLogout, isLogged} from "./AuthHandler";
+import {doLogin, doLogout} from "./AuthHandler";
 import {enviaEmailEsqueciSenha, login, loginV1, v1EsqueciSenha} from "./Controller/LoginController";
 import {postAluno} from "./Controller/AlunoController";
 import Cookies from "js-cookie";

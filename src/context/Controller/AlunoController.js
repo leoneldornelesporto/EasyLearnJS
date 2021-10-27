@@ -2,7 +2,6 @@ import {create} from 'apisauce';
 
 const api = create({
     baseURL: 'https://easylearn-app.herokuapp.com',
-    //baseURL: 'http://localhost:8080',
     headers: { Accept: 'application/json' },
 })
 

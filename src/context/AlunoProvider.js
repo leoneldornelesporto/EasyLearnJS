@@ -29,7 +29,6 @@ export const AlunoProvider = ({children}) => {
     const [privacidadeDoPerfil, setPrivacidadeDoPerfil] = useState(null);
     const [result,setResult]= useState({});
     const [errorMessage, setErrorMessage] = useState({});
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [passwordRepeat, setPasswordRepeat] = useState('');
