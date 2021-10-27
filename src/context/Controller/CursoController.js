@@ -37,12 +37,12 @@ export async function protectedPmodulo(id,authorization) {
     return (await api.get('/v1/protectedA/modulo/'+id,null,{headers:{Authorization:authorization}})).data;
 }
 
-export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,idFormacao,authorization) {
-    return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo, idFormacao:idFormacao},{headers:{Authorization:authorization}})).data;
+export async function salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,idFormacao,authorization) {
+    return (await api.post('v1/protectedP/curso',{idProfessor:idProfessor,nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo,transcricao:transcricao,valorCurso:valorCurso, idFormacao:idFormacao},{headers:{Authorization:authorization}})).data;
 }
 
-export async function atualizarCurso(id,nome,descricao,cargahoraria,idCategoria,imagemIcon,authorization) {
-    return (await api.put('v1/protectedP/curso/'+id,{nome:nome,descricao:descricao,cargahoraria:cargahoraria,idCategoria:idCategoria,imagemIcon:imagemIcon},{headers:{Authorization:authorization}})).data;
+export async function atualizarCurso(id,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,idFormacao,authorization) {
+    return (await api.put('v1/protectedP/curso/'+id,{nome:nome,descricao:descricao,cargahoraria:cargahoraria,categoriaId:categoriaId,imagemIcon:imagemIcon,ativo:ativo,transcricao:transcricao,valorCurso:valorCurso,idFormacao:idFormacao},{headers:{Authorization:authorization}})).data;
 }
 
 export async function removerCurso(id,authorization) {

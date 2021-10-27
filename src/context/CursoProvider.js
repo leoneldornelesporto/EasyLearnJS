@@ -119,20 +119,20 @@ export const CursoProvider = ({children}) => {
         }
     };
 
-    const saveCurso = async (idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,idFormacao) => {
+    const saveCurso = async (idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,idFormacao) => {
         try {
-            const response = await salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,idFormacao,getAuthorization());
+            const response = await salvarCurso(idProfessor,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,idFormacao,getAuthorization());
             setAllCursos(response);
         } catch (response) {
             setErrorMessage(response);
-            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log('Erro ao Salvar Curso.');
             console.log(response);
         }
     };
 
-    const alterarCurso = async (id,nome,descricao,cargahoraria,categoriaId,imagemIcon) => {
+    const alterarCurso = async (id,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,idFormacao) => {
         try {
-            const response = await atualizarCurso(id,nome,descricao,cargahoraria,categoriaId,imagemIcon,getAuthorization());
+            const response = await atualizarCurso(id,nome,descricao,cargahoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,idFormacao,getAuthorization());
             setAllCursos(response);
         } catch (response) {
             setErrorMessage(response);

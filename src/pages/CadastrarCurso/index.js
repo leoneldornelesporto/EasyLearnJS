@@ -16,6 +16,8 @@ const CadastrarCurso = () => {
     const [cargaHoraria,setCargaHoraria] = useState(null);
     const [imagemIcon,setImagemIcon] = useState(null);
     const [ativo,setAtivo] = useState(false);
+    const [transcricao,setTranscricao] = useState(null);
+    const [valorCurso,setValorCurso] = useState(null);
     const [categoriaId,setCategoriaId] = useState(null);
     const [categoriaSelected,setCategoriaSelected] = useState(null);
     const [formacaoId,setFormacaoId] = useState(null);
@@ -87,6 +89,15 @@ const CadastrarCurso = () => {
                                 <tr>
                                     <th scope="row">{value.id}</th>
                                     <td>{value.nome}</td>
+                                    <td>{value.descricao}</td>
+                                    <td>{value.cargaHoraria}</td>
+                                    <td>{value.categoria}</td>
+                                    <td>{value.nomeProfessor}</td>
+                                    <td>{value.biografia}</td>
+                                    <td>{value.linkedin}</td>
+                                    <td>{value.ativo?"Ativo":"Desativado"}</td>
+                                    <td>{value.transcricao}</td>
+                                    <td>{value.valorCurso}</td>
                                     <td>
                                         <td>{editar(value.id)}</td>
                                         <td>{excluir(value.id)}</td>
@@ -132,9 +143,8 @@ const CadastrarCurso = () => {
     }
 
     function criarNovoCurso(){
-
         function salvar(){
-            saveCurso(aluno.id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon,ativo,formacaoId);
+            saveCurso(aluno.id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,formacaoId);
 
             if (cursos!==null){
                 alert("Salvo com Sucesso");
@@ -151,7 +161,7 @@ const CadastrarCurso = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Salvar Curso</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -164,16 +174,22 @@ const CadastrarCurso = () => {
                                     {retornaTodasFormacoes()}
                                     <h5>Nome do Curso</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setNomeCurso(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Nome do Curso" onChange={e => setNomeCurso(e.target.value)}/>
                                     <h5>Descrição</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricao(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira a Descrição" onChange={e => setDescricao(e.target.value)}/>
                                     <h5>Carga Horária</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setCargaHoraria(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira a Carga Horária" onChange={e => setCargaHoraria(e.target.value)}/>
                                     <h5>Icone do Curso</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setImagemIcon(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Link do Icone do Curso" onChange={e => setImagemIcon(e.target.value)}/>
+                                    <h5>Porcentagem da Descrição do Curso</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Porcentagem da Transcrição do curso" onChange={e => setTranscricao(e.target.value)}/>
+                                    <h5>Valor Curso</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira o Valor do Curso" onChange={e => setValorCurso(e.target.value)}/>
                                     <h5>Ativo</h5>
                                     <input type="checkbox" id="exampleInputEmail1" onClick={e => setAtivo(true)}/>
                                 </div>
@@ -191,8 +207,9 @@ const CadastrarCurso = () => {
 
     function editar(id){
 
-        function alterar(e){
-            alterarCurso(id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon);
+        function alterar(){
+
+            alterarCurso(id,nomeCurso,descricao,cargaHoraria,categoriaId,imagemIcon,ativo,transcricao,valorCurso,formacaoId);
 
             if (cursos!==null){
                 alert("Alterado com Sucesso");
@@ -211,7 +228,7 @@ const CadastrarCurso = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Alterar Curso</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -220,6 +237,8 @@ const CadastrarCurso = () => {
                                 <div className="form-group">
                                     <h5>Escolha a categoria</h5>
                                     {retornaCategoria()}
+                                    <h5>Escolha a formacao</h5>
+                                    {retornaTodasFormacoes()}
                                     <h5>Nome do Curso</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Nome do Curso" onChange={e => setNomeCurso(e.target.value)}/>
@@ -231,7 +250,15 @@ const CadastrarCurso = () => {
                                            aria-describedby="emailHelp" placeholder="Insira a Carga Horária" onChange={e => setCargaHoraria(e.target.value)}/>
                                     <h5>Icone do Curso</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a icone do curso" onChange={e => setImagemIcon(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Link do Icone do Curso" onChange={e => setImagemIcon(e.target.value)}/>
+                                    <h5>Porcentagem da Descrição do Curso</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira a Porcentagem da Transcrição do curso" onChange={e => setTranscricao(e.target.value)}/>
+                                    <h5>Valor Curso</h5>
+                                    <input type="text" className="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" placeholder="Insira o Valor do Curso" onChange={e => setValorCurso(e.target.value)}/>
+                                    <h5>Ativo</h5>
+                                    <input type="checkbox" id="exampleInputEmail1" onClick={e => setAtivo(true)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -288,6 +315,15 @@ const CadastrarCurso = () => {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Carga Horaria</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Nome do Professor</th>
+                    <th scope="col">Biografia</th>
+                    <th scope="col">Linkedin</th>
+                    <th scope="col">Ativo</th>
+                    <th scope="col">Transcricao</th>
+                    <th scope="col">Valor Curso</th>
                     <th scope="col">Operações</th>
                 </tr>
                 </thead>

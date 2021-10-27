@@ -201,6 +201,10 @@ const CadastrarAula = () => {
                                 </button>
                             </div>
                             <form onSubmit={alterar}>
+                                <h5>Escolha o Curso</h5>
+                                {retornaCursos()}
+                                <h5>Escolha o Modulo</h5>
+                                {retornaModulos()}
                                 <div className="form-group">
                                     <input type="text" className="form-control" id="exampleInputEmail1"
                                            aria-describedby="emailHelp" placeholder="Insira o Indice" onChange={e => setIndice(e.target.value)}/>

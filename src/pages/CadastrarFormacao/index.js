@@ -71,6 +71,10 @@ const CadastrarFormacao = () => {
                                 <tr>
                                     <th scope="row">{value.id}</th>
                                     <td>{value.titulo}</td>
+                                    <td>{value.descricao}</td>
+                                    <td>{value.subtitulo}</td>
+                                    <td>{value.descricaoSubtitulo}</td>
+                                    <td>{value.categoria}</td>
                                     <td>
                                         <td>{editar(value.id)}</td>
                                         <td>{excluir(value.id)}</td>
@@ -107,7 +111,7 @@ const CadastrarFormacao = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Salvar Formação</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -118,16 +122,16 @@ const CadastrarFormacao = () => {
                                     {retornaCategoria()}
                                     <h5>Titulo</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setTitulo(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Titulo" onChange={e => setTitulo(e.target.value)}/>
                                     <h5>Descrição</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricao(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira a Descrição" onChange={e => setDescricao(e.target.value)}/>
                                     <h5>Subtitulo</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setSubtitulo(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Subtitulo" onChange={e => setSubtitulo(e.target.value)}/>
                                     <h5>Descrição Subtitulo</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricaoSubtitulo(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira a Descrição do Subtitulo" onChange={e => setDescricaoSubtitulo(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -163,7 +167,7 @@ const CadastrarFormacao = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Alterar Formação</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -174,16 +178,16 @@ const CadastrarFormacao = () => {
                                     {retornaCategoria()}
                                     <h5>Titulo</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setTitulo(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Titulo" onChange={e => setTitulo(e.target.value)}/>
                                     <h5>Descrição</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricao(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira a Descrição" onChange={e => setDescricao(e.target.value)}/>
                                     <h5>Subtitulo</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setSubtitulo(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira o Subtitulo" onChange={e => setSubtitulo(e.target.value)}/>
                                     <h5>Descrição Subtitulo</h5>
                                     <input type="text" className="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" placeholder="Insira a Categoria" onChange={e => setDescricaoSubtitulo(e.target.value)}/>
+                                           aria-describedby="emailHelp" placeholder="Insira a Descrição do Subtitulo" onChange={e => setDescricaoSubtitulo(e.target.value)}/>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -215,7 +219,7 @@ const CadastrarFormacao = () => {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="TituloModalLongoExemplo">Tem certeza que deseja excluir?</h5>
+                                <h5 className="modal-title" id="TituloModalLongoExemplo">Tem certeza que deseja excluir formação?</h5>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -239,7 +243,11 @@ const CadastrarFormacao = () => {
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nome</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Subtitulo</th>
+                    <th scope="col">Descrição Subtitulo</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Operações</th>
                 </tr>
                 </thead>
