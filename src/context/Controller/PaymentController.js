@@ -16,6 +16,10 @@ export async function findPaymentByUuidCursoAndIdAluno(uuidCurso,idAluno,authori
 }
 
 export async function savePayment(idPayment,status,uuidCurso,idAluno,authorization) {
+    console.log(idPayment);
+    console.log(status);
+    console.log(uuidCurso);
+    console.log(idAluno);
     return (await api.post('v1/protectedA/payment',{idPayment:idPayment,status:status,uuidCurso:uuidCurso,idAluno:idAluno},{headers:{Authorization:authorization}})).data;
 }
 

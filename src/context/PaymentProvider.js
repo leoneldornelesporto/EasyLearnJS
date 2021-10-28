@@ -15,6 +15,7 @@ export const PaymentProvider = ({children}) => {
         try {
             const response = await savePayment(idPayment,status,uuidCurso,idAluno,getAuthorization());
             setResposta(response);
+            console.log(response)
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
