@@ -12,6 +12,8 @@ import {FormacaoProvider} from "./context/FormacaoProvider";
 import {AulaProvider} from "./context/AulaProvider";
 import {EmailProvider} from "./context/EmailProvider";
 import {PaymentProvider} from "./context/PaymentProvider";
+import {ProfessorProvider} from "./context/ProfessorProvider";
+import {TutorProvider} from "./context/TutorProvider";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       <ModuloProvider>
       <CategoriaProvider>
       <CursoProvider>
+      <TutorProvider>
+      <ProfessorProvider>
       <AlunoProvider>
       <AuthUserProvider>
       <BrowserRouter>
@@ -32,6 +36,8 @@ function App() {
       </BrowserRouter>
       </AuthUserProvider>
       </AlunoProvider>
+      </ProfessorProvider>
+      </TutorProvider>
       </CursoProvider>
       </CategoriaProvider>
       </ModuloProvider>

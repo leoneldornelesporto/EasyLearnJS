@@ -1,27 +1,54 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from "react-router-dom";
 import {AlunoContext} from "../../context/AlunoProvider";
+import {ProfessorContext} from "../../context/ProfessorProvider";
+import {TutorContext} from "../../context/TutorProvider";
 
 const Cadastro = () => {
 
-    const {username,setUsername,cpf,setCpf,password,setPassword,passwordRepeat,setPasswordRepeat,email,setEmail,result,salvarAluno} = useContext(AlunoContext);
+    const [cpf, setCpf] = useState(null);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordRepeat, setPasswordRepeat] = useState('');
+    const [email, setEmail] = useState('');
+
+    const {result,salvarAluno} = useContext(AlunoContext);
+    const {resultado,salvarProfessor} = useContext(ProfessorContext);
+    const {re,salvarTutor} = useContext(TutorContext);
+    const [categoriaSelected,setCategoriaSelected] = useState(null);
 
     async function cadastro(e){
         e.preventDefault();
 
         if (password === passwordRepeat){
-            salvarAluno(email,password,username,cpf);
 
-            if(result.status===400){
-                alert("Usuário já Cadastrado =(");
-            }else{
-                if(result.id !== undefined) {
-                    alert("Cadastro realizado com sucesso =)");
-                    window.location.href = "/signin";
-                }else{
-                    alert("Erro Interno, favor entrar em contato com a EasyLearn");
+            if (categoriaSelected==="Aluno"){
+                salvarAluno(email,password,username,cpf);
+            }
+            else{
+                if (categoriaSelected==="Professor"){
+                    salvarProfessor(username,cpf,email,password);
+                }
+                else {
+                    salvarTutor(username,cpf,email,password);
                 }
             }
+
+            try{
+                if(result.status===400 || resultado.status===400 || re.status===400){
+                    alert("Usuário já Cadastrado =(");
+                }else{
+                    if(result.id !== undefined || resultado.id !== undefined || re.id !== undefined ) {
+                        alert("Cadastro realizado com sucesso =)");
+                        window.location.href = "/signin";
+                    }else{
+                        alert("Erro Interno, favor entrar em contato com a EasyLearn");
+                    }
+                }
+            }catch (e) {
+                alert("Usuário já Cadastrado =(");
+            }
+
         }else{
             alert("Senha Incorreta");
         }
@@ -55,6 +82,26 @@ const Cadastro = () => {
                             <div class="group">
                                 <label for="pass" class="label">Email</label>
                                 <input id="pass" type="text" class="input" onChange={e=>setEmail(e.target.value)}/>
+                            </div>
+                            <div className="group">
+                            <div className="dropdown">
+                                <button className="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    {categoriaSelected===null?"Escolha o Papel":categoriaSelected}
+                                </button>
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a>
+                                        <a className="dropdown-item"  onClick={e => setCategoriaSelected("Aluno")}>Aluno</a>
+                                    </a>
+                                    <a>
+                                        <a className="dropdown-item"  onClick={e => setCategoriaSelected("Professor")}>Professor</a>
+                                    </a>
+                                    <a>
+                                        <a className="dropdown-item"  onClick={e => setCategoriaSelected("Tutor")}>Tutor</a>
+                                    </a>
+                                </div>
+                            </div>
                             </div>
                             <div class="group">
                                 <input type="submit" class="button" value="Cadastrar"/>
