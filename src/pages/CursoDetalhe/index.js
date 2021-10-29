@@ -27,6 +27,10 @@ const CursoDetalhe = () => {
     console.log(Cookies.get("idUser"));
     console.log(resposta);
 
+    verificarMatriculaPorId(Cookies.get("idUser"),id);
+
+    console.log(matriculas)
+
     function imagemAvatar() {
         if(cursos.avatar!==null) {
             return (

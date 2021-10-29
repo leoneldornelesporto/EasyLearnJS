@@ -47,9 +47,9 @@ export const MatriculaProvider = ({children}) => {
         }
     };
 
-    const verificarMatriculaPorId = async (idAluno,idCurso,authorization) => {
+    const verificarMatriculaPorId = async (idAluno,idCurso) => {
         try {
-            const response = await verificarSeEstouMatriculadoEmAlgumCursoPorId(idAluno,idCurso,authorization);
+            const response = await verificarSeEstouMatriculadoEmAlgumCursoPorId(idAluno,idCurso,getAuthorization());
             setMatriculas(response);
         } catch (response) {
             setErrorMessage(response);
