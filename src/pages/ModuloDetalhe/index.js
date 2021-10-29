@@ -41,7 +41,7 @@ const ModuloDetalhe = () => {
         verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
         if (verifica===null){
             verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
-            verificaProximo(Cookies.get('UuidCurso'),id,getAuthorization());
+            verificaProximo(id);
         }
     }
     catch (e) {
