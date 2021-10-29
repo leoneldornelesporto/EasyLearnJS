@@ -15,7 +15,6 @@ const CursoDetalhe = () => {
 
     Cookies.set("UuidCurso",id);
 
-
     if (cursos===null){
         retornarCursosPorUuid(id);
     }

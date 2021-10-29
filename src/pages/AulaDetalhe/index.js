@@ -15,6 +15,10 @@ const AulaDetalhe = () => {
 
     console.log(id)
 
+    if(verifica===null){
+        verificaProximo(id);
+    }
+
     if(aula === null){
         retornarAulasPorId(id);
     }

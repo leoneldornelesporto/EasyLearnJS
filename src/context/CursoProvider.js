@@ -99,8 +99,8 @@ export const CursoProvider = ({children}) => {
         }
     };
 
-    const verificaProximo = async (uuid,id,authorization) => {
-        getAulaByUuidCursoAndIdAula(uuid,++id,authorization).then(function(result) {
+    const verificaProximo = async (id) => {
+        getAulaByUuidCursoAndIdAula(++id,getAuthorization()).then(function(result) {
             if(result!==null){
                 return setVerifica(id)
             }
