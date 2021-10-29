@@ -7,7 +7,13 @@ import {
     getCursoByUuid,
     getCursoByUuidAndIdAula
 } from "./Controller/CursoController";
-import {deletarAula, editarAula, returnAllAulas, salvarAula} from "./Controller/AulaController";
+import {
+    deletarAula,
+    editarAula,
+    getAulaByUuidCursoAndIdAula,
+    returnAllAulas,
+    salvarAula
+} from "./Controller/AulaController";
 import {getAuthorization} from "./AuthHandler";
 
 export const AulaContext = createContext({});
@@ -23,6 +29,17 @@ export const AulaProvider = ({children}) => {
         try {
             const response = await getAllCursos();
             setAllCursos(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const retornarAulasPorId = async (id) => {
+        try {
+            const response = await getAulaByUuidCursoAndIdAula(id);
+            setAula(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -166,6 +183,7 @@ export const AulaProvider = ({children}) => {
                 saveAula,
                 deleteAula,
                 updateAula,
+                retornarAulasPorId,
             }}>
             {children}
         </AulaContext.Provider>

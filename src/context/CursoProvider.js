@@ -88,9 +88,9 @@ export const CursoProvider = ({children}) => {
         }
     };
 
-    const retornarAulaPorUuidCursoEIdAula = async (uuid,id,authorization) => {
+    const retornarAulaPorUuidCursoEIdAula = async (id) => {
         try {
-            const response = await getAulaByUuidCursoAndIdAula(uuid,id,authorization);
+            const response = await getAulaByUuidCursoAndIdAula(id,getAuthorization());
             setAula(response);
         } catch (response) {
             setErrorMessage(response);

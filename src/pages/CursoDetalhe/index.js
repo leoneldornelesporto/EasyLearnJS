@@ -32,7 +32,7 @@ const CursoDetalhe = () => {
         if (matriculas!==null){
             if(matriculas.alunoDto.id == Cookies.get("idUser")){
                 return(
-                    <a href="/courses/flappybirdunity1/tryToEnroll"
+                    <a href={"/aula_detalhe="+cursos.moduloDto[0].aulaDto[0].id}
                        className="course-header-button startContinue-button bootcamp-primary-button-theme"
                        aria-label="Iniciar Curso" disabled="">
                         Acessar Curso
