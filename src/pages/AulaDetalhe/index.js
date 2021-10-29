@@ -4,15 +4,19 @@ import Cookies from "js-cookie";
 import {getAuthorization, isLogged} from "../../context/AuthHandler";
 import {CursoContext} from "../../context/CursoProvider";
 import {MatriculaContext} from "../../context/MatriculaContext";
+import {AulaContext} from "../../context/AulaProvider";
 
 const AulaDetalhe = () => {
 
-    const {cursos,modulo,aula,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
+    const {cursos,modulo,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
+    const {aula,retornarAulasPorId} = useContext(AulaContext);
     const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso} = useContext(MatriculaContext);
     const { id } = useParams();
 
+    console.log(id)
+
     if(aula === null){
-        retornarAulaPorUuidCursoEIdAula(id);
+        retornarAulasPorId(id);
     }
 
     if (cursos===null){

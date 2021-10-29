@@ -38,7 +38,7 @@ export const AulaProvider = ({children}) => {
 
     const retornarAulasPorId = async (id) => {
         try {
-            const response = await getAulaByUuidCursoAndIdAula(id);
+            const response = await getAulaByUuidCursoAndIdAula(id,getAuthorization());
             setAula(response);
         } catch (response) {
             setErrorMessage(response);
