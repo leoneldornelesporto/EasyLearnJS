@@ -10,10 +10,11 @@ const CursoDetalhe = () => {
 
     const { id } = useParams();
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
-    const {matriculas,salvarMatricula,verificarMatriculaPorId,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
+    const {matriculas,salvarMatricula,verificarMatriculaPorUuid,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
     const {resposta, pagamentos, salvarPagamento, retornaPagamentoPeloUuidCursoEIdAluno} = useContext(PaymentContext);
 
     Cookies.set("UuidCurso",id);
+
 
     if (cursos===null){
         retornarCursosPorUuid(id);
@@ -23,13 +24,32 @@ const CursoDetalhe = () => {
         retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
     }
 
-    console.log(cursos);
-    console.log(Cookies.get("idUser"));
-    console.log(resposta);
+    if(matriculas === null){
+        verificarMatriculaPorUuid(Cookies.get("idUser"),id);
+    }
 
-    verificarMatriculaPorId(Cookies.get("idUser"),id);
-
-    console.log(matriculas)
+    function verificaMatricula(){
+        if (matriculas!==null){
+            if(matriculas.alunoDto.id == Cookies.get("idUser")){
+                return(
+                    <a href="/courses/flappybirdunity1/tryToEnroll"
+                       className="course-header-button startContinue-button bootcamp-primary-button-theme"
+                       aria-label="Iniciar Curso" disabled="">
+                        Acessar Curso
+                    </a>
+                   )
+            }
+        }
+        else{
+            return (
+                <a href={"/payment="+id}
+                   className="course-header-button startContinue-button bootcamp-primary-button-theme"
+                   aria-label="Comprar Curso" disabled="" target="_blank">
+                    Comprar Curso
+                </a>
+            )
+        }
+    }
 
     function imagemAvatar() {
         if(cursos.avatar!==null) {
@@ -183,20 +203,8 @@ const CursoDetalhe = () => {
                                     <div className="course-header-headline-actions bootcamp-banner-background-theme">
                                         <div className="container">
 
-                                            {
-                                                resposta===null?
-                                                    <a href={"/payment="+id}
-                                                       className="course-header-button startContinue-button bootcamp-primary-button-theme"
-                                                       aria-label="Comprar Curso" disabled="" target="_blank">
-                                                        Comprar Curso
-                                                    </a>
-                                                    :
-                                                    <a href="/courses/flappybirdunity1/tryToEnroll"
-                                                       className="course-header-button startContinue-button bootcamp-primary-button-theme"
-                                                       aria-label="Iniciar Curso" disabled="">
-                                                        Acessar Curso
-                                                    </a>
-                                            }
+                                            {verificaMatricula()}
+
                                             <div className="course-header-button-wrapper">
                                                 <button className="course-header-button studyPlan-button"
                                                         aria-label="Adicionar a um Plano de Estudos">Adicionar a um

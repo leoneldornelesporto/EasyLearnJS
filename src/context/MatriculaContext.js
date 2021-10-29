@@ -58,9 +58,9 @@ export const MatriculaProvider = ({children}) => {
         }
     };
 
-    const verificarMatriculaPorUuid = async (idAluno,idCurso,authorization) => {
+    const verificarMatriculaPorUuid = async (idAluno,idCurso) => {
         try {
-            const response = await verificarSeEstouMatriculadoEmAlgumCursoPorUuid(idAluno,idCurso,authorization);
+            const response = await verificarSeEstouMatriculadoEmAlgumCursoPorUuid(idAluno,idCurso,getAuthorization());
             setMatriculas(response);
         } catch (response) {
             setErrorMessage(response);
