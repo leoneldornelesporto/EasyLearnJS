@@ -11,9 +11,9 @@ export const ModuloProvider = ({children}) => {
     const [opcao, setOpcao] = useState('');
     const [errorMessage, setErrorMessage] = useState({});
 
-    const retornarModuloPeloId = async (idModulo,authorization) => {
+    const retornarModuloPeloId = async (idModulo) => {
         try {
-            const response = await findModuloById(idModulo,authorization);
+            const response = await findModuloById(idModulo,getAuthorization());
             setModulo(response);
 
             console.log(modulo);

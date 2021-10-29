@@ -9,15 +9,11 @@ import {AulaContext} from "../../context/AulaProvider";
 const AulaDetalhe = () => {
 
     const {cursos,modulo,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
-    const {aula,retornarAulasPorId} = useContext(AulaContext);
+    const {aula,idAula,retornarAulasPorId,retornarAulasPorIdModulo} = useContext(AulaContext);
     const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso} = useContext(MatriculaContext);
     const { id } = useParams();
 
     console.log(id)
-
-    if(verifica===null){
-        verificaProximo(id);
-    }
 
     if(aula === null){
         retornarAulasPorId(id);
@@ -25,6 +21,10 @@ const AulaDetalhe = () => {
 
     if (cursos===null){
         retornarCursosPorUuid(Cookies.get('UuidCurso'));
+    }
+
+    if (idAula===null){
+        retornarAulasPorIdModulo(id);
     }
 
     console.log(aula)
@@ -246,15 +246,16 @@ const AulaDetalhe = () => {
                             <ul className="task-menu-nav-list">
                                 {
                                     cursos.moduloDto.map((value, index) => {
-                                        return(
-                                        value.aulaDto.map((value, index) => {
+                                        if(value.id===idAula){
                                             return(
-                                                <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
-                                                    <a href={"/aula_detalhe=" + value.id}
-                                                       className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
-                                                        {verificarSeVisualizouIcon(value.id)}
-                                                        <span className="task-menu-nav-item-number">0{++index}</span>
-                                                        <span className="task-menu-nav-item-text">
+                                                value.aulaDto.map((value, index) => {
+                                                    return(
+                                                        <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
+                                                            <a href={"/aula_detalhe=" + value.id}
+                                                               className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+                                                                {verificarSeVisualizouIcon(value.id)}
+                                                                <span className="task-menu-nav-item-number">0{++index}</span>
+                                                                <span className="task-menu-nav-item-text">
                                                   <span className="task-menu-nav-item-title" title="Introdução">
                                                   {value.titulo}
                                                   </span>
@@ -263,11 +264,12 @@ const AulaDetalhe = () => {
                                                         title="Ir para o Vídeo">02min</span>
                                                   </span>
                                                   </span>
-                                                    </a>
-                                                </li>
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })
                                             )
-                                        })
-                                        )
+                                        }
                                     })
                                 }
                             </ul>

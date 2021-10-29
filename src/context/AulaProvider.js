@@ -10,7 +10,7 @@ import {
 import {
     deletarAula,
     editarAula,
-    getAulaByUuidCursoAndIdAula,
+    getAulaByUuidCursoAndIdAula, getAulaByUuidCursoAndIdAulaModulo,
     returnAllAulas,
     salvarAula
 } from "./Controller/AulaController";
@@ -22,6 +22,7 @@ export const AulaProvider = ({children}) => {
 
     const [curso, setAllCursos] = useState([]);
     const [aula, setAula] = useState(null);
+    const [idAula, setIdAula] = useState(null);
     const [errorMessage, setErrorMessage] = useState({});
     const [modulo, setModulo] = useState('');
 
@@ -40,6 +41,17 @@ export const AulaProvider = ({children}) => {
         try {
             const response = await getAulaByUuidCursoAndIdAula(id,getAuthorization());
             setAula(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const retornarAulasPorIdModulo = async (id) => {
+        try {
+            const response = await getAulaByUuidCursoAndIdAulaModulo(id,getAuthorization());
+            setIdAula(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -166,6 +178,7 @@ export const AulaProvider = ({children}) => {
         <AulaContext.Provider
             value={{
                 aula,
+                idAula,
                 setAula,
                 curso,
                 setAllCursos,
@@ -184,6 +197,7 @@ export const AulaProvider = ({children}) => {
                 deleteAula,
                 updateAula,
                 retornarAulasPorId,
+                retornarAulasPorIdModulo,
             }}>
             {children}
         </AulaContext.Provider>
