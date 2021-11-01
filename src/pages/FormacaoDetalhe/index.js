@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {FormacaoContext} from "../../context/FormacaoProvider";
 import {MatriculaContext} from "../../context/MatriculaContext";
 import Cookies from "js-cookie";
+import {isLogged} from "../../context/AuthHandler";
 
 const FormacaoDetalhe = () => {
 
@@ -149,9 +150,10 @@ const FormacaoDetalhe = () => {
         }
     }
 
-    function percentagemCurso(cursosDetalhe, i) {
+    function percentagemCurso(cursosDetalhe) {
+        console.log(porcentagemCurso)
         try{
-            retornaDadosDoCursoMatriculado(Cookies.get('idUser'),cursosDetalhe[i].uuid);
+            retornaDadosDoCursoMatriculado(Cookies.get('idUser'),cursosDetalhe.uuid);
             const divStyle = {
                 backgroundImage: 'linear-gradient(to right, #7ee195, #7ee195 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
             };
@@ -165,35 +167,6 @@ const FormacaoDetalhe = () => {
         }
         catch (e) {
             console.log(e)
-        }
-    }
-
-    function cursos(){
-        try{
-            for(let i=0; i<cursosDetalhe.length; i++){
-
-                return(
-                    <li className="learning-content__item learning-content__item--kind-course"
-                    >
-                        <a className="learning-content__link  "
-                           href={"curso_detalhe="+cursosDetalhe[i].uuid} target="_blank">
-                            <img className="learning-content__icon"
-                                 src={cursosDetalhe[i].imagemIcon}/>
-                            <div className="learning-content__info">
-                                <div className="learning-content__progress ">
-                                    {percentagemCurso(cursosDetalhe,i)}
-                                </div>
-                                <span className="learning-content__kind" >Curso
-                              </span>
-                                <span className="learning-content__name">{cursosDetalhe[i].nome}</span>
-                            </div>
-                        </a>
-                    </li>
-                )
-            }
-        }
-        catch (e) {
-            return (<></>);
         }
     }
 
@@ -238,73 +211,99 @@ const FormacaoDetalhe = () => {
     }
 
     function body(){
-        try{
-            return(
-                <main className="formacao">
-                    {headerFormacao()}
-                    <section className="formacao__info">
-                        <div className="container">
-                            <div className="formacao__info-categoria">
-                                Esta formação faz parte da categoria <a href="" className="formacao__info-categoria-link">{cursosDetalhe[0].categoria}</a>
-                            </div>
-                            <div className="formacao__info-conclusao">
-                                <div className="formacao__info-icon formacao__info-icon-conclusao"></div>
-                                <div className="formacao__info-content">
-                                    <div className="formacao__info-destaque">{horasTotais()}h</div>
-                                    <p>Para conclusão</p>
+        if (isLogged()){
+            try{
+                return(
+                    <main className="formacao">
+                        {headerFormacao()}
+                        <section className="formacao__info">
+                            <div className="container">
+                                <div className="formacao__info-categoria">
+                                    Esta formação faz parte da categoria <a href="" className="formacao__info-categoria-link">{cursosDetalhe[0].categoria}</a>
+                                </div>
+                                <div className="formacao__info-conclusao">
+                                    <div className="formacao__info-icon formacao__info-icon-conclusao"></div>
+                                    <div className="formacao__info-content">
+                                        <div className="formacao__info-destaque">{horasTotais()}h</div>
+                                        <p>Para conclusão</p>
+                                    </div>
+                                </div>
+                                <div className="formacao__info-cursos">
+                                    <div className="formacao__info-icon formacao__info-icon-cursos"></div>
+                                    <div className="formacao__info-content">
+                                        <div className="formacao__info-destaque">{quantidadeTotalCursos()}</div>
+                                        <p>Cursos</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="formacao__info-cursos">
-                                <div className="formacao__info-icon formacao__info-icon-cursos"></div>
-                                <div className="formacao__info-content">
-                                    <div className="formacao__info-destaque">{quantidadeTotalCursos()}</div>
-                                    <p>Cursos</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    <section className="formacao-sobre formacao-sobre--logado ">
-                        <div className="container">
-                            <div id="sobre" className="formacao-sobre-mercado container-author-summary-wrapper">
-                                <h4 className="formacao-mercado-titulo formacao__text-color--programacao">{formacao[0].subtitulo}</h4>
-                                <div className="formacao-prerequisitos-texto">
-                                    <p>{formacao[0].descricaoSubtitulo}</p>
+                        <section className="formacao-sobre formacao-sobre--logado ">
+                            <div className="container">
+                                <div id="sobre" className="formacao-sobre-mercado container-author-summary-wrapper">
+                                    <h4 className="formacao-mercado-titulo formacao__text-color--programacao">{formacao[0].subtitulo}</h4>
+                                    <div className="formacao-prerequisitos-texto">
+                                        <p>{formacao[0].descricaoSubtitulo}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    <section id="instrutores" className="formacao-instrutores">
-                        <div className="container">
-                            <h3 className="formacao-instrutores-titulo formacao__text-color--programacao">Com quem você irá
-                                aprender</h3>
-                            <ul className="formacao-instrutores-lista">
-                                {professor()}
-                            </ul>
-                        </div>
-                    </section>
-                    <section id="passo-a-passo" className="formacao-passos">
-                        <div className="container">
-                            <div className="formacao-passos-fundo">
-                                <h3 className="formacao-passos-titulo" >Passo a passo</h3>
-                                <ol className="formacao-passos-lista">
-                                    <li id="unity-e-programacao" className="formacao-passos-passo">
-                                        <div className="formacao-passo-conteudo formacao-passo-conteudo--expanded">
-                                            <ul className="learning-content ">
-                                                {cursos()}
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ol>
+                        </section>
+                        <section id="instrutores" className="formacao-instrutores">
+                            <div className="container">
+                                <h3 className="formacao-instrutores-titulo formacao__text-color--programacao">Com quem você irá
+                                    aprender</h3>
+                                <ul className="formacao-instrutores-lista">
+                                    {professor()}
+                                </ul>
                             </div>
-                        </div>
-                    </section>
-                </main>
-            )
+                        </section>
+                        <section id="passo-a-passo" className="formacao-passos">
+                            <div className="container">
+                                <div className="formacao-passos-fundo">
+                                    <h3 className="formacao-passos-titulo" >Passo a passo</h3>
+                                    <ol className="formacao-passos-lista">
+                                        <li id="unity-e-programacao" className="formacao-passos-passo">
+                                            <div className="formacao-passo-conteudo formacao-passo-conteudo--expanded">
+                                                <ul className="learning-content ">
+                                                    {
+                                                        cursosDetalhe.map((value, index)=>{
+                                                            return (
+                                                                <li className="learning-content__item learning-content__item--kind-course"
+                                                                >
+                                                                    <a className="learning-content__link  "
+                                                                       href={"curso_detalhe="+value.uuid} target="_blank">
+                                                                        <img className="learning-content__icon"
+                                                                             src={value.imagemIcon}/>
+                                                                        <div className="learning-content__info">
+                                                                            <div className="learning-content__progress ">
+                                                                                {percentagemCurso(value)}
+                                                                            </div>
+                                                                            <span className="learning-content__kind" >Curso
+                              </span>
+                                                                            <span className="learning-content__name">{value.nome}</span>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                            );
+                                                        })
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                )
+            }
+            catch (e) {
+                return(<></>)
+            }
+        }else{
+            window.location.href = '/signin'; //manda para a rota home
         }
-        catch (e) {
-            return(<></>)
-        }
+
     }
 
     return(

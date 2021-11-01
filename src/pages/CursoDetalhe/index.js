@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import {CursoContext} from "../../context/CursoProvider";
 import {MatriculaContext} from "../../context/MatriculaContext";
 import {PaymentContext} from "../../context/PaymentProvider";
+import {ModuloContext} from "../../context/ModuloContext";
 
 const CursoDetalhe = () => {
 
@@ -12,18 +13,25 @@ const CursoDetalhe = () => {
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {matriculas,salvarMatricula,verificarMatriculaPorUuid,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
     const {resposta, pagamentos, salvarPagamento, retornaPagamentoPeloUuidCursoEIdAluno} = useContext(PaymentContext);
+    const {modulo,retornarModuloPeloIdCurso} = useContext(ModuloContext);
 
     Cookies.set("UuidCurso",id);
 
     if (cursos===null){
         retornarCursosPorUuid(id);
+        retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
+        verificarMatriculaPorUuid(Cookies.get("idUser"),id);
     }
 
     if(resposta === null){
+        retornarCursosPorUuid(id);
         retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
+        verificarMatriculaPorUuid(Cookies.get("idUser"),id);
     }
 
     if(matriculas === null){
+        retornarCursosPorUuid(id);
+        retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
         verificarMatriculaPorUuid(Cookies.get("idUser"),id);
     }
 

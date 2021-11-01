@@ -1,5 +1,12 @@
 import React, {createContext, useState} from 'react';
-import {deleteModulo, findAllModulos, findModuloById, saveModulo, updateModulo} from "./Controller/ModuloController";
+import {
+    deleteModulo,
+    findAllModulos,
+    findModuloById,
+    findModuloByIdCurso,
+    saveModulo,
+    updateModulo
+} from "./Controller/ModuloController";
 import {getAuthorization} from "./AuthHandler";
 
 export const ModuloContext = createContext({});
@@ -19,6 +26,17 @@ export const ModuloProvider = ({children}) => {
             console.log(modulo);
             setIdAula(modulo.aulaDto[1].id);
             console.log(idAula);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+    const retornarModuloPeloIdCurso = async (idCurso) => {
+        try {
+            const response = await findModuloByIdCurso(idCurso,getAuthorization());
+            setModulo(response);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -85,7 +103,8 @@ export const ModuloProvider = ({children}) => {
                 retornaTodosOsModulos,
                 salvarModulo,
                 alterarModulo,
-                deletarModulo
+                deletarModulo,
+                retornarModuloPeloIdCurso,
             }}>
             {children}
         </ModuloContext.Provider>
