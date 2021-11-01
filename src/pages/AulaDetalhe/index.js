@@ -150,7 +150,7 @@ const AulaDetalhe = () => {
                                         >Próxima Atividade</a>
                                     </div>
                                     :
-                                    cursoMatriculado === true?
+                                    porcentagemCurso === 100?
                                         <div className="task-body-header-actions">
                                             <a href={"/certificado=" + cursos.uuid} target="_blank" aria-hidden="true"
                                                className="task-actions-button task-body-actions-button task-actions-button-next bootcamp-next-button bootcamp-primary-button-theme"

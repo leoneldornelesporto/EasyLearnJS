@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import Cookies from "js-cookie";
-import {getAuthorization, isLogged} from "../../context/AuthHandler";
+import {isLogged} from "../../context/AuthHandler";
 import {CursoContext} from "../../context/CursoProvider";
 import {MatriculaContext} from "../../context/MatriculaContext";
 import {AulaContext} from "../../context/AulaProvider";
@@ -160,7 +160,7 @@ const ModuloDetalhe = () => {
                                         >Próxima Atividade</a>
                                     </div>
                                     :
-                                    cursoMatriculado === true?
+                                    porcentagemCurso === 100?
                                         <div className="task-body-header-actions">
                                             <a href={"/certificado=" + cursos.uuid} target="_blank" aria-hidden="true"
                                                className="task-actions-button task-body-actions-button task-actions-button-next bootcamp-next-button bootcamp-primary-button-theme"
