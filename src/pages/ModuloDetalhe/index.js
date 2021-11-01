@@ -48,7 +48,7 @@ const ModuloDetalhe = () => {
         console.log(e)
     }
 
-    console.log(cursoMatriculado)
+    console.log(aula)
 
     useEffect(()=>{
         try {
@@ -253,15 +253,16 @@ const ModuloDetalhe = () => {
                             </h2>
                             <ul className="task-menu-nav-list">
                                 {
-                                            modulo.aulaDto.map((value, index) => {
-
-                                                    return(
-                                                        <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
-                                                            <a href={"/aula_detalhe=" + value.id}
-                                                               className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
-                                                                {verificarSeVisualizouIcon(value.id)}
-                                                                <span className="task-menu-nav-item-number">0{++index}</span>
-                                                                <span className="task-menu-nav-item-text">
+                                    modulo.map((value, index) => {
+                                        return(
+                                            value.aulaDto.map((value, index) => {
+                                                return(
+                                                    <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
+                                                        <a href={"/aula_detalhe=" + value.id}
+                                                           className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+                                                            {verificarSeVisualizouIcon(value.id)}
+                                                            <span className="task-menu-nav-item-number">0{++index}</span>
+                                                            <span className="task-menu-nav-item-text">
                                                   <span className="task-menu-nav-item-title" title="Introdução">
                                                   {value.titulo}
                                                   </span>
@@ -270,11 +271,11 @@ const ModuloDetalhe = () => {
                                                         title="Ir para o Vídeo">02min</span>
                                                   </span>
                                                   </span>
-                                                            </a>
-                                                        </li>
-                                                    )
-
-
+                                                        </a>
+                                                    </li>
+                                                )
+                                            })
+                                        )
                                     })
                                 }
                             </ul>
