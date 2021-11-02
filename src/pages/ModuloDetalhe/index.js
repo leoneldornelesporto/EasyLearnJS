@@ -11,15 +11,9 @@ const ModuloDetalhe = () => {
 
     const {cursos,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
     const {aula,idAula,retornarAulasPorId,retornarAulasPorIdModulo} = useContext(AulaContext);
-    const {modulo,retornarModuloPeloId} = useContext(ModuloContext);
+    const {modulo,moduloId,retornarModuloPeloId,retornarModuloPeloIdCurso} = useContext(ModuloContext);
     const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso} = useContext(MatriculaContext);
     const { id } = useParams();
-
-    console.log(id)
-
-    if(modulo===null){
-        retornarModuloPeloId(id);
-    }
 
     if(verifica===null){
         verificaProximo(id);
@@ -37,9 +31,16 @@ const ModuloDetalhe = () => {
         retornarAulasPorIdModulo(id);
     }
 
+    if(cursos!==null){
+        retornarModuloPeloIdCurso(cursos.id);
+    }
+
+    retornarModuloPeloId(id);
+
+
     try{
-        verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
-        if (verifica===null){
+        console.log(moduloId.length)
+        if (verifica.status===null){
             verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
             verificaProximo(id);
         }
@@ -47,8 +48,6 @@ const ModuloDetalhe = () => {
     catch (e) {
         console.log(e)
     }
-
-    console.log(aula)
 
     useEffect(()=>{
         try {
@@ -252,17 +251,17 @@ const ModuloDetalhe = () => {
                                 <span>1 de 12</span>
                             </h2>
                             <ul className="task-menu-nav-list">
+
                                 {
-                                    modulo.map((value, index) => {
-                                        return(
-                                            value.aulaDto.map((value, index) => {
-                                                return(
-                                                    <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
-                                                        <a href={"/aula_detalhe=" + value.id}
-                                                           className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
-                                                            {verificarSeVisualizouIcon(value.id)}
-                                                            <span className="task-menu-nav-item-number">0{++index}</span>
-                                                            <span className="task-menu-nav-item-text">
+                                    moduloId.length!==undefined?
+                                        moduloId[0].aulaDto.map((value, index) => {
+                                                    return(
+                                                        <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
+                                                            <a href={"/aula_detalhe=" + value.id}
+                                                               className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+                                                                {verificarSeVisualizouIcon(value.id)}
+                                                                <span className="task-menu-nav-item-number">0{++index}</span>
+                                                                <span className="task-menu-nav-item-text">
                                                   <span className="task-menu-nav-item-title" title="Introdução">
                                                   {value.titulo}
                                                   </span>
@@ -271,12 +270,31 @@ const ModuloDetalhe = () => {
                                                         title="Ir para o Vídeo">02min</span>
                                                   </span>
                                                   </span>
-                                                        </a>
-                                                    </li>
-                                                )
-                                            })
-                                        )
-                                    })
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })
+                                        :
+                                        moduloId.aulaDto.map((value, index) => {
+                                            return(
+                                                <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
+                                                    <a href={"/aula_detalhe=" + value.id}
+                                                       className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
+                                                        {verificarSeVisualizouIcon(value.id)}
+                                                        <span className="task-menu-nav-item-number">0{++index}</span>
+                                                        <span className="task-menu-nav-item-text">
+                                                  <span className="task-menu-nav-item-title" title="Introdução">
+                                                  {value.titulo}
+                                                  </span>
+                                                  <span className="task-menu-nav-item-infos">
+                                                  <span className="task-menu-nav-item-videoDuration"
+                                                        title="Ir para o Vídeo">02min</span>
+                                                  </span>
+                                                  </span>
+                                                    </a>
+                                                </li>
+                                            )
+                                        })
                                 }
                             </ul>
                         </nav>

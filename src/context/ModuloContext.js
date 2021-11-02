@@ -15,17 +15,15 @@ export const ModuloProvider = ({children}) => {
 
     const [idAula, setIdAula] = useState('');
     const [modulo, setModulo] = useState(null);
+    const [moduloId, setModuloId] = useState(null);
     const [opcao, setOpcao] = useState('');
     const [errorMessage, setErrorMessage] = useState({});
 
     const retornarModuloPeloId = async (idModulo) => {
         try {
             const response = await findModuloById(idModulo,getAuthorization());
-            setModulo(response);
-
-            console.log(modulo);
+            setModuloId(response);
             setIdAula(modulo.aulaDto[1].id);
-            console.log(idAula);
         } catch (response) {
             setErrorMessage(response);
             console.log('Erro ao Retornar Cursos por Uuid.');
@@ -97,6 +95,7 @@ export const ModuloProvider = ({children}) => {
                 setModulo,
                 opcao,
                 setOpcao,
+                moduloId,
                 errorMessage,
                 setErrorMessage,
                 retornarModuloPeloId,

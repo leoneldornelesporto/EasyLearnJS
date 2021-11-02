@@ -6,11 +6,11 @@ const api = create({
 })
 
 export async function findModuloById(idModulo,authorization) {
-    return (await api.get('v1/protectedA/modulo/'+idModulo,'authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo/'+idModulo,'',{headers:{Authorization:authorization}})).data;
 }
 
 export async function findModuloByIdCurso(idCurso,authorization) {
-    return (await api.get('v1/protectedA/modulo/idCurso/'+idCurso,'authorization',{headers:{Authorization:authorization}})).data;
+    return (await api.get('v1/protectedA/modulo/idCurso/'+idCurso,'',{headers:{Authorization:authorization}})).data;
 }
 
 export async function findAllModulos(authorization) {
