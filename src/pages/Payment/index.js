@@ -29,6 +29,8 @@ const Payment = () => {
         retornarCursosPorUuid(uuidCurso);
     }
 
+    console.log(cursos)
+
     function enviarDadosPaymento(e){
         e.preventDefault();
         try{
@@ -50,7 +52,7 @@ const Payment = () => {
         console.log(matriculas)
         salvarMatricula(getAuthorization(),Cookies.get('idUser'),cursos.id,0,0);
         Cookies.set('matricula', true);
-        window.location.href = '/aula_detalhe='+cursos.moduloDtoList[0].aulaDto[0].id; //manda para a rota home
+        window.location.href = '/aula_detalhe='+cursos.moduloDto[0].aulaDto[0].id; //manda para a rota home
     }
 
     function main(){

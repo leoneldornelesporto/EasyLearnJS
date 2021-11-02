@@ -19,20 +19,16 @@ const CursoDetalhe = () => {
 
     if (cursos===null){
         retornarCursosPorUuid(id);
-        retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
-        verificarMatriculaPorUuid(Cookies.get("idUser"),id);
     }
 
     if(resposta === null){
-        retornarCursosPorUuid(id);
         retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
-        verificarMatriculaPorUuid(Cookies.get("idUser"),id);
+        retornarCursosPorUuid(id);
     }
 
     if(matriculas === null){
-        retornarCursosPorUuid(id);
-        retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
         verificarMatriculaPorUuid(Cookies.get("idUser"),id);
+        retornarCursosPorUuid(id);
     }
 
     function verificaMatricula(){
