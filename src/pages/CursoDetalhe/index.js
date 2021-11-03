@@ -87,7 +87,7 @@ const CursoDetalhe = () => {
                                             <div className="courseSectionList-details">
                                                 <aside className="courseSectionList-sectionProgress"
                                                        aria-label="0 exercícios feitos de 12">
-                                                    <span className=""> 0</span> / 12
+                                                    <span className="">{value.aulaDto.length}</span>
                                                 </aside>
                                                 <span className="courseSectionList-separation"></span>
                                                 <span className="courseSectionList-sectionTime"
@@ -138,7 +138,7 @@ const CursoDetalhe = () => {
                                             <div className="course-header-banner-logo">
                                                 <div className="courseLogo">
                                                     <img
-                                                        src="https://www.alura.com.br/assets/api/cursos/flappybirdunity1.svg"
+                                                        src={cursos.imagemIcon}
                                                         alt="" className="courseLogo-course"/>
                                                 </div>
                                             </div>
