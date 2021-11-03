@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {useParams} from "react-router-dom";
 import {FormacaoContext} from "../../context/FormacaoProvider";
 import {MatriculaContext} from "../../context/MatriculaContext";
-import Cookies from "js-cookie";
 import {isLogged} from "../../context/AuthHandler";
 
 const FormacaoDetalhe = () => {
@@ -18,9 +17,6 @@ const FormacaoDetalhe = () => {
     if(formacao===null){
         retornarFormacaoPorId(id);
     }
-
-    console.log(formacao);
-    console.log(cursosDetalhe);
 
     function headerFormacao(){
         try{
