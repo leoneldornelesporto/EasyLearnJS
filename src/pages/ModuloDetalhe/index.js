@@ -133,7 +133,7 @@ const ModuloDetalhe = () => {
             try {
                 return (<section className="task-body">
 
-
+                    {verificarSeEstouMatriculado()}
 
                     <header className="task-body-header">
                         <div className="container">

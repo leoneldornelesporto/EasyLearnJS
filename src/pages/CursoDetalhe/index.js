@@ -22,14 +22,13 @@ const CursoDetalhe = () => {
     }
 
     if (matriculas===null){
-        verificaByIdSeMatriculeiAlgumCursos(Cookies.get('idUser'),Cookies.get('UuidCurso'));
+        verificaByIdSeMatriculeiAlgumCursos(Cookies.get('idUser'),id);
     }
-
-    console.log(matriculas)
 
     function verificaMatricula(){
 
-        if (matriculas!==false){
+        if (matriculas===true){
+            Cookies.set('matricula',true);
                 return(
                     <a href={"/aula_detalhe="+cursos.moduloDto[0].aulaDto[0].id}
                        className="course-header-button startContinue-button bootcamp-primary-button-theme"
@@ -39,6 +38,7 @@ const CursoDetalhe = () => {
                    )
         }
         else{
+            Cookies.set('matricula',false);
             return (
                 <a href={"/payment="+id}
                    className="course-header-button startContinue-button bootcamp-primary-button-theme"
