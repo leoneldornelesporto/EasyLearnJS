@@ -150,26 +150,6 @@ const FormacaoDetalhe = () => {
         }
     }
 
-    function percentagemCurso(cursosDetalhe) {
-        console.log(porcentagemCurso)
-        try{
-            retornaDadosDoCursoMatriculado(Cookies.get('idUser'),cursosDetalhe.uuid);
-            const divStyle = {
-                backgroundImage: 'linear-gradient(to right, #7ee195, #7ee195 '+porcentagemCurso+'%, transparent '+porcentagemCurso+'%)'
-            };
-            return (
-                <>
-                    <div className="learning-content__bar"
-                         style={divStyle}></div>
-                    <span className="learning-content__percentage">{porcentagemCurso}%</span>
-                </>
-            )
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
-
     function horasTotais(){
         try{
             var sum=0;
@@ -275,9 +255,6 @@ const FormacaoDetalhe = () => {
                                                                         <img className="learning-content__icon"
                                                                              src={value.imagemIcon}/>
                                                                         <div className="learning-content__info">
-                                                                            <div className="learning-content__progress ">
-                                                                                {percentagemCurso(value)}
-                                                                            </div>
                                                                             <span className="learning-content__kind" >Curso
                               </span>
                                                                             <span className="learning-content__name">{value.nome}</span>
