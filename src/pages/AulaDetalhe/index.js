@@ -27,6 +27,10 @@ const AulaDetalhe = () => {
         retornarAulasPorIdModulo(id);
     }
 
+
+    console.log(idAula)
+    console.log(cursos)
+
     try{
         verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
         if (verifica===null){
@@ -244,15 +248,17 @@ const AulaDetalhe = () => {
                             <ul className="task-menu-nav-list">
                                 {
                                     cursos.moduloDto.map((value, index) => {
-                                        if(value.id===idAula){
-                                            return(
+                                        if (value.id === idAula) {
+
+                                            return (
                                                 value.aulaDto.map((value, index) => {
-                                                    return(
-                                                        <li className={value.id===parseInt(id)?"task-menu-nav-item task-menu-nav-item--selected":"task-menu-nav-item"}>
+                                                    return (
+                                                        <li className={value.id === parseInt(id) ? "task-menu-nav-item task-menu-nav-item--selected" : "task-menu-nav-item"}>
                                                             <a href={"/aula_detalhe=" + value.id}
                                                                className="task-menu-nav-item-link task-menu-nav-item-link-VIDEO">
                                                                 {verificarSeVisualizouIcon(value.id)}
-                                                                <span className="task-menu-nav-item-number">0{++index}</span>
+                                                                <span
+                                                                    className="task-menu-nav-item-number">0{++index}</span>
                                                                 <span className="task-menu-nav-item-text">
                                                   <span className="task-menu-nav-item-title" title="Introdução">
                                                   {value.titulo}
