@@ -12,7 +12,7 @@ const ModuloDetalhe = () => {
     const {cursos,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
     const {aula,idAula,retornarAulasPorId,retornarAulasPorIdModulo} = useContext(AulaContext);
     const {modulo,moduloId,retornarModuloPeloId,retornarModuloPeloIdCurso} = useContext(ModuloContext);
-    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso} = useContext(MatriculaContext);
+    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
     const { id } = useParams();
 
     if(verifica===null){
@@ -27,19 +27,15 @@ const ModuloDetalhe = () => {
         retornarCursosPorUuid(Cookies.get('UuidCurso'));
     }
 
-    if (idAula===null){
-        retornarAulasPorIdModulo(id);
-    }
-
     if(cursos!==null){
         retornarModuloPeloIdCurso(cursos.id);
     }
 
-    retornarModuloPeloId(id);
-
-
     try{
-        console.log(moduloId.length)
+        if(moduloId===null){
+            retornarModuloPeloId(id);
+        }
+
         if (verifica.status===null){
             verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
             verificaProximo(id);
@@ -136,7 +132,9 @@ const ModuloDetalhe = () => {
 
             try {
                 return (<section className="task-body">
-                    {verificarSeEstouMatriculado()}
+
+
+
                     <header className="task-body-header">
                         <div className="container">
                             <button title="" aria-label="" type="button" className="theatermode openMenu-button task-menu-button

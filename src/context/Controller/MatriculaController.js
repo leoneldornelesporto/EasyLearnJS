@@ -34,6 +34,11 @@ export async function verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos(idA
     return (await api.get('v1/protectedA/matricula/verificaById/cursosConcluidos/'+idAluno,'',{headers:{Authorization:authorization}})).data;
 }
 
+export async function verificaByIdSeMatriculeiAlgumCurso(idAluno,uuid,authorization) {
+    return (await api.get('v1/protectedA/matricula/verificaByIdSeMatriculeiAlgumCurso/'+idAluno+'/'+uuid,'',{headers:{Authorization:authorization}})).data;
+}
+
+
 export async function verificarSePauseiAlgumCursoNaMinhaMatricula(idAluno,authorization) {
     return (await api.get('v1/protectedA/matricula/verificaById/cursosPausados/'+idAluno,'',{headers:{Authorization:authorization}})).data;
 }

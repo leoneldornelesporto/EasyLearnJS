@@ -3,7 +3,7 @@ import {
     assistirAulaSave,
     assistiuAula, concluirCursoByUuid, findAllAlunosMatriculadosEmUmCurso,
     findAllMatriculas,
-    saveMatricula, verifcaSeConcluiCurso, verificaPorcentagemDoCurso,
+    saveMatricula, verifcaSeConcluiCurso, verificaByIdSeMatriculeiAlgumCurso, verificaPorcentagemDoCurso,
     verificarSeEstouMatriculadoEmAlgumCursoPorId,
     verificarSeEstouMatriculadoEmAlgumCursoPorIdConcluidos,
     verificarSeEstouMatriculadoEmAlgumCursoPorUuid,
@@ -137,6 +137,17 @@ export const MatriculaProvider = ({children}) => {
         }
     };
 
+    const verificaByIdSeMatriculeiAlgumCursos = async (idAluno,uuid) => {
+        try {
+            const response = await verificaByIdSeMatriculeiAlgumCurso(idAluno,uuid,getAuthorization());
+            setMatriculas(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     const concluirCurso = async (idAluno,uuid) => {
         try {
             const response = await concluirCursoByUuid(idAluno,uuid,getAuthorization());
@@ -188,6 +199,7 @@ export const MatriculaProvider = ({children}) => {
                 verificaConcluiAlgumCurso,
                 concluirCurso,
                 findAllAlunosMatriculadosEmalgumCurso,
+                verificaByIdSeMatriculeiAlgumCursos,
             }}>
             {children}
         </MatriculaContext.Provider>

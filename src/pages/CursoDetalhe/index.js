@@ -11,7 +11,7 @@ const CursoDetalhe = () => {
 
     const { id } = useParams();
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
-    const {matriculas,salvarMatricula,verificarMatriculaPorUuid,qtdAlunosMatriculados,findAllAlunosMatriculadosEmalgumCurso} = useContext(MatriculaContext);
+    const {matriculas,retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
     const {resposta, pagamentos, salvarPagamento, retornaPagamentoPeloUuidCursoEIdAluno} = useContext(PaymentContext);
     const {modulo,retornarModuloPeloIdCurso} = useContext(ModuloContext);
 
@@ -21,19 +21,15 @@ const CursoDetalhe = () => {
         retornarCursosPorUuid(id);
     }
 
-    if(resposta === null){
-        retornaPagamentoPeloUuidCursoEIdAluno(id,Cookies.get("idUser"));
-        retornarCursosPorUuid(id);
+    if (matriculas===null){
+        verificaByIdSeMatriculeiAlgumCursos(Cookies.get('idUser'),Cookies.get('UuidCurso'));
     }
 
-    if(matriculas === null){
-        verificarMatriculaPorUuid(Cookies.get("idUser"),id);
-        retornarCursosPorUuid(id);
-    }
+    console.log(matriculas)
 
     function verificaMatricula(){
-        if (matriculas!==null){
-            if(matriculas.alunoDto.id == Cookies.get("idUser")){
+
+        if (matriculas!==false){
                 return(
                     <a href={"/aula_detalhe="+cursos.moduloDto[0].aulaDto[0].id}
                        className="course-header-button startContinue-button bootcamp-primary-button-theme"
@@ -41,7 +37,6 @@ const CursoDetalhe = () => {
                         Acessar Curso
                     </a>
                    )
-            }
         }
         else{
             return (
