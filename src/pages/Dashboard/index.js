@@ -13,18 +13,18 @@ const Dashboard = () => {
 
     function formacaoProgramacao(){
         try {
-            for (let i = 0; i < programacao.length; i++) {
-                return (
-                <a className="categoryExplorer-item categoryExplorer-degree"
-                   href={"formacoes_detalhe="+programacao[i].id}>{programacao[i].titulo}</a>
-                );
-            }
+            return(
+                programacao.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);
         }
     }
-
 
     if(frontend===null){
         retornarTodasFormacoesFrontend();
@@ -32,12 +32,13 @@ const Dashboard = () => {
 
     function formacaoFrontend(){
         try {
-            for (let i = 0; i < frontend.length; i++) {
-                return (
-                    <a className="categoryExplorer-item categoryExplorer-degree"
-                       href={"formacoes_detalhe="+frontend[i].id}>{frontend[i].titulo}</a>
-                );
-            }
+            return(
+                frontend.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);
@@ -50,12 +51,13 @@ const Dashboard = () => {
 
     function formacaoDatascience(){
         try {
-            for (let i = 0; i < datascience.length; i++) {
-                return (
-                    <a className="categoryExplorer-item categoryExplorer-degree"
-                       href={"formacoes_detalhe="+datascience[i].id}>{datascience[i].titulo}</a>
-                );
-            }
+            return(
+                datascience.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);
@@ -68,12 +70,13 @@ const Dashboard = () => {
 
     function formacaoDevops(){
         try {
-            for (let i = 0; i < devops.length; i++) {
-                return (
-                    <a className="categoryExplorer-item categoryExplorer-degree"
-                       href={"formacoes_detalhe="+devops[i].id}>{devops[i].titulo}</a>
-                );
-            }
+            return(
+                devops.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);
@@ -85,13 +88,14 @@ const Dashboard = () => {
     }
 
     function formacaoUxDesign(){
-        try{
-            for(let i=0; i<uxdesign.length; i++){
-                return(
-                    <a className="categoryExplorer-item categoryExplorer-degree"
-                       href={"formacoes_detalhe="+uxdesign[i].id}>{uxdesign[i].titulo}</a>
-                );
-            }
+        try {
+            return(
+                uxdesign.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);
@@ -104,12 +108,13 @@ const Dashboard = () => {
 
     function formacaoMobile(){
         try {
-            for (let i = 0; i < mobile.length; i++) {
-                return (
-                    <a className="categoryExplorer-item categoryExplorer-degree"
-                       href={"formacoes_detalhe="+mobile[i].id}>{mobile[i].titulo}</a>
-                );
-            }
+            return(
+                mobile.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);
@@ -122,12 +127,13 @@ const Dashboard = () => {
 
     function formacaoInovacaoGestao(){
         try {
-            for (let i = 0; i < inovacaoGestao.length; i++) {
-                return (
-                    <a className="categoryExplorer-item categoryExplorer-degree"
-                       href={"formacoes_detalhe="+inovacaoGestao[i].id}>{inovacaoGestao[i].titulo}</a>
-                );
-            }
+            return(
+                inovacaoGestao.map((value, index)=>{
+                    return (
+                        <a className="categoryExplorer-item categoryExplorer-degree"
+                           href={"formacoes_detalhe="+value.id}>{value.titulo}</a>
+                    );
+                }))
         }
         catch (e) {
             console.log(e);

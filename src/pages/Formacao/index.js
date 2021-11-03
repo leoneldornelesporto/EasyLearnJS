@@ -28,7 +28,6 @@ const Formacao = () => {
         }
     }
 
-
     if(frontend===null){
         retornarTodasFormacoesFrontend();
     }
