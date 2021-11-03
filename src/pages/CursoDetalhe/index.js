@@ -82,7 +82,7 @@ const CursoDetalhe = () => {
                                             <div
                                                 className="courseSectionList-sectionTitle bootcamp-text-color">
                                                 {value.titulo}
-                                                {index===0?<object><a href="/course/flappybirdunity1/task/35975"> <button className="courseSectionList__firstVideo"> Ver primeiro vídeo </button></a></object>:<></>}
+                                                {index===0?<object><a href={"/modulo_detalhe="+value.id}> <button className="courseSectionList__firstVideo"> Ver primeiro vídeo </button></a></object>:<></>}
                                             </div>
                                             <div className="courseSectionList-details">
                                                 <aside className="courseSectionList-sectionProgress"
@@ -91,7 +91,7 @@ const CursoDetalhe = () => {
                                                 </aside>
                                                 <span className="courseSectionList-separation"></span>
                                                 <span className="courseSectionList-sectionTime"
-                                                      aria-label="Duração de 34 minutos">34min</span>
+                                                      aria-label="Duração de 34 minutos">{value.aulaDto.length>1?"Aulas":"Aula"}</span>
                                             </div>
                                         </a>
                                         <div className="courseSectionList-moreInfo"></div>
