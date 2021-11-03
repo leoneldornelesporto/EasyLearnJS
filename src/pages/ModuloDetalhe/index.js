@@ -15,8 +15,13 @@ const ModuloDetalhe = () => {
     const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
     const { id } = useParams();
 
-    if(verifica===null){
-        verificaProximo(id);
+    try{
+        if(verifica===null){
+            verificaProximo(moduloId.aulaDto[0].id);
+        } 
+    }
+    catch (e) {
+
     }
 
     if(aula === null){
@@ -38,7 +43,7 @@ const ModuloDetalhe = () => {
 
         if (verifica.status===null){
             verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
-            verificaProximo(id);
+            verificaProximo(moduloId.aulaDto[0].id);
         }
     }
     catch (e) {
@@ -145,8 +150,8 @@ const ModuloDetalhe = () => {
                                     <path transform="translate(-37.000000, -324.000000)"
                                           d="M39,326 L39,338 L51,338 L51,326 L39,326 Z M37,325.99406 C37,324.892771 37.8945138,324 38.9940603,324 L51.0059397,324 C52.1072288,324 53,324.894514 53,325.99406 L53,338.00594 C53,339.107229 52.1054862,340 51.0059397,340 L38.9940603,340 C37.8927712,340 37,339.105486 37,338.00594 L37,325.99406 Z M47.1404694,331.484282 C47.615175,331.769105 47.6076584,332.235405 47.1404694,332.515718 L43.8595306,334.484282 C43.384825,334.769105 43,334.549025 43,334.009222 L43,329.990778 C43,329.443586 43.3923416,329.235405 43.8595306,329.515718 L47.1404694,331.484282 Z"></path>
                                 </svg>
-                                <small>{aula.indice}</small>
-                                <span className="task-body-header-title-text">{aula.titulo}</span>
+                                <small>{moduloId.aulaDto[0].indice}</small>
+                                <span className="task-body-header-title-text">{moduloId.aulaDto[0].titulo}</span>
                             </h1>
                             {
                                 verifica !== false ?
@@ -354,7 +359,7 @@ const ModuloDetalhe = () => {
                                         </div>
                                     </div>
                                     <div align="center">
-                                        <iframe width="620px" height="420px%" src={aula.urlVideo}
+                                        <iframe width="620px" height="420px%" src={moduloId.aulaDto[0].urlVideo}
                                                 title="YouTube video player" frameBorder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowFullScreen></iframe>
@@ -363,7 +368,7 @@ const ModuloDetalhe = () => {
                                              className="video-transcription video-transcription--inactive transcription-toggle">
                                         <h2 className="video-transcription-title">Transcrição</h2>
                                         <div className="formattedText"data-external-links="">
-                                            <p>{aula.transcricao}</p>
+                                            <p>{moduloId.aulaDto[0].transcricao}</p>
                                         </div>
                                     </section>
                                 </div>
