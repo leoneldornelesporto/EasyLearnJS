@@ -22,15 +22,10 @@ const Cursos = () => {
                                 <div className="course-card  course-card--simple-card bootcamp-background-dark-section">
                                     <Link className="course-card__course-link " data-recommendationId="" data-courseid=""
                                           data-recommendationsource="" to={"/curso_detalhe=".concat(value.uuid)}></Link>
-                                    <div className="course-card__progress ">
-                                        <div className="course-card__bar" aria-hidden="true"></div>
-                                        <span className="course-card__number" aria-label="Progresso do curso">%</span>
-                                    </div>
                                     <div className="course-card__content-wrapper">
                                         <div className="course-card__content">
-                                            <img className="course-card__icon" aria-hidden="true" alt=""
-                                                 src={value.imagemIcon}/>
-                                            <span className="course-card__name">{value.descricao}</span>
+                                            <img className="course-card__icon" aria-hidden="true" alt="" src={value.imagemIcon}/>
+                                                <span className="course-card__name">{value.nome}</span>
                                         </div>
                                     </div>
                                 </div>
