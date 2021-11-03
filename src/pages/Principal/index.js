@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Principal = () => {
+
     return(
             <div className="container">
                 <div className="home--background">

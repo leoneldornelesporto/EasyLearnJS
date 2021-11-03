@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {AulaContext} from "../../context/AulaProvider";
 import {CursoContext} from "../../context/CursoProvider";
 import {ModuloContext} from "../../context/ModuloContext";
+import {isLogged} from "../../context/AuthHandler";
 
 const CadastrarAula = () => {
 
@@ -263,25 +264,39 @@ const CadastrarAula = () => {
         )
     }
 
+    function body(){
+        try{
+            if(isLogged()){
+                return(
+                    <>
+                        <table className="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Indice</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">urlVideo</th>
+                                <th scope="col">transcricao</th>
+                                <th scope="col">Operações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {retornarAulas()}
+                            </tbody>
+                        </table>
+                        {criarNovaAula()}
+                    </>
+                );
+            }else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
     return(
-        <>
-            <table className="table table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Indice</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">urlVideo</th>
-                    <th scope="col">transcricao</th>
-                    <th scope="col">Operações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {retornarAulas()}
-                </tbody>
-            </table>
-            {criarNovaAula()}
-        </>
+        body()
     );
 }
 

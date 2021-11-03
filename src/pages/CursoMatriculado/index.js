@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {MatriculaContext} from "../../context/MatriculaContext";
 import Cookies from "js-cookie";
 import {AuthUserContext} from "../../context/AuthUserProvider";
@@ -7,15 +7,13 @@ import {Link} from "react-router-dom";
 
 const CursosMatriculados = () => {
 
-    const {aluno,signIn,signInV1} = useContext(AuthUserContext);
-    const {matriculas,cursosPausados,errorMessage,setErrorMessage,retornarTodasMatriculas,salvarMatricula,verificarMatriculaPorId,verificarMatriculaPorUuid,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
+    const {aluno,signInV1} = useContext(AuthUserContext);
+    const {matriculas,cursosPausados,verificarSeEstouMatriculadoEmAlgumCursoById,verificarSePauseiAlgumCursoMatricula} = useContext(MatriculaContext);
 
     if(matriculas===null){
         signInV1(Cookies.get("email"), Cookies.get("pass"));
         verificarSeEstouMatriculadoEmAlgumCursoById(aluno.id, getAuthorization());
     }
-
-    console.log(matriculas)
 
     function cursosMatriculados(){
         try{
@@ -104,7 +102,8 @@ const CursosMatriculados = () => {
     }
 
     function body() {
-        if(isLogged()) {
+        try{
+            if(isLogged()) {
                 return (
                     <main className="myCourses">
                         <div className="container">
@@ -131,9 +130,12 @@ const CursosMatriculados = () => {
                         </div>
                     </main>
                 )
-        }
-        else{
-            window.location.href = '/signin'; //manda para a rota home
+            }
+            else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
         }
     }
 

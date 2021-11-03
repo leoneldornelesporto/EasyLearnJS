@@ -1,13 +1,12 @@
 import React, {useContext} from 'react';
 import {useParams} from "react-router-dom";
 import {AuthUserContext} from "../../context/AuthUserProvider";
+import {isLogged} from "../../context/AuthHandler";
 
 const RedefinirSenha = () => {
 
     const { id,email } = useParams();
     const {resposta,pass,setPass,passConfirm,setPassConfirm,esqueciASenhaV1} = useContext(AuthUserContext);
-
-    console.log(pass===passConfirm)
 
     function esqueciSenha (e) {
         e.preventDefault();
@@ -25,30 +24,43 @@ const RedefinirSenha = () => {
         }
     }
 
+    function body(){
+        try{
+            if(isLogged()){
+                return(
+                    <div className="contentBox   container bootcamp-background-dark-section">
+                        <div className="contentBox-title">
+                            <h1 className="bootcamp-text-color">Redefinir senha </h1>
+                        </div>
+                        <section className="forgotPassword bootcamp-background-dark-section">
+                            <form id="passwordForgottenForm" className="forgotPassword-form bootcamp-input-format"
+                                  onSubmit={esqueciSenha}>
+                                <label htmlFor="newPassword">Senha
+                                    <input id="newPassword" name="newPassword" className="bootcamp-input-background-dark"
+                                           pattern=".{6,}" type="password" required="required" onChange={e => setPass(e.target.value)}/>
+                                </label>
+                                <label htmlFor="passwordConfirmation">Confirmação de senha
+                                    <input id="passwordConfirmation" name="passwordConfirmation"
+                                           className="bootcamp-input-background-dark" pattern=".{6,}" type="password"
+                                           required="required" onChange={e => setPassConfirm(e.target.value)}/>
+                                </label>
+                                <button className="button buttonLight bootcamp-primary-button-theme" type="submit">
+                                    Redefinir minha senha
+                                </button>
+                            </form>
+                        </section>
+                    </div>
+                );
+            }else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
 
     return(
-            <div className="contentBox   container bootcamp-background-dark-section">
-                <div className="contentBox-title">
-                    <h1 className="bootcamp-text-color">Redefinir senha </h1>
-                </div>
-                <section className="forgotPassword bootcamp-background-dark-section">
-                    <form id="passwordForgottenForm" className="forgotPassword-form bootcamp-input-format"
-                          onSubmit={esqueciSenha}>
-                            <label htmlFor="newPassword">Senha
-                                <input id="newPassword" name="newPassword" className="bootcamp-input-background-dark"
-                                       pattern=".{6,}" type="password" required="required" onChange={e => setPass(e.target.value)}/>
-                            </label>
-                            <label htmlFor="passwordConfirmation">Confirmação de senha
-                                <input id="passwordConfirmation" name="passwordConfirmation"
-                                       className="bootcamp-input-background-dark" pattern=".{6,}" type="password"
-                                       required="required" onChange={e => setPassConfirm(e.target.value)}/>
-                            </label>
-                            <button className="button buttonLight bootcamp-primary-button-theme" type="submit">
-                                Redefinir minha senha
-                            </button>
-                    </form>
-                </section>
-            </div>
+         body()
     );
 }
 export default RedefinirSenha;

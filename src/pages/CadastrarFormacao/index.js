@@ -4,6 +4,7 @@ import {CursoContext} from "../../context/CursoProvider";
 import {AuthUserContext} from "../../context/AuthUserProvider";
 import Cookies from "js-cookie";
 import {FormacaoContext} from "../../context/FormacaoProvider";
+import {isLogged} from "../../context/AuthHandler";
 
 const CadastrarFormacao = () => {
 
@@ -237,26 +238,40 @@ const CadastrarFormacao = () => {
         )
     }
 
+    function body(){
+        try{
+            if(isLogged()){
+                return(
+                    <>
+                        <table className="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Subtitulo</th>
+                                <th scope="col">Descrição Subtitulo</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Operações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {retornaFormacoes()}
+                            </tbody>
+                        </table>
+                        {criarNovaFormacao()}
+                    </>
+                );
+            }else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
     return(
-        <>
-            <table className="table table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Subtitulo</th>
-                    <th scope="col">Descrição Subtitulo</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Operações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {retornaFormacoes()}
-                </tbody>
-            </table>
-            {criarNovaFormacao()}
-        </>
+        body()
     );
 }
 

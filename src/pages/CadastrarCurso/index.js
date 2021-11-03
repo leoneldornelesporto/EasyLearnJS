@@ -1,9 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {CategoriaContext} from "../../context/CategoriaProvider";
 import {CursoContext} from "../../context/CursoProvider";
 import {AuthUserContext} from "../../context/AuthUserProvider";
 import Cookies from "js-cookie";
 import {FormacaoContext} from "../../context/FormacaoProvider";
+import {isLogged} from "../../context/AuthHandler";
 
 const CadastrarCurso = () => {
 
@@ -34,15 +35,6 @@ const CadastrarCurso = () => {
     if (categoria===null){
         retornaTodasCategorias();
     }
-
-    console.log(nomeCurso)
-    console.log(categoriaId)
-    console.log(descricao)
-    console.log(cargaHoraria)
-    console.log(imagemIcon)
-    console.log(categoriaId)
-    console.log(formacaoId)
-    console.log(formacaoSelected)
 
     if(formacao===null){
         retornaTodasFormacoesPorCategoriaId(categoriaId===null?0:categoriaId);
@@ -308,31 +300,45 @@ const CadastrarCurso = () => {
         )
     }
 
+    function body(){
+        try{
+            if(isLogged()){
+                return(
+                    <>
+                        <table className="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Carga Horaria</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Nome do Professor</th>
+                                <th scope="col">Biografia</th>
+                                <th scope="col">Linkedin</th>
+                                <th scope="col">Ativo</th>
+                                <th scope="col">Transcricao</th>
+                                <th scope="col">Valor Curso</th>
+                                <th scope="col">Operações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {retornaCursos()}
+                            </tbody>
+                        </table>
+                        {criarNovoCurso()}
+                    </>
+                );
+            }else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
     return(
-        <>
-            <table className="table table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Carga Horaria</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Nome do Professor</th>
-                    <th scope="col">Biografia</th>
-                    <th scope="col">Linkedin</th>
-                    <th scope="col">Ativo</th>
-                    <th scope="col">Transcricao</th>
-                    <th scope="col">Valor Curso</th>
-                    <th scope="col">Operações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {retornaCursos()}
-                </tbody>
-            </table>
-            {criarNovoCurso()}
-        </>
+        body()
     );
 }
 

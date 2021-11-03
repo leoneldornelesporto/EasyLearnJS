@@ -1,14 +1,12 @@
 import React, {useContext} from 'react';
 import {useParams} from "react-router-dom";
 import {FormacaoContext} from "../../context/FormacaoProvider";
-import {MatriculaContext} from "../../context/MatriculaContext";
 import {isLogged} from "../../context/AuthHandler";
 
 const FormacaoDetalhe = () => {
 
     const { id } = useParams();
     const {cursosDetalhe,formacao,retornaFormacaoById,retornarFormacaoPorId} = useContext(FormacaoContext);
-    const {retornaDadosDoCursoMatriculado,porcentagemCurso} = useContext(MatriculaContext);
 
     if(cursosDetalhe===null){
         retornaFormacaoById(id);

@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {CategoriaContext} from "../../context/CategoriaProvider";
+import {isLogged} from "../../context/AuthHandler";
 
 const CadastrarCategoria = () => {
 
@@ -161,23 +162,35 @@ const CadastrarCategoria = () => {
         )
     }
 
-    return(
-        <>
-            <table className="table table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Operações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {retornarCategoria()}
-                </tbody>
-            </table>
-            {criarNovaCategoria()}
-        </>
-    );
+    function body(){
+        try{
+            if(isLogged()){
+                return(
+                    <>
+                        <table className="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Operações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {retornarCategoria()}
+                            </tbody>
+                        </table>
+                        {criarNovaCategoria()}
+                    </>
+                );
+            }else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
+    return(body());
 }
 
 export default CadastrarCategoria;

@@ -9,10 +9,10 @@ import {ModuloContext} from "../../context/ModuloContext";
 
 const ModuloDetalhe = () => {
 
-    const {cursos,verifica,retornarCursosPorUuid,retornarModuloPorUuidCursoEIdDaAula,retornarAulaPorUuidCursoEIdAula,verificaProximo} = useContext(CursoContext);
-    const {aula,idAula,retornarAulasPorId,retornarAulasPorIdModulo} = useContext(AulaContext);
-    const {modulo,moduloId,retornarModuloPeloId,retornarModuloPeloIdCurso} = useContext(ModuloContext);
-    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,cursoMatriculado,verificaConcluiAlgumCurso,porcentagemCurso,concluiuCurso,concluirCurso,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
+    const {cursos,verifica,retornarCursosPorUuid,verificaProximo} = useContext(CursoContext);
+    const {aula,retornarAulasPorId} = useContext(AulaContext);
+    const {moduloId,retornarModuloPeloId,retornarModuloPeloIdCurso} = useContext(ModuloContext);
+    const {retornaDadosDoCursoMatriculado,retornaAulasAssistida,registraAulaAssistida,resposta,verificaConcluiAlgumCurso,porcentagemCurso,concluirCurso} = useContext(MatriculaContext);
     const { id } = useParams();
 
     try{
@@ -21,7 +21,7 @@ const ModuloDetalhe = () => {
         } 
     }
     catch (e) {
-
+        console.log(e);
     }
 
     if(aula === null){

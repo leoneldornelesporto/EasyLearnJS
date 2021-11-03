@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {ModuloContext} from "../../context/ModuloContext";
 import {CursoContext} from "../../context/CursoProvider";
+import {isLogged} from "../../context/AuthHandler";
 
 const CadastrarModulo = () => {
 
@@ -210,25 +211,39 @@ const CadastrarModulo = () => {
         )
     }
 
+    function body(){
+        try{
+            if(isLogged()){
+                return(
+                    <>
+                        <table className="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Indice</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Titulo Secundario</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">Operações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {retornarModulos()}
+                            </tbody>
+                        </table>
+                        {criarNovoModulo()}
+                    </>
+                );
+            }else{
+                window.location.href = '/signin'; //manda para a rota home
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
     return(
-        <>
-            <table className="table table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Indice</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Titulo Secundario</th>
-                    <th scope="col">Curso</th>
-                    <th scope="col">Operações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {retornarModulos()}
-                </tbody>
-            </table>
-            {criarNovoModulo()}
-        </>
+        body()
     );
 }
 
