@@ -12,8 +12,10 @@ const CursoDetalhe = () => {
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {matriculas,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
 
-    if (cursos===null){
+    try{
         retornarCursosPorUuid(id);
+    }catch (e) {
+        console.log(e)
     }
 
     if (matriculas===null){
@@ -113,18 +115,51 @@ const CursoDetalhe = () => {
         }
     }
 
+    function categoria(){
+        if (cursos.categoria==="Programação"){
+            return 1;
+        }
+        else{
+            if (cursos.categoria==="Front-end"){
+                return 2;
+            }
+            else{
+                if(cursos.categoria ==="Data Science"){
+                    return 3;
+                }
+                else{
+                    if(cursos.categoria==="DevOps"){
+                        return 4;
+                    }
+                    else{
+                        if(cursos.categoria==="UX & Design"){
+                            return 5;
+                        }
+                        else{
+                            if(cursos.categoria==="Mobile"){
+                                return 6;
+                            }
+                            else{
+                                return 7;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     function headerCurso(){
         try{
             if (isLogged()){
-                if (cursos.categoria==="Programação"){
                     return(
                         <>
                             <section className="course">
                                 <section className="course-header">
                                     <div className="course-header-banner bootcamp-background-dark">
                                         <div className="container course-header-banner-breadcrumb">
-                                            <a href="/category/programacao"
-                                               className="course-header-banner-breadcrumb__category" aria-label="Programação">
+                                            <a href={"/cursos_por_categoria="+categoria()}
+                                               className="course-header-banner-breadcrumb__category" aria-label={cursos.categoria}>
                                                 {cursos.categoria}
                                             </a>
                                         </div>
@@ -405,7 +440,6 @@ const CursoDetalhe = () => {
                             </section>
                         </>
                     )
-                }
             }else{
                 window.location.href = '/signin'; //manda para a rota home
             }

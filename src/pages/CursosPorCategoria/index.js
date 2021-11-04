@@ -119,7 +119,7 @@ const CursosPorCategoria = () => {
                                                     <div className="course-card__content">
                                                         <img className="course-card__icon" aria-hidden="true" alt=""
                                                              src={value.imagemIcon}/>
-                                                        <span className="course-card__name">{value.descricao}</span>
+                                                        <span className="course-card__name">{value.nome}</span>
                                                     </div>
                                                 </div>
                                             </div>
