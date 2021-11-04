@@ -12,6 +12,8 @@ const CursoDetalhe = () => {
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {matriculas,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
 
+    Cookies.set('UuidCurso',id);
+
     try{
         retornarCursosPorUuid(id);
     }catch (e) {
