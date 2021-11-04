@@ -111,8 +111,9 @@ const Header = () => {
                                 <a className="headerUnlogged-cta-button headerUnlogged-cta-button bootcamp-primary-button-theme"
                                    href="https://www.alura.com.br/planos-cursos-online">Matricule-se</a>
                             </div>
-                            <a className="headerUnlogged-login bootcamp-secondary-button-theme"
-                               href="https://cursos.alura.com.br/loginForm?urlAfterLogin=/loginForm">Login</a>
+                            <Link className="headerUnlogged-login bootcamp-secondary-button-theme"
+                                  to="/signin">
+                                Login</Link>
                         </div>
                     </div>
                     <div className="natural-header natural-header--company">
