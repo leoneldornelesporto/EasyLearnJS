@@ -12,7 +12,9 @@ const CursoDetalhe = () => {
     const {cursos,retornarCursosPorUuid} = useContext(CursoContext);
     const {matriculas,verificaByIdSeMatriculeiAlgumCursos} = useContext(MatriculaContext);
 
-    retornarCursosPorUuid(id);
+    if (cursos===null){
+        retornarCursosPorUuid(id);
+    }
 
     if (matriculas===null){
         verificaByIdSeMatriculeiAlgumCursos(Cookies.get('idUser'),id);
