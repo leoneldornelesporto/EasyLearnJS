@@ -193,7 +193,7 @@ const FormacaoDetalhe = () => {
                         <section className="formacao__info">
                             <div className="container">
                                 <div className="formacao__info-categoria">
-                                    Esta formação faz parte da categoria <a href="" className="formacao__info-categoria-link">{cursosDetalhe[0].categoria}</a>
+                                    Esta formação faz parte da categoria <a href={"cursos_por_categoria="+id} className="formacao__info-categoria-link">{cursosDetalhe[0].categoria}</a>
                                 </div>
                                 <div className="formacao__info-conclusao">
                                     <div className="formacao__info-icon formacao__info-icon-conclusao"></div>
