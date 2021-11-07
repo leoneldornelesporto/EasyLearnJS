@@ -403,7 +403,7 @@ const CursoDetalhe = () => {
                                                         </div>
                                                         <div className="instructor-details">
                                                             <div className="instructor-item-header">
-                                                                <a href={"/user"+cursos.nomeProfessor}
+                                                                <a href={"/user="+cursos.nomeProfessor}
                                                                    className="instructor-item-link bootcamp-text-color">
                                                                     <h3 className="instructor-item-name bootcamp-text-color">{cursos.nomeProfessor}</h3>
                                                                 </a>

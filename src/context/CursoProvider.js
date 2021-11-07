@@ -8,7 +8,7 @@ import {
     getCursoByUuid,
     getCursoByUuidAndIdAula, protectedPmodulo, removerCurso, salvarCurso
 } from "./Controller/CursoController";
-import {getAulaByUuidCursoAndIdAula} from "./Controller/AulaController";
+import {getAulaByIdAulaAndUuidCurso, getAulaByUuidCursoAndIdAula} from "./Controller/AulaController";
 import {getAuthorization} from "./AuthHandler";
 
 export const CursoContext = createContext({});
@@ -99,8 +99,9 @@ export const CursoProvider = ({children}) => {
         }
     };
 
-    const verificaProximo = async (id) => {
-        getAulaByUuidCursoAndIdAula(++id,getAuthorization()).then(function(result) {
+    const verificaProximo = async (id,uuidCurso) => {
+        getAulaByIdAulaAndUuidCurso(++id,uuidCurso,getAuthorization()).then(function(result) {
+            console.log(result)
             if(result!==null){
                 return setVerifica(id)
             }

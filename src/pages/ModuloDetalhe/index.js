@@ -17,7 +17,7 @@ const ModuloDetalhe = () => {
 
     try{
         if(verifica===null){
-            verificaProximo(moduloId.aulaDto[0].id);
+            verificaProximo(moduloId.aulaDto[0].id,Cookies.get('UuidCurso'));
         } 
     }
     catch (e) {
@@ -43,7 +43,7 @@ const ModuloDetalhe = () => {
 
         if (verifica.status===null){
             verificaConcluiAlgumCurso(Cookies.get('idUser'), cursos.uuid);
-            verificaProximo(moduloId.aulaDto[0].id);
+            verificaProximo(moduloId.aulaDto[0].id,Cookies.get('UuidCurso'));
         }
     }
     catch (e) {

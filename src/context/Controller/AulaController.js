@@ -9,6 +9,10 @@ export async function getAulaByUuidCursoAndIdAula(id,authorization) {
     return (await api.get('v1/protectedA/aulas/'+id,null,{headers:{Authorization:authorization}})).data;
 }
 
+export async function getAulaByIdAulaAndUuidCurso(idAula,uuidCurso,authorization) {
+    return (await api.get('v1/protectedA/aulas/'+idAula+'/'+uuidCurso,null,{headers:{Authorization:authorization}})).data;
+}
+
 export async function getAulaByUuidCursoAndIdAulaModulo(id,authorization) {
     return (await api.get('v1/aulasS/modulo/'+id,null,{headers:{Authorization:authorization}})).data;
 }

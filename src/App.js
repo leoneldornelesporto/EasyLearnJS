@@ -14,9 +14,11 @@ import {EmailProvider} from "./context/EmailProvider";
 import {PaymentProvider} from "./context/PaymentProvider";
 import {ProfessorProvider} from "./context/ProfessorProvider";
 import {TutorProvider} from "./context/TutorProvider";
+import {UserProvider} from "./context/UserProvider";
 
 function App() {
   return (
+      <UserProvider>
       <PaymentProvider>
       <EmailProvider>
       <AulaProvider>
@@ -46,6 +48,7 @@ function App() {
       </AulaProvider>
       </EmailProvider>
       </PaymentProvider>
+      </UserProvider>
   );
 }
 export default App;

@@ -28,6 +28,7 @@ import ConfirmarEmail from "./pages/ConfirmarEmail";
 import RedefinirSenha from "./pages/RedefinirSenha";
 import GeraCertificado from "./pages/GeraCertificado";
 import Payment from "./pages/Payment";
+import User from "./pages/User";
 
 export default () => {
     return(
@@ -112,6 +113,9 @@ export default () => {
             </Route>
             <Route path="/payment=:uuidCurso">
                 <Payment/>
+            </Route>
+            <Route path="/user=:name">
+                <User/>
             </Route>
             <Route path="/">
                 <Principal/>
