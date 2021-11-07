@@ -15,9 +15,11 @@ import {PaymentProvider} from "./context/PaymentProvider";
 import {ProfessorProvider} from "./context/ProfessorProvider";
 import {TutorProvider} from "./context/TutorProvider";
 import {UserProvider} from "./context/UserProvider";
+import {ForumProvider} from "./context/ForumProvider";
 
 function App() {
   return (
+      <ForumProvider>
       <UserProvider>
       <PaymentProvider>
       <EmailProvider>
@@ -49,6 +51,7 @@ function App() {
       </EmailProvider>
       </PaymentProvider>
       </UserProvider>
+      </ForumProvider>
   );
 }
 export default App;
