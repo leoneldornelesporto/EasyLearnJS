@@ -29,6 +29,7 @@ import RedefinirSenha from "./pages/RedefinirSenha";
 import GeraCertificado from "./pages/GeraCertificado";
 import Payment from "./pages/Payment";
 import User from "./pages/User";
+import ForumDetalhe from "./pages/ForumDetalhe";
 
 export default () => {
     return(
@@ -74,6 +75,9 @@ export default () => {
             </Route>
             <Route path="/forum">
                 <Forum/>
+            </Route>
+            <Route path="/forum_detalhe=:id">
+                <ForumDetalhe/>
             </Route>
             <Route path="/formacoes">
                 <Formacao/>

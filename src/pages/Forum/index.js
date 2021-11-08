@@ -161,7 +161,7 @@ const Forum = () => {
                                             <div className="forumList-item-subject-info">
                                                 <h2 className="forumList-item-subject-info-title">
                                                     <a className="forumList-item-subject-info-title-link"
-                                                       href="/forum/topico-comparacao-estranha-183833">
+                                                       href={"/forum_detalhe="+value.id}>
                                                         {value.titulo}
                                                     </a>
                                                 </h2>

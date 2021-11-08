@@ -1,5 +1,12 @@
 import React, {createContext, useState} from 'react';
-import {allTopicos, alterarTopico, removerTopico, saveTopico, topicoById} from "./Controller/ForumController";
+import {
+    allTopicos,
+    alterarTopico,
+    removerTopico,
+    responderTopicoController,
+    saveTopico,
+    topicoById
+} from "./Controller/ForumController";
 
 export const ForumContext = createContext({});
 
@@ -51,6 +58,18 @@ export const ForumProvider = ({children}) => {
         }
     };
 
+    const responderTopico = async (mensagem,idTopico,idUsuario) => {
+        try {
+            const response = await responderTopicoController(mensagem,idTopico,idUsuario);
+            setResposta(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
+
     const remover = async (idTopico) => {
         try {
             const response = await removerTopico(idTopico);
@@ -73,6 +92,7 @@ export const ForumProvider = ({children}) => {
                 detalhar,
                 atualizar,
                 remover,
+                responderTopico,
             }}>
             {children}
         </ForumContext.Provider>

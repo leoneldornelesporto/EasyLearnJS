@@ -21,6 +21,10 @@ export async function alterarTopico(id,titulo,mensagem) {
     return (await api.put('/topicos/'+id,{titulo:titulo,mensagem:mensagem})).data;
 }
 
+export async function responderTopicoController(mensagem,idTopico,idUsuario) {
+    return (await api.put('/topicos/responder/'+idTopico,{mensagem:mensagem,idUsuario:idUsuario})).data;
+}
+
 export async function removerTopico(id) {
     return (await api.delete('/topicos/'+id)).data;
 }
