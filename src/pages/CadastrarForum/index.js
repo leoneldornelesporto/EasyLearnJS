@@ -65,6 +65,7 @@ const CadastrarForum = () => {
     }
 
     function salvarTopico() {
+        alert("Forum criado com Sucesso");
         cadastrar(titulo,duvida,cursoId,Cookies.get('idUser'));
         window.location.href = '/forum'; //manda para a rota home
     }
