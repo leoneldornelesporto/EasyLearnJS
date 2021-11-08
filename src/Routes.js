@@ -30,6 +30,7 @@ import GeraCertificado from "./pages/GeraCertificado";
 import Payment from "./pages/Payment";
 import User from "./pages/User";
 import ForumDetalhe from "./pages/ForumDetalhe";
+import CadastrarForum from "./pages/CadastrarForum";
 
 export default () => {
     return(
@@ -72,6 +73,9 @@ export default () => {
             </Route>
             <Route path="/agendamento_tutoria">
                 <AgendamentoTutoria/>
+            </Route>
+            <Route path="/cadastrar_forum">
+                <CadastrarForum/>
             </Route>
             <Route path="/forum">
                 <Forum/>

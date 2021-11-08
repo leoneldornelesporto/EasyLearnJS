@@ -59,7 +59,7 @@ const Forum = () => {
                 <div className="container">
                     <div className="title-and-new-topic">
                         <span className="title">Tópicos</span>
-                        <a href="/forum/offtopic/novo" className="button-new-topic">Criar novo tópico</a>
+                        <a href="/cadastrar_forum" className="button-new-topic">Criar novo tópico</a>
                     </div>
                     <div className="categories-restrictions-and-search ">
                         <fieldset className="select-filter">
@@ -131,7 +131,7 @@ const Forum = () => {
                                    placeholder="Busque por assunto"/>
                             <button className="forumSearch-submit">Buscar</button>
                         </form>
-                        <a href="/forum/offtopic/novo" className="button-new-topic">Criar novo tópico</a>
+                        <a href="/cadastrar_forum" className="button-new-topic">Criar novo tópico</a>
                     </div>
                 </div>
             </section>
