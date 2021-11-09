@@ -379,7 +379,7 @@ const ModuloDetalhe = () => {
                             </button>
                             <section className="task-actions">
                                 <div className="container">
-                                    <a href="/forum/curso-criacao-de-jogos-com-unity-3/exercicio-quantidade-de-zumbis-mortos/34189/novo"
+                                    <a href="/forum"
                                        className=" task-actions-button task-actions-button-forum bootcamp-secondary-button-theme"
                                        target="_blank">
                                         Discutir no Forum

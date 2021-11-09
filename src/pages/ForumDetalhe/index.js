@@ -3,16 +3,22 @@ import {ForumContext} from "../../context/ForumProvider";
 import {isLogged} from "../../context/AuthHandler";
 import {useParams} from "react-router-dom";
 import Cookies from "js-cookie";
+import {AuthUserContext} from "../../context/AuthUserProvider";
 
 const ForumDetalhe = () => {
 
     const [categoria,setCategoria] = useState(null);
+    const {aluno,signInV1} = useContext(AuthUserContext);
     const [mensagem,setMensagem] = useState(null);
-    const {resposta,detalhar,cadastrar,responderTopico} = useContext(ForumContext);
+    const {resposta,detalhar,cadastrar,responderTopico,solucionarTopico} = useContext(ForumContext);
     const { id } = useParams();
 
     if (resposta===null){
         detalhar(id);
+    }
+
+    if (aluno===''){
+        signInV1(Cookies.get('email'),Cookies.get('pass'))
     }
 
     console.log(resposta);
@@ -149,23 +155,33 @@ const ForumDetalhe = () => {
         window.location.href = '/forum_detalhe='+id;
     }
 
+    function fecharTopico(e) {
+        e.preventDefault()
+        solucionarTopico(id);
+        alert("Topico Solucionado");
+    }
+
     function formulario(){
-        return(
-            <section className="topic-reply">
-                <div className="container">
-                    <h2 className="topic-reply-title"> O que você acha disso?</h2>
-                    <form onSubmit={salvarResposta} className="topic-reply-form">
-                        <div className="markdown-editor--wrapper">
-                            <div className="alert markdown-alert-error-hide" data-category="error" role="alert">
-                                <div className="markdown-header">
-                                    <p className="alert-message">Desculpe, mas ocorreu um problema ao inserir as
-                                        imagens
-                                    </p>
-                                </div>
-                                <ul className="markdown-list-errors"></ul>
-                            </div>
-                            <div className="markdownEditor" id="text">
-                                <div className="hackeditor">
+        try{
+            if (resposta.status==="SOLUCIONADO"){
+                return (<></>);
+            }else {
+                return(
+                    <section className="topic-reply">
+                        <div className="container">
+                            <h2 className="topic-reply-title"> O que você acha disso?</h2>
+                            <form onSubmit={salvarResposta} className="topic-reply-form">
+                                <div className="markdown-editor--wrapper">
+                                    <div className="alert markdown-alert-error-hide" data-category="error" role="alert">
+                                        <div className="markdown-header">
+                                            <p className="alert-message">Desculpe, mas ocorreu um problema ao inserir as
+                                                imagens
+                                            </p>
+                                        </div>
+                                        <ul className="markdown-list-errors"></ul>
+                                    </div>
+                                    <div className="markdownEditor" id="text">
+                                        <div className="hackeditor">
                   <textarea aria-live="polite" aria-atomic="true"
                             className="markdownEditor-source markdownEditor-textArea "
                             placeholder="" name="text" data-allow-image-upload="true"
@@ -173,14 +189,28 @@ const ForumDetalhe = () => {
                             data-maxlength-reached-message="limite de caracteres atingido"
                             data-maxlength-exceeded-message="limite de caracteres ultrapassado"
                             id="markdownEditor-text-ta" onChange={e => setMensagem(e.target.value)}></textarea>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <input className="topic-reply-form-submit" type="submit" value="Responder"/>
+                            </form>
+
+                            {aluno.professor === true?
+                                <form onSubmit={fecharTopico}>
+                                    <input className="topic-reply-form-submit" type="submit" value="Solucionar Tópico"/>
+                                </form>
+                                :
+                                <></>
+                            }
+
                         </div>
-                        <input className="topic-reply-form-submit" type="submit" value="Responder"/>
-                    </form>
-                </div>
-            </section>
-        )
+                    </section>
+                )
+            }
+        }catch (e) {
+            console.log(e);
+        }
+
     }
 
     function respostas(){

@@ -4,7 +4,7 @@ import {
     alterarTopico,
     removerTopico,
     responderTopicoController,
-    saveTopico,
+    saveTopico, solucionar,
     topicoById
 } from "./Controller/ForumController";
 
@@ -58,6 +58,17 @@ export const ForumProvider = ({children}) => {
         }
     };
 
+    const solucionarTopico = async (id) => {
+        try {
+            const response = await solucionar(id);
+            setResposta(response);
+        } catch (response) {
+            setErrorMessage(response);
+            console.log('Erro ao Retornar Cursos por Uuid.');
+            console.log(response);
+        }
+    };
+
     const responderTopico = async (mensagem,idTopico,idUsuario) => {
         try {
             const response = await responderTopicoController(mensagem,idTopico,idUsuario);
@@ -93,6 +104,7 @@ export const ForumProvider = ({children}) => {
                 atualizar,
                 remover,
                 responderTopico,
+                solucionarTopico,
             }}>
             {children}
         </ForumContext.Provider>
